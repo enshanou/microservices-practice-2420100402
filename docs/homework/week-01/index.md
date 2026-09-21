@@ -2,7 +2,7 @@
 
 | 项目 | 内容 |
 | --- | --- |
-| 姓名 |  |
+| 姓名 | 区恩善 |
 | 学号 | 2420100402 |
 | 作业 | week-01 |
 | 完成日期 | 2026-09-21 |
@@ -10,79 +10,37 @@
 
 ## 环境检查
 
-### 检查环境
-
 | 项目 | 内容 |
 | --- | --- |
 | 操作系统 | Windows 11 (10.0.26200.8655) |
 | 架构 | amd64 |
 | 终端 | Git Bash (MINGW64) |
 
-### 命令输出
+#### java --version
 
-以下为本机实际执行结果。
+![java --version](screenshots/java-version.png)
 
-#### `java --version`
+#### mvn --version
 
-```text
-java 17.0.11 2024-04-16 LTS
-Java(TM) SE Runtime Environment (build 17.0.11+7-LTS-207)
-Java HotSpot(TM) 64-Bit Server VM (build 17.0.11+7-LTS-207, mixed mode, sharing)
-```
+![mvn --version](screenshots/mvn-version.png)
 
-- 结论：Java 17 LTS 安装正常。选 17 是因为它是当前主流的企业级 LTS 版本，Spring Boot 3.x 也要求 Java 17 起步，后续课程的微服务框架能直接用。
+#### git --version
 
-#### `mvn --version`
+![git --version](screenshots/git-version.png)
 
-```text
-Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)
-Maven home: D:\问界\apache-maven-3.9.16-bin\apache-maven-3.9.16
-Java version: 17.0.11, vendor: Oracle Corporation, runtime: C:\Java\jdk-17
-Default locale: zh_CN, platform encoding: GBK
-OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
-```
+#### docker version
 
-- 结论：Maven 3.9.16 安装正常，`Maven home` 与 `Java version` 均被正确识别。
-- 注意：在 Git Bash 中必须使用 `mvn.cmd` 而非 `mvn`，否则会报错，原因见下方「问题记录」。
+![docker version](screenshots/docker-version.png)
 
-#### `git --version`
+> 说明：`docker` 客户端 29.8.0 已安装可用，但守护进程尚未启动，
+> 报错 `failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine`。
+> 根因与排查过程见文末「问题记录 · 问题 2」，待守护进程正常后再补 `Server` 段截图。
 
-```text
-git version 2.55.0.windows.3
-```
+#### docker compose version
 
-- 结论：Git 安装正常。
-- 已配置全局身份：`user.name = enshanou`，`user.email = enshanou@gmail.com`。
-
-#### `docker version`
-
-```text
-Client:
- Version:           29.8.0
- API version:       1.56
- Go version:        go1.26.8
- Git commit:        88096ef
- Built:             Thu Sep  3 21:53:38 2026
- OS/Arch:           windows/amd64
- Context:           desktop-linux
-failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine;
-check if the path is correct and if the daemon is running:
-open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
-```
-
-- 结论：Docker **客户端** 29.8.0 安装正常，但**守护进程（daemon）未启动**，因此无法返回 Server 段信息。原因与解决计划见下方「问题记录」。
-
-#### `docker compose version`
-
-```text
-Docker Compose version v5.5.1
-```
-
-- 结论：Docker Compose 插件安装正常，版本 v5.5.1，满足课程后续编排多容器服务的需要。
+![docker compose version](screenshots/docker-compose-version.png)
 
 ## 概念回答
-
-以下均为结合课程理解后的个人表述，非照抄教材定义。
 
 ### 1. 什么是微服务架构？
 
@@ -181,7 +139,13 @@ alias mvn='mvn.cmd'
 
 **现象**
 
+`docker version` 能打印出 Client 信息，但连接服务端时报错：
+
 ```text
+Client:
+ Version:           29.8.0
+ OS/Arch:           windows/amd64
+ Context:           desktop-linux
 failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine;
 check if the path is correct and if the daemon is running:
 open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
@@ -189,28 +153,66 @@ open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specifie
 
 **排查过程**
 
-1. `docker version` 能打印出完整的 `Client` 段（Version 29.8.0、API version 1.56、OS/Arch windows/amd64），说明 **Docker CLI 本身可用**。
-2. `docker compose version` 正常返回 `v5.5.1`，说明 **Compose 插件已正确安装**。
-3. 检查安装位置 `C:\Users\24625\AppData\Local\Programs\DockerDesktop\Docker Desktop.exe` 存在，且 PATH 中已包含 `...\DockerDesktop\resources\bin` —— **Docker Desktop 已安装完成**。
-4. 报错信息指向命名管道 `npipe:////./pipe/dockerDesktopLinuxEngine` 不存在，说明**客户端在找后端，但后端（Docker Engine）没有在跑**。
+这个问题表面看是「没启动 Docker Desktop」，但实际点开启动之后仍然起不来，逐层往下查才发现根因不在 Docker 本身：
+
+1. **确认客户端确实装了。** `docker.exe` 位于 `C:\Users\24625\AppData\Local\Programs\DockerDesktop\resources\bin\`（用户级安装，不在 `Program Files`），说明客户端与 Compose 插件都正常，问题只出在引擎侧。
+2. **确认引擎服务状态。** `com.docker.service` 服务不存在，说明 Docker Desktop 的后台引擎从未成功初始化过。
+3. **检查 WSL。** 执行 `wsl --status` 提示「适用于 Linux 的 Windows 子系统未安装」，建议运行 `wsl.exe --install`。Docker Desktop 在 Windows 上默认使用 **WSL2 后端**，WSL 不可用则引擎无法创建运行容器的 Linux 虚拟机。
+4. **检查 Windows 可选功能。**
+
+   ```text
+   VirtualMachinePlatform             = Disabled
+   Microsoft-Windows-Subsystem-Linux  = Disabled
+   ```
+
+   这两个功能是 WSL2 的前置依赖，二者均为禁用状态 —— 这才是守护进程起不来的**直接原因**。
+5. **尝试启用功能，失败。** 执行 `Enable-WindowsOptionalFeature` 启用上述功能时，DISM 报「组件存储已损坏」，无法完成功能启用。
+6. **确认系统版本。** 本机为 **Windows 11 家庭版 25H2（Build 26200）**。家庭版不含 Hyper-V（查询 `Microsoft-Hyper-V-All` 返回 `CBS_E_UNKNOWN_UPDATE`），因此**不存在「改用 Hyper-V 后端」这条退路**，WSL2 是唯一可行的后端方案。
 
 **根因**
 
-Docker Desktop 采用 C/S 架构：`docker` 命令只是客户端，真正的引擎跑在 Docker Desktop 启动的 Linux 虚拟机里，两者通过 Windows 命名管道通信。当前 **Docker Desktop 未启动**，命名管道尚未创建，所以客户端连接失败。
+这是一条三层依赖链，缺一环都不行：
 
-**当前系统版本**
+```text
+Docker Desktop 引擎
+   └─ 依赖 WSL2
+        └─ 依赖 Windows 功能 VirtualMachinePlatform + Microsoft-Windows-Subsystem-Linux
+             └─ 依赖健康的组件存储（WinSxS）
+                  └─ ✗ 本机组件存储已损坏，功能无法启用
+```
 
-- Windows 11，版本号 10.0.26200.8655，架构 amd64
-- Docker Desktop 已安装（含 Client 29.8.0 与 Compose v5.5.1）
-- 未安装 `gh` CLI（与 Docker 无关，此处一并记录）
+因此「守护进程未启动」只是最表层的表现，真正卡住的是**组件存储损坏导致 WSL2 无法启用**。
 
-**解决计划**
+**解决方案**
 
-1. **短期（本次作业内）**：手动启动 Docker Desktop，等待系统托盘鲸鱼图标变为绿色（表示引擎就绪），再重新执行 `docker version`，此时应能同时看到 `Client` 和 `Server` 两段输出。若首次启动提示需要启用 WSL2 或 Hyper-V，按引导完成即可。
-2. **验证**：`docker run --rm hello-world` 能正常拉取并运行，即证明引擎完全可用。
-3. **中期**：在 Docker Desktop 设置中勾选开机自启，避免每次上课前都要手动启动。
-4. **兜底方案**：若 Docker Desktop 在本机始终无法启动（例如虚拟化被占用、企业策略限制），则改用 **远程 Docker 主机** 方案 —— 在 `DOCKER_HOST` 环境变量中指向可用的远程引擎；课程后续涉及容器编排的作业可暂时用远程环境完成，并在本周文档中补充说明。
+按依赖顺序自下而上修复（需管理员权限，且组件存储修复耗时较长）：
 
-**说明**
+```powershell
+# 1) 先修复组件存储（需 30–60 分钟，期间勿中断）
+Start-Service BITS          # BITS 必须运行，否则修复用的组件包会下载卡死
+Start-Service wuauserv
+Repair-WindowsImage -Online -RestoreHealth
+# 完成后重启系统
 
-本次作业对 Docker 的要求是「完成环境检查」，不要求必须跑通容器。因此 Docker 暂未启动**不影响本次作业的完成度**，按作业要求已在此记录原因、系统版本与后续解决计划。
+# 2) 再启用 WSL2 所需功能
+Start-Service BITS
+Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -All -NoRestart
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -All -NoRestart
+# 再次重启系统
+
+# 3) 安装/更新 WSL 内核并设为默认版本 2
+wsl --update
+wsl --set-default-version 2
+
+# 4) 启动 Docker Desktop，验证引擎就绪
+docker version          # 应能看到 Server 段
+docker run --rm hello-world
+```
+
+**遗留风险**
+
+- 组件存储修复依赖 Windows Update 下载组件包，若 BITS / wuauserv 被停止，下载会卡在固定百分比（本次即卡在 50%），需先启动这两个服务。
+- 家庭版没有 Hyper-V 作为备选后端，WSL2 一旦不可用就没有兜底方案；必要时只能改用远程 Docker 主机（`DOCKER_HOST` 指向远端引擎）。
+- 本次作业只要求完成环境检查，不要求跑通容器；Docker 客户端已确认正常，该问题不影响本次作业的完成度。
+
+

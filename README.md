@@ -8,12 +8,10 @@
 
 | 项目 | 内容 |
 | --- | --- |
-| 姓名 |  |
+| 姓名 | 区恩善 |
 | 学号 | 2420100402 |
 | GitHub | [@enshanou](https://github.com/enshanou) |
 | 仓库地址 | https://github.com/enshanou/microservices-practice-2420100402 |
-
-> 姓名一栏待补充。
 
 ## 仓库用途
 
@@ -32,36 +30,3 @@
 │           └── screenshots/         # 环境命令、仓库页面、提交记录截图
 └── src/                             # 后续作业的源代码
 ```
-
-## 作业进度
-
-| 周次 | 主题 | 文档 | 状态 |
-| --- | --- | --- | --- |
-| week-01 | 开发环境与个人仓库 | [docs/homework/week-01/index.md](docs/homework/week-01/index.md) | 已完成 |
-
-## 环境概览
-
-| 工具 | 版本 | 状态 |
-| --- | --- | --- |
-| Java | 17.0.11 LTS | 正常 |
-| Maven | 3.9.16 | 正常（需使用 `mvn.cmd`，详见 week-01 问题记录） |
-| Git | 2.55.0.windows.3 | 正常 |
-| Docker | Client 29.8.0 | 需启动 Docker Desktop 守护进程 |
-| Docker Compose | v5.5.1 | 正常 |
-
-## 提交规范
-
-采用 Conventional Commits 风格，便于回溯每次作业的变更范围：
-
-```text
-<type>(<scope>): <描述>
-
-feat     新增功能
-fix      修复缺陷
-docs     文档变更
-chore    构建、配置、杂项
-test     测试相关
-refactor 重构
-```
-
-示例：`docs(week-01): 补充环境检查与概念回答`

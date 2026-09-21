@@ -2,13 +2,17 @@
 
 | 项目 | 内容 |
 | --- | --- |
-| 姓名 |  |
+| 姓名 | 区恩善 |
 | 学号 | 2420100402 |
 | 课程 | 微服务架构 |
 | 周次 | week-01 |
 | 提交日期 | 2026-09-21 |
 
-> **填写说明**：「姓名」一栏请自行补充，其余内容已完整。
+> **待补截图**：本文件共引用 7 张截图，其中 4 张已就位
+> （`java-version.png`、`mvn-version.png`、`git-version.png`、`docker-compose-version.png`）；
+> 另 3 张待补：`github-repo.png`（仓库页面）、`git-log-graph.png`（提交记录）、
+> `docker-version.png`（守护进程正常后含 `Server` 段的输出）。
+> 截图统一放在 `docs/homework/week-01/screenshots/` 目录下，用相对路径引用。
 
 ---
 
@@ -36,7 +40,7 @@
 
 ## 二、GitHub 仓库页面截图
 
-![GitHub 仓库页面](screenshots/01-github-repo.png)
+![GitHub 仓库页面](screenshots/github-repo.png)
 
 仓库状态为 **Public**，分支 `main`，根目录含 `docs/`、`src/`、`README.md`，
 右上角显示共 7 次提交。
@@ -45,12 +49,13 @@
 
 ## 三、提交记录截图
 
-![git log --oneline --graph](screenshots/02-git-log-graph.png)
+![git log --oneline --graph](screenshots/git-log-graph.png)
 
 提交记录文字版（便于对照）：
 
 | 提交哈希 | 说明 |
 | --- | --- |
+| `6e7b553` | docs(week-01): 补充作业截图 |
 | `542e322` | docs(week-01): 改为截图占位，补充截图清单 |
 | `fcc86b0` | docs(week-01): 更新提交记录截图 |
 | `8ddf680` | docs(week-01): 添加作业截图与提交说明文档 |
@@ -72,7 +77,7 @@
 
 ### 1. Java
 
-![java --version](screenshots/03-java-version.png)
+![java --version](screenshots/java-version.png)
 
 本机实测结果：
 
@@ -86,7 +91,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 17.0.11+7-LTS-207, mixed mode, sharing)
 
 ### 2. Maven
 
-![mvn --version](screenshots/04-maven-version.png)
+![mvn --version](screenshots/mvn-version.png)
 
 本机实测结果：
 
@@ -102,7 +107,7 @@ OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
 
 ### 3. Git
 
-![git --version](screenshots/05-git-version.png)
+![git --version](screenshots/git-version.png)
 
 本机实测结果：
 
@@ -114,7 +119,7 @@ git version 2.55.0.windows.3
 
 ### 4. Docker
 
-![docker version](screenshots/06-docker-version.png)
+![docker version](screenshots/docker-version.png)
 
 本机实测结果：
 
@@ -145,7 +150,7 @@ open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specifie
 
 ### 5. Docker Compose
 
-![docker compose version](screenshots/07-docker-compose-version.png)
+![docker compose version](screenshots/docker-compose-version.png)
 
 本机实测结果：
 
@@ -170,8 +175,6 @@ Docker Compose version v5.5.1
 ## 五、本周文字说明
 
 本周完成了课程开发环境的检查。Java 17.0.11、Maven 3.9.16、Git 2.55.0 与 Docker Compose v5.5.1 均已验证可用；Docker 客户端正常，但守护进程未启动，已记录原因与解决计划。排查中还发现一个隐蔽问题：在 Git Bash 下执行 mvn 会因路径格式不兼容而报类加载异常，改用 mvn.cmd 后恢复正常，说明环境检查不能只看版本号，必须真正跑通命令。本次作业让我理解了微服务与单体架构在部署、数据与扩展方式上的取舍，也认识到可重复运行的验证脚本对后续作业的价值。
-
-（约 171 字）
 
 ---
 
