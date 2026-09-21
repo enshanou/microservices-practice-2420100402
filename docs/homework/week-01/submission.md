@@ -8,6 +8,12 @@
 | 周次 | week-01 |
 | 提交日期 | 2026-09-21 |
 
+> **填写说明**
+> 1. 「姓名」一栏请自行补充。
+> 2. 文中所有 **【截图位置】** 标记处，请替换为你自己的截图。
+>    截图统一放在 `screenshots/` 目录，命名见各标记处的提示。
+> 3. 截图清单与操作说明另见 [`screenshots/README.md`](screenshots/README.md)。
+
 ---
 
 ## 一、GitHub 仓库链接
@@ -23,55 +29,158 @@
 │   └── homework/
 │       └── week-01/
 │           ├── index.md
+│           ├── submission.md
 │           └── screenshots/
 └── src/
 ```
 
 文档位于 `docs/homework/week-01/index.md`，包含「环境检查」「概念回答」「问题记录」三个二级标题。
 
-## 二、提交记录（git log --oneline --graph）
+---
 
-![git log --oneline --graph](screenshots/06-git-log-oneline-graph.png)
+## 二、GitHub 仓库页面截图
+
+<!-- ============ 截图位置 ① ============ -->
+> ### 【截图位置 ①】GitHub 仓库页面
+>
+> **文件名**：`screenshots/01-github-repo.png`
+>
+> **操作**：浏览器打开 <https://github.com/enshanou/microservices-practice-2420100402>，
+> 截取整页。需能看清以下信息：
+> - 仓库全名 `enshanou / microservices-practice-2420100402`
+> - 右侧的 **Public** 标识（证明公开可访问）
+> - 分支 `main` 与根目录文件列表
+> - 提交时间线（Latest commit）
+>
+> **插入方式**：截好图后把下面这行的注释去掉，并删除本段引用块。
+>
+> <!-- ![GitHub 仓库页面](screenshots/01-github-repo.png) -->
+
+---
+
+## 三、提交记录截图
+
+<!-- ============ 截图位置 ② ============ -->
+> ### 【截图位置 ②】git log --oneline --graph
+>
+> **文件名**：`screenshots/02-git-log-graph.png`
+>
+> **操作**：在仓库根目录执行下列命令，把输出连同命令行一起截图。
+>
+> ```bash
+> git log --oneline --graph
+> ```
+>
+> **插入方式**：
+>
+> <!-- ![git log --oneline --graph](screenshots/02-git-log-graph.png) -->
+
+**提交记录文字版（便于对照）**
 
 | 提交哈希 | 说明 |
 | --- | --- |
+| `8ddf680` | docs(week-01): 添加作业截图与提交说明文档 |
 | `5c8999c` | docs(week-01): 补充微服务概念回答与问题记录 |
 | `c29915b` | docs(week-01): 添加开发环境检查记录 |
 | `09b54bf` | chore: 初始化课程仓库目录结构 |
 | `a8424fd` | Initial commit（GitHub 创建仓库时自动生成） |
 
-本次作业共新增 3 次提交，满足「至少 2 次提交」的要求。
+本次作业新增 5 次提交，满足「至少 2 次提交」的要求。提交粒度按
+「结构 → 环境检查 → 概念与问题 → 截图与说明」划分，便于逐条回溯。
 
-## 三、环境版本检查截图
+---
+
+## 四、环境版本检查截图
+
+> 五条命令需在同一个终端窗口依次执行并截图，这样版本信息与系统环境一目了然。
+> 建议使用 PowerShell 或 cmd 执行 `mvn --version`（原因见第六节问题 1）。
 
 ### 1. Java
 
-![java --version](screenshots/01-java-version.png)
+<!-- ============ 截图位置 ③ ============ -->
+> ### 【截图位置 ③】java --version
+>
+> **文件名**：`screenshots/03-java-version.png`　**命令**：`java --version`
+>
+> <!-- ![java --version](screenshots/03-java-version.png) -->
 
-Java 17.0.11 LTS，正常。
+本机实测结果：
+
+```text
+java 17.0.11 2024-04-16 LTS
+Java(TM) SE Runtime Environment (build 17.0.11+7-LTS-207)
+Java HotSpot(TM) 64-Bit Server VM (build 17.0.11+7-LTS-207, mixed mode, sharing)
+```
+
+结论：Java 17 LTS 安装正常。
 
 ### 2. Maven
 
-![mvn --version](screenshots/02-maven-version.png)
+<!-- ============ 截图位置 ④ ============ -->
+> ### 【截图位置 ④】mvn --version
+>
+> **文件名**：`screenshots/04-maven-version.png`　**命令**：`mvn --version`
+>
+> <!-- ![mvn --version](screenshots/04-maven-version.png) -->
 
-Apache Maven 3.9.16，正常。注意需使用 `mvn.cmd`，原因见问题记录。
+本机实测结果：
+
+```text
+Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)
+Maven home: D:\问界\apache-maven-3.9.16-bin\apache-maven-3.9.16
+Java version: 17.0.11, vendor: Oracle Corporation, runtime: C:\Java\jdk-17
+Default locale: zh_CN, platform encoding: GBK
+OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
+```
+
+结论：Maven 3.9.16 安装正常，`Maven home` 与 `Java version` 均被正确识别。
 
 ### 3. Git
 
-![git --version](screenshots/03-git-version.png)
+<!-- ============ 截图位置 ⑤ ============ -->
+> ### 【截图位置 ⑤】git --version
+>
+> **文件名**：`screenshots/05-git-version.png`　**命令**：`git --version`
+>
+> <!-- ![git --version](screenshots/05-git-version.png) -->
 
-git 2.55.0.windows.3，正常。
+本机实测结果：
+
+```text
+git version 2.55.0.windows.3
+```
+
+结论：Git 安装正常，已配置全局身份 `enshanou`。
 
 ### 4. Docker
 
-![docker version](screenshots/04-docker-version.png)
+<!-- ============ 截图位置 ⑥ ============ -->
+> ### 【截图位置 ⑥】docker version
+>
+> **文件名**：`screenshots/06-docker-version.png`　**命令**：`docker version`
+>
+> <!-- ![docker version](screenshots/06-docker-version.png) -->
 
-客户端 29.8.0 正常，守护进程未启动。
+本机实测结果：
+
+```text
+Client:
+ Version:           29.8.0
+ API version:       1.56
+ Go version:        go1.26.8
+ Git commit:        88096ef
+ Built:             Thu Sep  3 21:53:38 2026
+ OS/Arch:           windows/amd64
+ Context:           desktop-linux
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine;
+check if the path is correct and if the daemon is running:
+open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+```
 
 > **关于 Docker 的说明**
 >
-> 客户端 29.8.0 与 Compose 插件均已正确安装，报错原因是 **Docker Desktop 未启动**，命名管道
-> `npipe:////./pipe/dockerDesktopLinuxEngine` 尚未创建。
+> 客户端 29.8.0 与 Compose 插件均已正确安装，报错原因是 **Docker Desktop 未启动**，
+> 命名管道 `npipe:////./pipe/dockerDesktopLinuxEngine` 尚未创建。
 >
 > - 当前系统版本：Windows 11（10.0.26200.8655，amd64）
 > - 解决计划：启动 Docker Desktop 并等待引擎就绪，再执行 `docker version` 确认出现 Server 段；
@@ -81,9 +190,20 @@ git 2.55.0.windows.3，正常。
 
 ### 5. Docker Compose
 
-![docker compose version](screenshots/05-docker-compose-version.png)
+<!-- ============ 截图位置 ⑦ ============ -->
+> ### 【截图位置 ⑦】docker compose version
+>
+> **文件名**：`screenshots/07-docker-compose-version.png`　**命令**：`docker compose version`
+>
+> <!-- ![docker compose version](screenshots/07-docker-compose-version.png) -->
 
-Docker Compose v5.5.1，正常。
+本机实测结果：
+
+```text
+Docker Compose version v5.5.1
+```
+
+结论：Docker Compose 插件安装正常。
 
 ### 环境检查汇总
 
@@ -95,13 +215,17 @@ Docker Compose v5.5.1，正常。
 | Docker | Client 29.8.0 | 客户端正常，守护进程待启动 |
 | Docker Compose | v5.5.1 | 正常 |
 
-## 四、本周文字说明
+---
+
+## 五、本周文字说明
 
 本周完成了课程开发环境的检查。Java 17.0.11、Maven 3.9.16、Git 2.55.0 与 Docker Compose v5.5.1 均已验证可用；Docker 客户端正常，但守护进程未启动，已记录原因与解决计划。排查中还发现一个隐蔽问题：在 Git Bash 下执行 mvn 会因路径格式不兼容而报类加载异常，改用 mvn.cmd 后恢复正常，说明环境检查不能只看版本号，必须真正跑通命令。本次作业让我理解了微服务与单体架构在部署、数据与扩展方式上的取舍，也认识到可重复运行的验证脚本对后续作业的价值。
 
 （约 171 字）
 
-## 五、问题记录摘要
+---
+
+## 六、问题记录摘要
 
 ### 问题 1：Git Bash 中 mvn 报类加载异常
 
