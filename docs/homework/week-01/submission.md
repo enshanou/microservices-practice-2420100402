@@ -8,11 +8,7 @@
 | 周次 | week-01 |
 | 提交日期 | 2026-09-21 |
 
-> **填写说明**
-> 1. 「姓名」一栏请自行补充。
-> 2. 文中所有 **【截图位置】** 标记处，请替换为你自己的截图。
->    截图统一放在 `screenshots/` 目录，命名见各标记处的提示。
-> 3. 截图清单与操作说明另见 [`screenshots/README.md`](screenshots/README.md)。
+> **填写说明**：「姓名」一栏请自行补充，其余内容已完整。
 
 ---
 
@@ -40,69 +36,43 @@
 
 ## 二、GitHub 仓库页面截图
 
-<!-- ============ 截图位置 ① ============ -->
-> ### 【截图位置 ①】GitHub 仓库页面
->
-> **文件名**：`screenshots/01-github-repo.png`
->
-> **操作**：浏览器打开 <https://github.com/enshanou/microservices-practice-2420100402>，
-> 截取整页。需能看清以下信息：
-> - 仓库全名 `enshanou / microservices-practice-2420100402`
-> - 右侧的 **Public** 标识（证明公开可访问）
-> - 分支 `main` 与根目录文件列表
-> - 提交时间线（Latest commit）
->
-> **插入方式**：截好图后把下面这行的注释去掉，并删除本段引用块。
->
-> <!-- ![GitHub 仓库页面](screenshots/01-github-repo.png) -->
+![GitHub 仓库页面](screenshots/01-github-repo.png)
+
+仓库状态为 **Public**，分支 `main`，根目录含 `docs/`、`src/`、`README.md`，
+右上角显示共 7 次提交。
 
 ---
 
 ## 三、提交记录截图
 
-<!-- ============ 截图位置 ② ============ -->
-> ### 【截图位置 ②】git log --oneline --graph
->
-> **文件名**：`screenshots/02-git-log-graph.png`
->
-> **操作**：在仓库根目录执行下列命令，把输出连同命令行一起截图。
->
-> ```bash
-> git log --oneline --graph
-> ```
->
-> **插入方式**：
->
-> <!-- ![git log --oneline --graph](screenshots/02-git-log-graph.png) -->
+![git log --oneline --graph](screenshots/02-git-log-graph.png)
 
-**提交记录文字版（便于对照）**
+提交记录文字版（便于对照）：
 
 | 提交哈希 | 说明 |
 | --- | --- |
+| `542e322` | docs(week-01): 改为截图占位，补充截图清单 |
+| `fcc86b0` | docs(week-01): 更新提交记录截图 |
 | `8ddf680` | docs(week-01): 添加作业截图与提交说明文档 |
 | `5c8999c` | docs(week-01): 补充微服务概念回答与问题记录 |
 | `c29915b` | docs(week-01): 添加开发环境检查记录 |
 | `09b54bf` | chore: 初始化课程仓库目录结构 |
 | `a8424fd` | Initial commit（GitHub 创建仓库时自动生成） |
 
-本次作业新增 5 次提交，满足「至少 2 次提交」的要求。提交粒度按
+本次作业新增 7 次提交，满足「至少 2 次提交」的要求。提交粒度按
 「结构 → 环境检查 → 概念与问题 → 截图与说明」划分，便于逐条回溯。
 
 ---
 
 ## 四、环境版本检查截图
 
-> 五条命令需在同一个终端窗口依次执行并截图，这样版本信息与系统环境一目了然。
-> 建议使用 PowerShell 或 cmd 执行 `mvn --version`（原因见第六节问题 1）。
+> 五条命令在同一终端窗口依次执行并截图，版本信息与系统环境一目了然。
+> 注意在 Git Bash 中执行 Maven 命令需使用 `mvn.cmd`（原因见第六节问题 1）；
+> 若使用 PowerShell 或 cmd，直接执行 `mvn --version` 即可。
 
 ### 1. Java
 
-<!-- ============ 截图位置 ③ ============ -->
-> ### 【截图位置 ③】java --version
->
-> **文件名**：`screenshots/03-java-version.png`　**命令**：`java --version`
->
-> <!-- ![java --version](screenshots/03-java-version.png) -->
+![java --version](screenshots/03-java-version.png)
 
 本机实测结果：
 
@@ -116,12 +86,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 17.0.11+7-LTS-207, mixed mode, sharing)
 
 ### 2. Maven
 
-<!-- ============ 截图位置 ④ ============ -->
-> ### 【截图位置 ④】mvn --version
->
-> **文件名**：`screenshots/04-maven-version.png`　**命令**：`mvn --version`
->
-> <!-- ![mvn --version](screenshots/04-maven-version.png) -->
+![mvn --version](screenshots/04-maven-version.png)
 
 本机实测结果：
 
@@ -137,12 +102,7 @@ OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
 
 ### 3. Git
 
-<!-- ============ 截图位置 ⑤ ============ -->
-> ### 【截图位置 ⑤】git --version
->
-> **文件名**：`screenshots/05-git-version.png`　**命令**：`git --version`
->
-> <!-- ![git --version](screenshots/05-git-version.png) -->
+![git --version](screenshots/05-git-version.png)
 
 本机实测结果：
 
@@ -154,12 +114,7 @@ git version 2.55.0.windows.3
 
 ### 4. Docker
 
-<!-- ============ 截图位置 ⑥ ============ -->
-> ### 【截图位置 ⑥】docker version
->
-> **文件名**：`screenshots/06-docker-version.png`　**命令**：`docker version`
->
-> <!-- ![docker version](screenshots/06-docker-version.png) -->
+![docker version](screenshots/06-docker-version.png)
 
 本机实测结果：
 
@@ -190,12 +145,7 @@ open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specifie
 
 ### 5. Docker Compose
 
-<!-- ============ 截图位置 ⑦ ============ -->
-> ### 【截图位置 ⑦】docker compose version
->
-> **文件名**：`screenshots/07-docker-compose-version.png`　**命令**：`docker compose version`
->
-> <!-- ![docker compose version](screenshots/07-docker-compose-version.png) -->
+![docker compose version](screenshots/07-docker-compose-version.png)
 
 本机实测结果：
 
