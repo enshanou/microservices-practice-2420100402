@@ -131,9 +131,32 @@ alias mvn='mvn.cmd'
 
 或在 PowerShell / cmd 中执行 Maven 命令（Windows 批处理脚本 `mvn.cmd` 的路径处理是正确的）。
 
+本机已按上述方式在 `~/.bashrc` 中配置别名，并实测验证：
+
+```text
+$ type mvn
+mvn is aliased to `mvn.cmd'
+
+$ mvn --version
+Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)
+Java version: 17.0.11, vendor: Oracle Corporation, runtime: C:\Java\jdk-17
+OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
+```
+
+> 补充一个配置细节：Git for Windows 的 `/etc/profile.d/bash_profile.sh` 在检测到存在
+> `~/.bashrc` 却没有 `~/.bash_profile` 时会自动生成后者来加载前者；本机已显式创建
+> `~/.bash_profile`（内容为 `test -f ~/.bashrc && . ~/.bashrc`），保证别名一定被加载。
+
 **遗留风险**
 
-`alias` 只对交互式 Git Bash 生效；如果后续 CI 脚本或 IDE 内置终端仍调用 `mvn`，需要确认其 shell 环境，必要时改用绝对路径调用 `mvn.cmd`。
+`alias` **只在交互式 shell 中展开**，且 `~/.bashrc` 也只在交互式 shell 启动时被加载。因此：
+
+- 手动在 Git Bash 里敲 `mvn` —— 别名生效，一切正常；
+- 但如果某个**脚本**（CI、构建脚本、`bash xxx.sh`）里调用 `mvn`，别名不会生效，
+  仍会撞上同样的报错。这类场景需要**显式写 `mvn.cmd`**，或改用绝对路径调用。
+
+同理，IDE（如 IntelliJ IDEA）内置终端若配置为 Git Bash 也会受影响；若使用其自带的
+Maven 集成则完全绕过 shell，不受此问题影响。
 
 ### 问题 2：Docker 守护进程未启动
 
