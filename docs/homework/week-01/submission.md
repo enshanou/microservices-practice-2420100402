@@ -40,7 +40,7 @@
 
 ## 二、GitHub 仓库页面
 
-![GitHub 仓库页面：Public、main 分支、13 次提交、README 正常渲染](screenshots/github-repo.png)
+![GitHub 仓库页面：Public、main 分支、16 次提交、README 正常渲染](screenshots/github-repo.png)
 
 截图取自仓库首页，可核对以下要点：
 
@@ -50,7 +50,7 @@
 | 默认分支 | **main**（1 Branch、0 Tags） |
 | 目录结构 | 根目录含 `docs/homework/week-01`、`src`、`README.md` |
 | README 渲染 | 页面下方正常显示姓名、学号、仓库地址表格 |
-| 提交留痕 | 右侧计数 **13 Commits**，最新一条为 `9dc7ac1` |
+| 提交留痕 | 右侧计数 **16 Commits**，最新一条为 `4e1a4e3` |
 
 ---
 
@@ -58,6 +58,7 @@
 
 ```text
 $ git log --oneline
+4e1a4e3 docs(week-01): 同步 index 精简改动，submission 移除对应段落并补齐提交记录
 96b42c1 docs(week-01): 问题1 补充「输出与 cmd 一致即成功」的判断标准
 8ba58c8 docs(week-01): 补充 GitHub 仓库页面真实截图，提交记录同步至 13 次
 9dc7ac1 docs(week-01): 问题1 补充证据边界说明，避免与环境检查截图混淆
@@ -77,6 +78,7 @@ a8424fd Initial commit（GitHub 创建仓库时自动生成）
 
 | 提交哈希 | 日期 | 说明 |
 | --- | --- | --- |
+| `4e1a4e3` | 2026-09-22 | 同步 index 精简改动，submission 移除对应段落并补齐提交记录 |
 | `96b42c1` | 2026-09-22 | 问题 1 补充「输出与 cmd 一致即成功」的判断标准 |
 | `8ba58c8` | 2026-09-22 | 补充 GitHub 仓库页面真实截图，提交记录同步至 13 次 |
 | `9dc7ac1` | 2026-09-22 | 问题 1 补充证据边界说明，避免与环境检查截图混淆 |
@@ -93,7 +95,7 @@ a8424fd Initial commit（GitHub 创建仓库时自动生成）
 | `09b54bf` | 2026-09-21 | 初始化课程仓库目录结构 |
 | `a8424fd` | 2026-09-14 | Initial commit（GitHub 创建仓库时自动生成） |
 
-仓库累计 15 次提交，其中**本次作业新增 14 次**，满足「至少 2 次提交」的要求。
+仓库累计 16 次提交，其中**本次作业新增 15 次**，满足「至少 2 次提交」的要求。
 提交粒度按「结构 → 环境检查 → 概念与问题 → 排查记录 → 文档定稿 → 截图」划分，便于逐条回溯。
 
 ---
