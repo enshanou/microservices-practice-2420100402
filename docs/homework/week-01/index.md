@@ -14,31 +14,63 @@
 | --- | --- |
 | 操作系统 | Windows 11 (10.0.26200.8655) |
 | 架构 | amd64 |
-| 终端 | Git Bash (MINGW64) |
+| 终端 | cmd.exe |
+| 检查日期 | 2026-09-22 |
 
-#### java --version
+五条命令在**同一个 cmd.exe 窗口**中依次执行，一屏截图即可对照：
 
-![java --version](screenshots/java-version.png)
+![环境检查：java / mvn / git / docker / docker compose 五条命令的实际输出](screenshots/environment-check.png)
 
-#### mvn --version
+实测结果汇总：
 
-![mvn --version](screenshots/mvn-version.png)
+| 工具 | 命令 | 实测版本 | 状态 |
+| --- | --- | --- | --- |
+| Java | `java --version` | 17.0.11 LTS (2024-04-16) | 正常 |
+| Maven | `mvn --version` | Apache Maven 3.9.16 | 正常 |
+| Git | `git --version` | 2.53.0.windows.2 | 正常 |
+| Docker | `docker version` | Client 29.8.0 | 客户端正常，**守护进程未启动** |
+| Docker Compose | `docker compose version` | v5.5.1 | 正常 |
 
-#### git --version
+截图中五条命令的完整原始输出：
 
-![git --version](screenshots/git-version.png)
+```text
+C:\Users\24625>java --version
+java 17.0.11 2024-04-16 LTS
+Java(TM) SE Runtime Environment (build 17.0.11+7-LTS-207)
+Java HotSpot(TM) 64-Bit Server VM (build 17.0.11+7-LTS-207, mixed mode, sharing)
 
-#### docker version
+C:\Users\24625>mvn --version
+Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)
+Maven home: D:\问界\apache-maven-3.9.16-bin\apache-maven-3.9.16
+Java version: 17.0.11, vendor: Oracle Corporation, runtime: C:\Java\jdk-17
+Default locale: zh_CN, platform encoding: GBK
+OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
 
-![docker version](screenshots/docker-version.png)
+C:\Users\24625>git --version
+git version 2.53.0.windows.2
 
-> 说明：`docker` 客户端 29.8.0 已安装可用，但守护进程尚未启动，
-> 报错 `failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine`。
-> 根因与排查过程见文末「问题记录 · 问题 2」，待守护进程正常后再补 `Server` 段截图。
+C:\Users\24625>docker version
+Client:
+ Version:           29.8.0
+ API version:       1.56
+ Go version:        go1.26.8
+ Git commit:        88096ef
+ Built:             Thu Sep  3 21:53:38 2026
+ OS/Arch:           windows/amd64
+ Context:           desktop-linux
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine;
+check if the path is correct and if the daemon is running:
+open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
 
-#### docker compose version
+C:\Users\24625>docker compose version
+Docker Compose version v5.5.1
+```
 
-![docker compose version](screenshots/docker-compose-version.png)
+### 关于 Docker 的说明
+
+`docker` 客户端 29.8.0 与 Compose 插件 v5.5.1 均已正确安装，
+报错原因是**守护进程未启动**，命名管道 `npipe:////./pipe/dockerDesktopLinuxEngine` 尚未创建。
+根因与完整排查过程见文末「问题记录 · 问题 2」。
 
 ## 概念回答
 
@@ -208,34 +240,93 @@ Docker Desktop 引擎
 
 **解决方案**
 
-按依赖顺序自下而上修复（需管理员权限，且组件存储修复耗时较长）：
+按依赖链自下而上修，第一步就是修组件存储。**本次实际执行了这一步，但失败了**，过程记录如下。
+
+*第一次尝试：用 Windows Update 修复组件存储*
 
 ```powershell
-# 1) 先修复组件存储（需 30–60 分钟，期间勿中断）
-Start-Service BITS          # BITS 必须运行，否则修复用的组件包会下载卡死
+Start-Service BITS          # BITS 必须运行，否则组件包下载会卡死
 Start-Service wuauserv
 Repair-WindowsImage -Online -RestoreHealth
-# 完成后重启系统
-
-# 2) 再启用 WSL2 所需功能
-Start-Service BITS
-Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -All -NoRestart
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -All -NoRestart
-# 再次重启系统
-
-# 3) 安装/更新 WSL 内核并设为默认版本 2
-wsl --update
-wsl --set-default-version 2
-
-# 4) 启动 Docker Desktop，验证引擎就绪
-docker version          # 应能看到 Server 段
-docker run --rm hello-world
 ```
+
+执行了约 3.5 小时（下载了累计 1.8 GB 组件包、恢复 75,992 条组件载荷），但最终**失败**：
+
+```text
+16:13:20  Error  CBS  Session: 31279508_1118754411 failed to perform
+                       store corruption detect and repair operation.
+                       [HRESULT = 0x800f0915 - CBS_E_REPAIR_CONTENT_MISSING]
+16:13:20  Info   CBS  Finalize failed. [HRESULT = 0x800f0915]
+```
+
+随后 DISM 自动重试第二轮，却陷入了**死循环** —— 每几秒轮询同一批组件并反复失败：
+
+```text
+18:07:59  Error  CBS  FC: CFCAcquirerWUClient::Download(141): Result = 0x800F0950
+18:08:03  Error  CBS  FC: CFCAcquirerWUClient::Download(141): Result = 0x800F0950
+18:08:09  Error  CBS  FC: CFCAcquirerWUClient::Download(141): Result = 0x800F0950
+```
+
+轮询的组件固定为 `Windows.Appraiser.amd64`、`Windows.AppraiserData.amd64`、
+`Windows.EmergencyUpdate.amd64`、`Client.OS.rs2.amd64`，**下载全部失败**。
+
+*为什么会失败*
+
+| HRESULT | 名称 | 含义 |
+| --- | --- | --- |
+| `0x80073712` | `ERROR_SXS_COMPONENT_STORE_CORRUPT` | 组件存储损坏（启用功能时最先暴露） |
+| `0x800f0915` | `CBS_E_REPAIR_CONTENT_MISSING` | 修复内容缺失（第一轮失败） |
+| `0x800F0950` | `CBS_E_NO_OPTIONAL_CONTENT_FOUND_FOR_BUILD` | 该版本找不到可选内容（死循环原因） |
+
+底层损坏类型在 CBS 日志中成片出现：
+
+```text
+Store corruption detected in function
+  ComponentStore::CRawStoreLayout::FetchManifestContent
+Attempting to mark store corrupt with category 'CorruptManifest'
+```
+
+即**组件清单（Manifest）本身损坏**。更关键的是，日志显示系统同时存在两个版本区间的包：
+
+```text
+10.0.26100.x   ← 当前系统（25H2 / Build 26200）
+10.0.27000.x   ← 更高版本的功能更新包（已预置，如 10.0.27000.397）
+```
+
+**系统卡在「跨版本撕裂」状态**，而 Windows Update 无法为一个一半旧、一半新的系统
+提供匹配 build 的修复内容，于是 DISM 只能不断重试、不断失败 —— **这条路走不通**。
+
+*一个重要的判断经验*
+
+修复过程中日志一直在写、CPU 一直在涨，看起来「正在工作」，
+但**真正的进度指标是 `Repr: Add missing payload` 的计数**：
+
+```text
+16:19   75,992 条
+18:07   75,992 条   ← 1 小时 45 分钟零增长，说明并未真正修复
+```
+
+**只看日志活跃度会被误导**（死循环里日志和 CPU 同样活跃）。计数冻结 = 没有实质进展。
+
+*下一步可行方案*
+
+| 方案 | 做法 | 评价 |
+| --- | --- | --- |
+| **① 就地升级修复安装** | 下载 Windows 11 ISO → 运行 `setup.exe` → 选「保留个人文件和应用」 | **推荐**。用健康文件替换损坏组件，同时消除跨版本撕裂 |
+| ② 本地 ISO 作修复源 | `DISM /Online /Cleanup-Image /RestoreHealth /Source:WIM:X:\sources\install.wim:1 /LimitAccess` | 绕开 Windows Update，但未必能修 `CorruptManifest` |
+| ③ 重置 Windows Update 组件 | 重建 `SoftwareDistribution` 与 `catroot2` 后重试 | 较轻，但大概率仍失败 |
 
 **遗留风险**
 
-- 组件存储修复依赖 Windows Update 下载组件包，若 BITS / wuauserv 被停止，下载会卡在固定百分比（本次即卡在 50%），需先启动这两个服务。
-- 家庭版没有 Hyper-V 作为备选后端，WSL2 一旦不可用就没有兜底方案；必要时只能改用远程 Docker 主机（`DOCKER_HOST` 指向远端引擎）。
-- 本次作业只要求完成环境检查，不要求跑通容器；Docker 客户端已确认正常，该问题不影响本次作业的完成度。
+- 组件存储修复依赖 Windows Update 提供内容；当系统处于跨版本撕裂状态时，
+  Windows Update 无法提供匹配内容，`RestoreHealth` **会陷入死循环且永远不会成功**。
+- ⚠️ **切勿强行结束 `DismHost` 进程或重启 `TrustedInstaller` 服务** —— 本次组件存储
+  的严重损坏（约 1.8 万处）正是强行中断 DISM 操作导致的。需要中止时应优先在窗口内
+  按 `Ctrl+C` 优雅取消，或重启系统。
+- 家庭版没有 Hyper-V 作为备选后端，WSL2 一旦不可用就没有兜底方案；
+  必要时只能改用远程 Docker 主机（`DOCKER_HOST` 指向远端引擎）。
+- 本次作业只要求完成环境检查，不要求跑通容器；Docker 客户端与 Compose 插件均已确认
+  安装正常，**该问题不影响本次作业的完成度**。
+
 
 
