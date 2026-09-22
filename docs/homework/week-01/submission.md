@@ -57,7 +57,7 @@
 ## 三、提交记录
 
 ```text
-$ git log --oneline
+$ git log --oneline --graph
 4e1a4e3 docs(week-01): 同步 index 精简改动，submission 移除对应段落并补齐提交记录
 96b42c1 docs(week-01): 问题1 补充「输出与 cmd 一致即成功」的判断标准
 8ba58c8 docs(week-01): 补充 GitHub 仓库页面真实截图，提交记录同步至 13 次
