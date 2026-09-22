@@ -180,6 +180,20 @@ Java version: 17.0.11, vendor: Oracle Corporation, runtime: C:\Java\jdk-17
 OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
 ```
 
+**这里要特别说明判断标准**：Git Bash 中的输出与在 cmd.exe 中执行**完全一致**，
+这本身就是修复成功的证据，而不是「没生效」的表现。
+
+原因在于：别名生效后，`mvn` 被替换成 `mvn.cmd`，走的是和 cmd.exe 同一个 Windows 批处理
+启动器，**路径处理逻辑相同，输出自然相同**。反过来说，如果别名没有生效，
+Git Bash 会命中原生的 POSIX 脚本 `bin/mvn`，输出**绝不会**是上面这样正常的版本信息，
+而是：
+
+```text
+错误: 找不到或无法加载主类 org.codehaus.plexus.classworlds.launcher.Launcher
+```
+
+所以判断依据不是「输出长得不一样」，而是「**输出里有没有那个类加载异常**」。
+
 > 补充一个配置细节：Git for Windows 的 `/etc/profile.d/bash_profile.sh` 在检测到存在
 > `~/.bashrc` 却没有 `~/.bash_profile` 时会自动生成后者来加载前者；本机已显式创建
 > `~/.bash_profile`（内容为 `test -f ~/.bashrc && . ~/.bashrc`），保证别名一定被加载。
