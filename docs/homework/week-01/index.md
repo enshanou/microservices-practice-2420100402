@@ -153,11 +153,6 @@ mvn.cmd --version
 
 输出完全正常。同时，用 Windows 风格路径手工拼出等价的 java 启动命令也能成功运行 —— 两个方向都确认了根因是路径格式。
 
-> ⚠️ **注意证据边界（容易看漏的一点）**：上方「环境检查」的截图是在 **cmd.exe** 中拍摄的，
-> 而本问题**只在 Git Bash 中出现**。所以那张截图里**不会**出现这个报错 ——
-> 它证明的是「cmd.exe 下 `mvn` 一直正常」，**并不能证明「Git Bash 下问题已解决」**。
-> 两者的证据是分开的，Git Bash 侧的验证见下方「解决方案」里的 `type mvn` 实测输出。
-
 **解决方案**
 
 在 Git Bash 中统一使用 `mvn.cmd` 代替 `mvn`。如需长期生效，可在 `~/.bashrc` 中加别名：
@@ -344,8 +339,6 @@ Attempting to mark store corrupt with category 'CorruptManifest'
   按 `Ctrl+C` 优雅取消，或重启系统。
 - 家庭版没有 Hyper-V 作为备选后端，WSL2 一旦不可用就没有兜底方案；
   必要时只能改用远程 Docker 主机（`DOCKER_HOST` 指向远端引擎）。
-- 本次作业只要求完成环境检查，不要求跑通容器；Docker 客户端与 Compose 插件均已确认
-  安装正常，**该问题不影响本次作业的完成度**。
 
 
 
