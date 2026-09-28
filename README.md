@@ -13,7 +13,7 @@
 | 业务背景 | 视频课程按时间线性呈现，学习者课前难以了解全貌，观看时频繁暂停抄写会打断思考，课后笔记又难以定位原视频核对 |
 | 目标用户 | 学习高校课程、公开课、技术教程和岗位培训视频的学生、自学者与职业学习者；管理员负责保障用户、资源和处理任务正常运行 |
 
-**本周作业记录：**[Week 02：项目选题与功能规划](docs/homework/week-02/index.md)
+**作业记录：**[Week 02：项目选题与功能规划](docs/homework/week-02/index.md) · [Week 03：Spring Boot 工程与运行验证](docs/homework/week-03/index.md) · [项目选题简案](docs/project-proposal.md)
 
 ---
 
@@ -251,15 +251,52 @@ flowchart TD
 .
 ├── README.md
 ├── docs/
+│   ├── project-proposal.md
 │   └── homework/
 │       ├── week-01/
 │       │   ├── index.md
 │       │   ├── submission.md
 │       │   └── screenshots/
-│       └── week-02/
+│       ├── week-02/
+│       │   ├── index.md
+│       │   └── screenshots/
+│       └── week-03/
 │           ├── index.md
 │           └── screenshots/
+├── monolith/
+│   ├── pom.xml
+│   ├── mvnw
+│   ├── mvnw.cmd
+│   ├── .mvn/wrapper/
+│   └── src/
 └── src/
 ```
 
-本周重点是**确定项目选题和完成功能规划**，不要求完成 Java 代码。详细的选题确定过程、本周完成内容和后续计划见 [Week 02 作业记录](docs/homework/week-02/index.md)。
+第 02 周重点是**确定项目选题和完成功能规划**，当周不要求完成 Java 代码。选题过程和完成内容见 [Week 02 作业记录](docs/homework/week-02/index.md)。
+
+## 10. 第三周工程运行
+
+`monolith/` 是独立 Maven 工程。需要 JDK 25；首次使用 Maven Wrapper 时需要网络下载 Maven 和项目依赖。默认端口为 `8080`，配置文件是 `monolith/src/main/resources/application.yml`。
+
+本机的 Java 17 仍为系统默认版本。若 `java -version` 显示 17，可在当前 PowerShell 窗口临时切换到 D 盘上的 Java 25，并把 Maven 下载内容也放在 D 盘：
+
+```powershell
+$env:JAVA_HOME = 'D:\AAA学习\jdk-25\jdk-25.0.4.1+1'
+$env:Path = "$env:JAVA_HOME\bin;$env:Path"
+$env:MAVEN_USER_HOME = 'D:\AAA学习\maven-user-home'
+$env:MAVEN_OPTS = '-Dmaven.repo.local=D:\AAA学习\maven-repository'
+```
+
+这些设置只在当前窗口生效。然后在 `monolith/` 目录执行：
+
+```powershell
+.\mvnw.cmd test
+.\mvnw.cmd spring-boot:run
+```
+
+macOS/Linux 对应使用 `./mvnw test` 和 `./mvnw spring-boot:run`。启动后访问：
+
+- 问候接口：<http://localhost:8080/api/hello>，应返回 `CourseLens is running`；
+- 健康检查：<http://localhost:8080/actuator/health>，应返回包含 `"status":"UP"` 的 JSON。
+
+目前只交付工程骨架和运行验证；上传、课程处理、笔记等业务能力仍在规划阶段，不应把这两个验证接口理解为业务功能。第三周测试记录和截图见 [Week 03 作业记录](docs/homework/week-03/index.md)。
