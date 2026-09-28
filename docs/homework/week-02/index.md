@@ -121,19 +121,4 @@ flowchart TD
 5. 在上述设计稳定后进行总体架构与模块边界复审；
 6. 按课程安排实现模块化单体，再逐步完成持久化、认证、消息、服务拆分、监控和部署。
 
----
 
-## 三、GitHub 提交检查
-
-提交作业前，应从更新并推送后的真实 GitHub 仓库页面截取 1–5 张 PNG/JPG/JPEG 图片，保存到 `docs/homework/week-02/screenshots/`。建议截图覆盖：
-
-1. 仓库首页及 README 开头，能看到项目名称、简介、业务背景和目标用户；
-2. README 的用户角色和功能模块；
-3. README 的 Mermaid 核心业务流程正常渲染；
-4. README 的项目范围和后续演进方向；
-5. 本页在 GitHub 上的渲染结果。
-
-作业系统中填写的公开仓库链接为：  
-<https://github.com/enshanou/microservices-practice-2420100402>
-
-作业系统中的项目名称、选题说明和功能规划应与本页及根目录 README 保持一致。
