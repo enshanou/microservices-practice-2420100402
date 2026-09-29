@@ -1,4 +1,4 @@
-package com.zjgs.qes;
+package com.zjgs.oes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

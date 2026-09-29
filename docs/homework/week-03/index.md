@@ -10,7 +10,7 @@
 | --- | --- |
 | 工程目录 | `monolith/`，独立 Maven 工程 |
 | Java / Spring Boot | Java 25 / Spring Boot 4.0.8 |
-| Group / Package | `com.zjgs.qes`（区恩善姓名拼音首字母） |
+| Group / Package | `com.zjgs.oes`（区恩善姓名拼音首字母） |
 | 依赖 | Spring Web MVC、Actuator、Spring Boot Test |
 | 配置 | `src/main/resources/application.yml`，端口 8080 |
 | 验证接口 | `GET /api/hello`、`GET /actuator/health` |
@@ -25,7 +25,7 @@
 .\mvnw.cmd spring-boot:run
 ```
 
-本机验证结果（2026-09-28）：
+本机验证结果（2026-09-29，包名更正后复验）：
 
 | 检查 | 实际结果 |
 | --- | --- |

@@ -8,7 +8,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.zjgs.qes</groupId>
+    <groupId>com.zjgs.oes</groupId>
     <artifactId>courselens-monolith</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>CourseLens Monolith</name>

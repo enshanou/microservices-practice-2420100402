@@ -1,4 +1,4 @@
-package com.zjgs.qes;
+package com.zjgs.oes;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
