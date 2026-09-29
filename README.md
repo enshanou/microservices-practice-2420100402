@@ -278,7 +278,7 @@ flowchart TD
 
 `monolith/` 是独立 Maven 工程。需要 JDK 25；首次使用 Maven Wrapper 时需要网络下载 Maven 和项目依赖。默认端口为 `8080`，配置文件是 `monolith/src/main/resources/application.yml`。
 
-本机已将 D 盘上的 Java 25 设为系统默认版本。重新打开终端后，`java -version` 应显示 25。尚未重新打开的终端可临时切换到 Java 25；以下设置也会把 Maven 下载内容放在 D 盘：
+本机已将 D 盘上的 Java 25 设为系统默认版本。已经打开的 IDEA 或终端可能仍保留旧的 `JAVA_HOME`；可完全退出后重开，必要时注销 Windows 后重新登录。当前 PowerShell 窗口可用以下命令切换到 Java 25，并把 Maven 下载内容放在 D 盘：
 
 ```powershell
 $env:JAVA_HOME = 'D:\AAA学习\jdk-25\jdk-25.0.4.1+1'
@@ -299,4 +299,4 @@ macOS/Linux 对应使用 `./mvnw test` 和 `./mvnw spring-boot:run`。启动后�
 - 问候接口：<http://localhost:8080/api/hello>，应返回 `CourseLens is running`；
 - 健康检查：<http://localhost:8080/actuator/health>，应返回包含 `"status":"UP"` 的 JSON。
 
-目前只交付工程骨架和运行验证；上传、课程处理、笔记等业务能力仍在规划阶段，不应把这两个验证接口理解为业务功能。第三周测试记录和截图见 [Week 03 作业记录](docs/homework/week-03/index.md)。
+本机已验证：启动测试 1 个通过、构建成功，问候接口返回 `CourseLens is running`，健康检查返回 `UP`。代码、配置、启动、接口与测试截图见 [Week 03 作业记录](docs/homework/week-03/index.md)。目前只交付工程骨架和运行验证；上传、课程处理、笔记等业务能力仍在规划阶段，不应把这两个验证接口理解为业务功能。

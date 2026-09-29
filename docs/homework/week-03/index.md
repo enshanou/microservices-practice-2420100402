@@ -18,14 +18,14 @@
 
 ## 运行与验证记录
 
-在 `monolith/` 目录，使用 Java 25 执行（本机临时切换命令见根目录 README）：
+在 `monolith/` 目录，使用 Java 25 执行（终端若仍保留旧的 `JAVA_HOME`，修正方法见根目录 README）：
 
 ```powershell
 .\mvnw.cmd test
 .\mvnw.cmd spring-boot:run
 ```
 
-本机验证结果（2026-09-29，包名更正后复验）：
+本机验证结果（2026-09-29，使用 `com.zjgs.oes` 包名复验）：
 
 | 检查 | 实际结果 |
 | --- | --- |
@@ -35,11 +35,15 @@
 | `GET http://localhost:8080/api/hello` | HTTP 200，`CourseLens is running` |
 | `GET http://localhost:8080/actuator/health` | HTTP 200，包含 `"status":"UP"` |
 
-运行与测试截图：
+运行与测试证据：
 
-- [启动测试结果](screenshots/context-loads.png)
-- [问候接口响应](screenshots/hello-api.png)
-- [健康检查响应](screenshots/health.png)
+| 内容 | 截图与说明 |
+| --- | --- |
+| 配置 | [application.yml 配置截图](screenshots/application_yml.png)；截图显示的是 `target/classes` 中的构建副本，实际编辑的源文件是 `monolith/src/main/resources/application.yml` |
+| 接口代码与启动 | [HelloController 与 IDEA 启动日志](screenshots/HelloController及启动日志.png)，日志显示应用在 8080 端口启动 |
+| 接口响应 | [GET /api/hello](screenshots/hello-api.png)，返回 `CourseLens is running` |
+| 健康检查 | [GET /actuator/health](screenshots/health.png)，返回 `UP` |
+| 启动测试 | [执行 `mvnw.cmd test` 的命令](screenshots/mvnw%20test_1.png)与[测试结果](screenshots/mvnw%20test_2.png)，1 个测试通过且 `BUILD SUCCESS` |
 
 ## 本周完成与后续
 
