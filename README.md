@@ -278,7 +278,7 @@ flowchart TD
 
 `monolith/` 是独立 Maven 工程。需要 JDK 25；首次使用 Maven Wrapper 时需要网络下载 Maven 和项目依赖。默认端口为 `8080`，配置文件是 `monolith/src/main/resources/application.yml`。
 
-本机的 Java 17 仍为系统默认版本。若 `java -version` 显示 17，可在当前 PowerShell 窗口临时切换到 D 盘上的 Java 25，并把 Maven 下载内容也放在 D 盘：
+本机已将 D 盘上的 Java 25 设为系统默认版本。重新打开终端后，`java -version` 应显示 25。尚未重新打开的终端可临时切换到 Java 25；以下设置也会把 Maven 下载内容放在 D 盘：
 
 ```powershell
 $env:JAVA_HOME = 'D:\AAA学习\jdk-25\jdk-25.0.4.1+1'
