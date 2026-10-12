@@ -1,4 +1,4 @@
-package com.zjgs.oes;
+package com.zjgsu.oes;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -10,7 +10,7 @@
 | --- | --- |
 | 工程目录 | `monolith/`，独立 Maven 工程 |
 | Java / Spring Boot | Java 25 / Spring Boot 4.0.8 |
-| Group / Package | `com.zjgs.oes`（区恩善姓名拼音首字母） |
+| Group / Package | `com.zjgsu.oes`（区恩善姓名拼音首字母） |
 | 依赖 | Spring Web MVC、Actuator、Spring Boot Test |
 | 配置 | `src/main/resources/application.yml`，端口 8080 |
 | 验证接口 | `GET /api/hello`、`GET /actuator/health` |
@@ -25,7 +25,7 @@
 .\mvnw.cmd spring-boot:run
 ```
 
-本机验证结果（2026-09-29，使用 `com.zjgs.oes` 包名复验）：
+本机首次验证结果（2026-09-29）：
 
 | 检查 | 实际结果 |
 | --- | --- |
@@ -44,6 +44,17 @@
 | 接口响应 | [GET /api/hello](screenshots/hello-api.png)，返回 `CourseLens is running` |
 | 健康检查 | [GET /actuator/health](screenshots/health.png)，返回 `UP` |
 | 启动测试 | [执行 `mvnw.cmd test` 的命令](screenshots/mvnw%20test_1.png)与[测试结果](screenshots/mvnw%20test_2.png)，1 个测试通过且 `BUILD SUCCESS` |
+
+### 2026-10-12 包名调整与复验
+
+项目 Group、源码和测试代码的包名已统一为 `com.zjgsu.oes`，Java 目录同步调整为 `com/zjgsu/oes`。上面的截图保留为此前运行记录；当前包名以工程源码和本次复验记录为准。
+
+| 检查 | 本次实际结果 |
+| --- | --- |
+| `mvnw.cmd clean test` | 清理旧构建产物后重新编译；1 个测试通过，失败 0、错误 0，`BUILD SUCCESS` |
+| `mvnw.cmd spring-boot:run` | `com.zjgsu.oes.CourseLensApplication` 在默认 8080 端口正常启动 |
+| `GET http://localhost:8080/api/hello` | HTTP 200，`CourseLens is running` |
+| `GET http://localhost:8080/actuator/health` | HTTP 200，`status` 为 `UP` |
 
 ## 本周完成与后续
 
