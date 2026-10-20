@@ -1,0 +1,139 @@
+[INFO] Scanning for projects...
+[INFO]
+[INFO] -----------------< com.zjgsu.oes:courselens-monolith >------------------
+[INFO] Building CourseLens Monolith 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ courselens-monolith ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO]
+[INFO] --- compiler:3.14.1:compile (default-compile) @ courselens-monolith ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ courselens-monolith ---
+[INFO] Copying 2 resources from src\test\resources to target\test-classes
+[INFO]
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ courselens-monolith ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO]
+[INFO] --- surefire:3.5.6:test (default-test) @ courselens-monolith ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.zjgsu.oes.controller.ApiTests
+20:09:15.687 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.zjgsu.oes.controller.ApiTests]: ApiTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:09:15.997 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.zjgsu.oes.CourseLensApplication for test class com.zjgsu.oes.controller.ApiTests
+20:09:16.142 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.zjgsu.oes.controller.ApiTests]: ApiTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:09:16.148 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.zjgsu.oes.CourseLensApplication for test class com.zjgsu.oes.controller.ApiTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.8)
+
+2026-10-12T20:09:16.784+08:00  INFO 12368 --- [           main] com.zjgsu.oes.controller.ApiTests        : Starting ApiTests using Java 25.0.4.1 with PID 12368 (started by 24625 in D:\AAAѧϰ\GitHub\microservices-practice-2420100402\monolith)
+2026-10-12T20:09:16.786+08:00  INFO 12368 --- [           main] com.zjgsu.oes.controller.ApiTests        : No active profile set, falling back to 1 default profile: "default"
+2026-10-12T20:09:18.818+08:00  INFO 12368 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-12T20:09:18.970+08:00  INFO 12368 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 128 ms. Found 2 JPA repository interfaces.
+2026-10-12T20:09:20.063+08:00  INFO 12368 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-12T20:09:20.220+08:00  INFO 12368 --- [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.24.Final
+2026-10-12T20:09:21.669+08:00  INFO 12368 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-12T20:09:21.785+08:00  INFO 12368 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-12T20:09:22.384+08:00  INFO 12368 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:courselens-4e1ab491-f6a3-4fdf-a251-ae21538f3e40 user=SA
+2026-10-12T20:09:22.390+08:00  INFO 12368 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-12T20:09:22.572+08:00  INFO 12368 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:courselens-4e1ab491-f6a3-4fdf-a251-ae21538f3e40]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: COURSELENS-4E1AB491-F6A3-4FDF-A251-AE21538F3E40/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-12T20:09:25.500+08:00  INFO 12368 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-12T20:09:25.687+08:00  INFO 12368 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-12T20:09:25.991+08:00  INFO 12368 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-12T20:09:30.128+08:00  INFO 12368 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-12T20:09:30.128+08:00  INFO 12368 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-12T20:09:30.163+08:00  INFO 12368 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-10-12T20:09:30.200+08:00  INFO 12368 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 70 ms
+2026-10-12T20:09:30.402+08:00  INFO 12368 --- [           main] com.zjgsu.oes.controller.ApiTests        : Started ApiTests in 14.15 seconds (process running for 16.436)
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.17 s -- in com.zjgsu.oes.controller.ApiTests
+[INFO] Running com.zjgsu.oes.CourseLensApplicationTests
+2026-10-12T20:09:33.530+08:00  INFO 12368 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.zjgsu.oes.CourseLensApplicationTests]: CourseLensApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-12T20:09:33.561+08:00  INFO 12368 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.zjgsu.oes.CourseLensApplication for test class com.zjgsu.oes.CourseLensApplicationTests
+2026-10-12T20:09:33.565+08:00  INFO 12368 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.zjgsu.oes.CourseLensApplicationTests]: CourseLensApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-12T20:09:33.569+08:00  INFO 12368 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.zjgsu.oes.CourseLensApplication for test class com.zjgsu.oes.CourseLensApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.8)
+
+2026-10-12T20:09:33.654+08:00  INFO 12368 --- [           main] c.zjgsu.oes.CourseLensApplicationTests   : Starting CourseLensApplicationTests using Java 25.0.4.1 with PID 12368 (started by 24625 in D:\AAAѧϰ\GitHub\microservices-practice-2420100402\monolith)
+2026-10-12T20:09:33.655+08:00  INFO 12368 --- [           main] c.zjgsu.oes.CourseLensApplicationTests   : No active profile set, falling back to 1 default profile: "default"
+2026-10-12T20:09:34.447+08:00  INFO 12368 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-12T20:09:34.515+08:00  INFO 12368 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 2 JPA repository interfaces.
+2026-10-12T20:09:34.850+08:00  INFO 12368 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-12T20:09:34.911+08:00  INFO 12368 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-12T20:09:34.912+08:00  INFO 12368 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-10-12T20:09:34.919+08:00  INFO 12368 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:courselens-dab5e50f-9615-4505-9367-31aad6bc96c6 user=SA
+2026-10-12T20:09:34.919+08:00  INFO 12368 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-10-12T20:09:34.921+08:00  INFO 12368 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:courselens-dab5e50f-9615-4505-9367-31aad6bc96c6]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: COURSELENS-DAB5E50F-9615-4505-9367-31AAD6BC96C6/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-12T20:09:35.017+08:00  INFO 12368 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-12T20:09:35.031+08:00  INFO 12368 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-12T20:09:35.752+08:00  INFO 12368 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-10-12T20:09:35.830+08:00  INFO 12368 --- [           main] c.zjgsu.oes.CourseLensApplicationTests   : Started CourseLensApplicationTests in 2.245 seconds (process running for 21.866)
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.314 s -- in com.zjgsu.oes.CourseLensApplicationTests
+[INFO] Running com.zjgsu.oes.repository.RepositoryTests
+2026-10-12T20:09:35.853+08:00  INFO 12368 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.zjgsu.oes.repository.RepositoryTests]: RepositoryTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-12T20:09:35.893+08:00  INFO 12368 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.zjgsu.oes.CourseLensApplication for test class com.zjgsu.oes.repository.RepositoryTests
+2026-10-12T20:09:35.895+08:00  INFO 12368 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.zjgsu.oes.repository.RepositoryTests]: RepositoryTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-12T20:09:35.897+08:00  INFO 12368 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.zjgsu.oes.CourseLensApplication for test class com.zjgsu.oes.repository.RepositoryTests
+2026-10-12T20:09:36.101+08:00  WARN 12368 --- [           main] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 23505, SQLState: 23505
+2026-10-12T20:09:36.102+08:00  WARN 12368 --- [           main] org.hibernate.orm.jdbc.error             : Unique index or primary key violation: "PUBLIC.UK_TASKS_ACTIVE_COURSE INDEX PUBLIC.UK_TASKS_ACTIVE_COURSE_INDEX_3 ON PUBLIC.PROCESSING_TASKS(ACTIVE_COURSE_ID NULLS FIRST) VALUES ( /* 6 */ '29fdb473-bbcb-45f4-8800-cdeeb994e485' )"; SQL statement:
+insert into processing_tasks (active_course_id,course_id,created_at,failure_reason,status,updated_at,id) values (?,?,?,?,?,?,?) [23505-240]
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.273 s -- in com.zjgsu.oes.repository.RepositoryTests
+[INFO] Running com.zjgsu.oes.service.CourseProcessingServiceTests
+2026-10-12T20:09:36.131+08:00  INFO 12368 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.zjgsu.oes.service.CourseProcessingServiceTests]: CourseProcessingServiceTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-12T20:09:36.169+08:00  INFO 12368 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.zjgsu.oes.CourseLensApplication for test class com.zjgsu.oes.service.CourseProcessingServiceTests
+2026-10-12T20:09:36.171+08:00  INFO 12368 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.zjgsu.oes.service.CourseProcessingServiceTests]: CourseProcessingServiceTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-12T20:09:36.174+08:00  INFO 12368 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.zjgsu.oes.CourseLensApplication for test class com.zjgsu.oes.service.CourseProcessingServiceTests
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.827 s -- in com.zjgsu.oes.service.CourseProcessingServiceTests
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 31, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  26.376 s
+[INFO] Finished at: 2026-10-12T20:09:37+08:00
+[INFO] ------------------------------------------------------------------------

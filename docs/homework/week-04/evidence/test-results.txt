@@ -1,0 +1,57 @@
+CourseLens Week04 verification — 2026-10-12
+Java 25.0.4.1 / Spring Boot 4.0.8 / Maven 3.9.16
+Automatic tests: isolated H2, real Service/Repository, no mocks.
+
+com.zjgsu.oes.controller.ApiTests: tests=11, failures=0, errors=0, skipped=0
+  PASS rejectsBlankCourseInputWith400
+  PASS returns404ForMissingCourseAndTask
+  PASS retainsHelloAndHealthEndpoints
+  PASS rejectsInvalidStateAndUnknownStatus
+  PASS createsCourseAndReturnsLocationThenReadsIt
+  PASS createsTaskThenRejectsDuplicateWith409
+  PASS rejectsMalformedUuidAndJsonWith400
+  PASS listsAutomaticallyPreparedDemoCourseAndHistory
+  PASS rejectsOversizedInputWith400
+  PASS reportsFailureReasonAndRejectsEmptyReason
+  PASS updatesTaskToSuccessThenAllowsNewAttempt
+com.zjgsu.oes.CourseLensApplicationTests: tests=1, failures=0, errors=0, skipped=0
+  PASS contextLoads
+com.zjgsu.oes.repository.RepositoryTests: tests=5, failures=0, errors=0, skipped=0
+  PASS databaseRejectsTaskReferencingMissingCourse
+  PASS writesAndReadsCourse
+  PASS writesTaskWithCourseRelationship
+  PASS completedHistoryDoesNotBlockNewActiveTask
+  PASS databaseRejectsTwoActiveTasksEvenWithoutServiceCheck
+com.zjgsu.oes.service.CourseProcessingServiceTests: tests=14, failures=0, errors=0, skipped=0
+  PASS recordsFailureReasonAndAllowsNewAttempt
+  PASS completesTaskAndPreservesHistoryWhenCreatingAnother
+  PASS rejectsBlankFailureReasonWithoutChangingTask
+  PASS createsPendingTaskLinkedToExistingCourse
+  PASS rejectsDuplicatePendingTaskWithoutAddingAnotherRecord
+  PASS registersCourseWithTrimmedMetadata
+  PASS rejectsBlankCourseMetadata
+  PASS concurrentSubmissionsCreateOnlyOneActiveTask
+  PASS rejectsCompletionBeforeTaskStarts
+  PASS rejectsChangingAnAlreadyFinishedTask
+  PASS allowsIndependentTasksForDifferentCourses
+  PASS rejectsUnknownTaskAndMissingIdentifiers
+  PASS rejectsTaskForUnknownCourse
+  PASS rejectsDuplicateRunningTask
+
+First run: mvnw.cmd clean test
+[INFO] Tests run: 31, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+[INFO] Total time:  30.228 s
+[INFO] Finished at: 2026-10-12T20:09:06+08:00
+
+Repeat run: mvnw.cmd test
+[INFO] Tests run: 31, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+[INFO] Total time:  26.376 s
+[INFO] Finished at: 2026-10-12T20:09:37+08:00
+
+Live MySQL 8.0.45 / database courselens / port 13306
+Application restart preserved course and task UUIDs.
+Concurrent HTTP creation: 201 and 409; SQL active task count: 1.
+Verify-Api.ps1: 19 HTTP checks passed.
+Expected constraint-rejection warnings in Repository tests are asserted successful cases, not test failures.

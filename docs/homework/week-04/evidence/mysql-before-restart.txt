@@ -1,0 +1,6 @@
+mysql_version
+8.0.45
+id	title	source_reference
+195f8e89-8f26-49df-8fa3-184dbc1b229a	Week04 persistence verification	imports/demo.srt
+id	course_id	status	active_course_id
+6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a	195f8e89-8f26-49df-8fa3-184dbc1b229a	PENDING	195f8e89-8f26-49df-8fa3-184dbc1b229a

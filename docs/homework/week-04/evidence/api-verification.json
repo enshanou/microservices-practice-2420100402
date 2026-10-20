@@ -1,0 +1,370 @@
+{
+  "verifiedAt": "2026-10-12 20:04:26 +0800",
+  "baseUrl": "http://localhost:18080",
+  "courseId": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+  "taskId": "6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a",
+  "beforeRestart": [
+    {
+      "method": "GET",
+      "path": "/actuator/health",
+      "status": 200,
+      "body": {
+        "groups": [
+          "liveness",
+          "readiness"
+        ],
+        "status": "UP"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/hello",
+      "status": 200,
+      "body": "CourseLens is running"
+    },
+    {
+      "method": "POST",
+      "path": "/api/courses",
+      "status": 201,
+      "body": {
+        "id": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+        "ownerId": "oes",
+        "title": "Week04 persistence verification",
+        "sourceReference": "imports/demo.srt",
+        "createdAt": "2026-10-12T12:04:25.561636Z"
+      },
+      "request": {
+        "ownerId": "oes",
+        "title": "Week04 persistence verification",
+        "sourceReference": "imports/demo.srt"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses",
+      "status": 200,
+      "body": [
+        {
+          "id": "11111111-1111-4111-8111-111111111111",
+          "ownerId": "oes",
+          "title": "Microservices demo",
+          "sourceReference": "imports/demo.srt",
+          "createdAt": "2026-10-01T00:00:00Z"
+        },
+        {
+          "id": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+          "ownerId": "oes",
+          "title": "Week04 persistence verification",
+          "sourceReference": "imports/demo.srt",
+          "createdAt": "2026-10-12T12:04:25.561636Z"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/195f8e89-8f26-49df-8fa3-184dbc1b229a",
+      "status": 200,
+      "body": {
+        "id": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+        "ownerId": "oes",
+        "title": "Week04 persistence verification",
+        "sourceReference": "imports/demo.srt",
+        "createdAt": "2026-10-12T12:04:25.561636Z"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/courses/195f8e89-8f26-49df-8fa3-184dbc1b229a/tasks",
+      "status": 201,
+      "body": {
+        "id": "6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a",
+        "courseId": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+        "status": "PENDING",
+        "failureReason": null,
+        "createdAt": "2026-10-12T12:04:26.125736Z",
+        "updatedAt": "2026-10-12T12:04:26.125736Z"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks/6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a",
+      "status": 200,
+      "body": {
+        "id": "6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a",
+        "courseId": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+        "status": "PENDING",
+        "failureReason": null,
+        "createdAt": "2026-10-12T12:04:26.125736Z",
+        "updatedAt": "2026-10-12T12:04:26.125736Z"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/195f8e89-8f26-49df-8fa3-184dbc1b229a/tasks",
+      "status": 200,
+      "body": [
+        {
+          "id": "6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a",
+          "courseId": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+          "status": "PENDING",
+          "failureReason": null,
+          "createdAt": "2026-10-12T12:04:26.125736Z",
+          "updatedAt": "2026-10-12T12:04:26.125736Z"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/courses/195f8e89-8f26-49df-8fa3-184dbc1b229a/tasks",
+      "status": 409,
+      "body": {
+        "detail": "Course already has an active processing task",
+        "instance": "/api/courses/195f8e89-8f26-49df-8fa3-184dbc1b229a/tasks",
+        "status": 409,
+        "title": "Conflict"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/courses",
+      "status": 400,
+      "body": {
+        "detail": "Invalid request content.",
+        "instance": "/api/courses",
+        "status": 400,
+        "title": "Bad Request"
+      },
+      "request": {
+        "ownerId": "oes",
+        "title": "",
+        "sourceReference": "demo.srt"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/d3e05c5e-b44b-4df1-9274-dfcc90cde15d",
+      "status": 404,
+      "body": {
+        "detail": "Course does not exist: d3e05c5e-b44b-4df1-9274-dfcc90cde15d",
+        "instance": "/api/courses/d3e05c5e-b44b-4df1-9274-dfcc90cde15d",
+        "status": 404,
+        "title": "Not Found"
+      }
+    }
+  ],
+  "afterRestart": [
+    {
+      "method": "GET",
+      "path": "/api/courses/195f8e89-8f26-49df-8fa3-184dbc1b229a",
+      "status": 200,
+      "body": {
+        "id": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+        "ownerId": "oes",
+        "title": "Week04 persistence verification",
+        "sourceReference": "imports/demo.srt",
+        "createdAt": "2026-10-12T12:04:25.561636Z"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks/6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a",
+      "status": 200,
+      "body": {
+        "id": "6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a",
+        "courseId": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+        "status": "PENDING",
+        "failureReason": null,
+        "createdAt": "2026-10-12T12:04:26.125736Z",
+        "updatedAt": "2026-10-12T12:04:26.125736Z"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/courses/195f8e89-8f26-49df-8fa3-184dbc1b229a/tasks",
+      "status": 409,
+      "body": {
+        "detail": "Course already has an active processing task",
+        "instance": "/api/courses/195f8e89-8f26-49df-8fa3-184dbc1b229a/tasks",
+        "status": 409,
+        "title": "Conflict"
+      }
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/tasks/6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a/status",
+      "status": 409,
+      "body": {
+        "detail": "Cannot change task from PENDING to SUCCEEDED",
+        "instance": "/api/tasks/6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a/status",
+        "status": 409,
+        "title": "Conflict"
+      },
+      "request": {
+        "status": "SUCCEEDED"
+      }
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/tasks/6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a/status",
+      "status": 200,
+      "body": {
+        "id": "6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a",
+        "courseId": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+        "status": "RUNNING",
+        "failureReason": null,
+        "createdAt": "2026-10-12T12:04:26.125736Z",
+        "updatedAt": "2026-10-12T12:05:31.888515Z"
+      },
+      "request": {
+        "status": "RUNNING"
+      }
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/tasks/6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a/status",
+      "status": 400,
+      "body": {
+        "detail": "failureReason must not be blank",
+        "instance": "/api/tasks/6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a/status",
+        "status": 400,
+        "title": "Bad Request"
+      },
+      "request": {
+        "status": "FAILED",
+        "failureReason": " "
+      }
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/tasks/6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a/status",
+      "status": 200,
+      "body": {
+        "id": "6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a",
+        "courseId": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+        "status": "SUCCEEDED",
+        "failureReason": null,
+        "createdAt": "2026-10-12T12:04:26.125736Z",
+        "updatedAt": "2026-10-12T12:05:32.009020Z"
+      },
+      "request": {
+        "status": "SUCCEEDED"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/courses/195f8e89-8f26-49df-8fa3-184dbc1b229a/tasks",
+      "status": 201,
+      "body": {
+        "id": "8c731b00-a21b-47bc-8487-15ef50d4af44",
+        "courseId": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+        "status": "PENDING",
+        "failureReason": null,
+        "createdAt": "2026-10-12T12:05:32.060349Z",
+        "updatedAt": "2026-10-12T12:05:32.060349Z"
+      }
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/tasks/8c731b00-a21b-47bc-8487-15ef50d4af44/status",
+      "status": 200,
+      "body": {
+        "id": "8c731b00-a21b-47bc-8487-15ef50d4af44",
+        "courseId": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+        "status": "RUNNING",
+        "failureReason": null,
+        "createdAt": "2026-10-12T12:05:32.060349Z",
+        "updatedAt": "2026-10-12T12:05:32.131304Z"
+      },
+      "request": {
+        "status": "RUNNING"
+      }
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/tasks/8c731b00-a21b-47bc-8487-15ef50d4af44/status",
+      "status": 200,
+      "body": {
+        "id": "8c731b00-a21b-47bc-8487-15ef50d4af44",
+        "courseId": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+        "status": "FAILED",
+        "failureReason": "Demo: missing subtitle input",
+        "createdAt": "2026-10-12T12:05:32.060349Z",
+        "updatedAt": "2026-10-12T12:05:32.179863Z"
+      },
+      "request": {
+        "status": "FAILED",
+        "failureReason": "Demo: missing subtitle input"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/195f8e89-8f26-49df-8fa3-184dbc1b229a/tasks",
+      "status": 200,
+      "body": [
+        {
+          "id": "6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a",
+          "courseId": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+          "status": "SUCCEEDED",
+          "failureReason": null,
+          "createdAt": "2026-10-12T12:04:26.125736Z",
+          "updatedAt": "2026-10-12T12:05:32.009020Z"
+        },
+        {
+          "id": "8c731b00-a21b-47bc-8487-15ef50d4af44",
+          "courseId": "195f8e89-8f26-49df-8fa3-184dbc1b229a",
+          "status": "FAILED",
+          "failureReason": "Demo: missing subtitle input",
+          "createdAt": "2026-10-12T12:05:32.060349Z",
+          "updatedAt": "2026-10-12T12:05:32.179863Z"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/courses",
+      "status": 201,
+      "body": {
+        "id": "18efe869-5090-461d-97ca-91a516376ecf",
+        "ownerId": "oes",
+        "title": "Concurrent API verification",
+        "sourceReference": "imports/demo.srt",
+        "createdAt": "2026-10-12T12:05:32.296431Z"
+      },
+      "request": {
+        "ownerId": "oes",
+        "title": "Concurrent API verification",
+        "sourceReference": "imports/demo.srt"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/courses/18efe869-5090-461d-97ca-91a516376ecf/tasks",
+      "status": 201,
+      "body": {
+        "id": "3ea46615-c30b-4e9b-8bfb-94999666e14e",
+        "courseId": "18efe869-5090-461d-97ca-91a516376ecf",
+        "status": "PENDING",
+        "failureReason": null,
+        "createdAt": "2026-10-12T12:05:32.338549Z",
+        "updatedAt": "2026-10-12T12:05:32.338549Z"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/courses/18efe869-5090-461d-97ca-91a516376ecf/tasks",
+      "status": 409,
+      "body": {
+        "detail": "Course already has an active processing task",
+        "instance": "/api/courses/18efe869-5090-461d-97ca-91a516376ecf/tasks",
+        "status": 409,
+        "title": "Conflict"
+      }
+    }
+  ],
+  "persistenceVerified": true,
+  "concurrentStatuses": [
+    201,
+    409
+  ],
+  "finishedAt": "2026-10-12 20:05:32 +0800"
+}

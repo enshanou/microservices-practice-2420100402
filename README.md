@@ -13,7 +13,7 @@
 | 业务背景 | 视频课程按时间线性呈现，学习者课前难以了解全貌，观看时频繁暂停抄写会打断思考，课后笔记又难以定位原视频核对 |
 | 目标用户 | 学习高校课程、公开课、技术教程和岗位培训视频的学生、自学者与职业学习者；管理员负责保障用户、资源和处理任务正常运行 |
 
-**作业记录：**[Week 02：项目选题与功能规划](docs/homework/week-02/index.md) · [Week 03：Spring Boot 工程与运行验证](docs/homework/week-03/index.md) · [项目选题简案](docs/project-proposal.md)
+**作业记录：**[Week 02：项目选题与功能规划](docs/homework/week-02/index.md) · [Week 03：Spring Boot 工程与运行验证](docs/homework/week-03/index.md) · [Week 04：业务建模、API、数据库与测试](docs/homework/week-04/index.md) · [项目选题简案](docs/project-proposal.md)
 
 ---
 
@@ -252,6 +252,7 @@ flowchart TD
 ├── README.md
 ├── docs/
 │   ├── project-proposal.md
+│   ├── database.md
 │   └── homework/
 │       ├── week-01/
 │       │   ├── index.md
@@ -260,43 +261,138 @@ flowchart TD
 │       ├── week-02/
 │       │   ├── index.md
 │       │   └── screenshots/
-│       └── week-03/
+│       ├── week-03/
+│       │   ├── index.md
+│       │   └── screenshots/
+│       └── week-04/
 │           ├── index.md
+│           ├── evidence/
 │           └── screenshots/
 ├── monolith/
 │   ├── pom.xml
 │   ├── mvnw
 │   ├── mvnw.cmd
 │   ├── .mvn/wrapper/
+│   ├── scripts/
 │   └── src/
 └── src/
 ```
 
 第 02 周重点是**确定项目选题和完成功能规划**，当周不要求完成 Java 代码。选题过程和完成内容见 [Week 02 作业记录](docs/homework/week-02/index.md)。
 
-## 10. 第三周工程运行
+## 10. 当前工程与本机启动
 
-`monolith/` 是独立 Maven 工程。需要 JDK 25；首次使用 Maven Wrapper 时需要网络下载 Maven 和项目依赖。默认端口为 `8080`，配置文件是 `monolith/src/main/resources/application.yml`。
+`monolith/` 是独立 Maven 工程：Java 25、Spring Boot 4.0.8、Maven Wrapper 3.9.16、MySQL。主配置为 `src/main/resources/application.yml`，默认 HTTP 端口 8080。第 03 周的问候与健康接口保留；本周新增课程和任务管理。
 
-本机已将 D 盘上的 Java 25 设为系统默认版本。已经打开的 IDEA 或终端可能仍保留旧的 `JAVA_HOME`；可完全退出后重开，必要时注销 Windows 后重新登录。当前 PowerShell 窗口可用以下命令切换到 Java 25，并把 Maven 下载内容放在 D 盘：
+### 本机最快运行方法
+
+打开 Windows **PowerShell**，复制执行下面三行：
 
 ```powershell
-$env:JAVA_HOME = 'D:\AAA学习\jdk-25\jdk-25.0.4.1+1'
-$env:Path = "$env:JAVA_HOME\bin;$env:Path"
-$env:MAVEN_USER_HOME = 'D:\AAA学习\maven-user-home'
-$env:MAVEN_OPTS = '-Dmaven.repo.local=D:\AAA学习\maven-repository'
+cd 'D:\study\GitHub\microservices-practice-2420100402\monolith'
+Set-ExecutionPolicy -Scope Process Bypass
+.\scripts\Start-Local.ps1
 ```
 
-这些设置只在当前窗口生效。然后在 `monolith/` 目录执行：
+看到 `Started CourseLensApplication` 后保持窗口打开。脚本会使用本机已有 MySQL 二进制，在 `D:\courselens-local-mysql` 准备独立数据库，监听 13306，然后启动应用。随机密码和真实数据库文件均保存在仓库外。重复启动保留课程和任务，不改动电脑原有 3306 服务。若 HTTP 8080 被占用，可改用 `.\scripts\Start-Local.ps1 -Port 18080`，后面的请求也相应改为 18080。
+
+浏览器可打开：
+
+- <http://localhost:8080/api/courses>：课程列表，JSON 是接口实际响应。
+- <http://localhost:8080/api/hello>：`CourseLens is running`。
+- <http://localhost:8080/actuator/health>：`{"status":"UP"}`。
+
+停止应用：在启动窗口按 Ctrl+C，若出现 `Terminate batch job (Y/N)?` 输入 Y 回车。独立数据库仍运行；需要停止时，在应用退出后执行 `.\scripts\Stop-LocalMySql.ps1`，下次启动脚本会重新启动它。
+
+### 两个可直接运行的 curl 示例
+
+另开 PowerShell 窗口，进入 `monolith/` 执行（这里明确使用 `curl.exe`）：
 
 ```powershell
-.\mvnw.cmd test
+cd 'D:\study\GitHub\microservices-practice-2420100402\monolith'
+curl.exe -i http://localhost:8080/api/courses
+curl.exe -i -X POST http://localhost:8080/api/courses -H 'Content-Type: application/json' --data-binary '@scripts/requests/create-course.json'
+```
+
+第一条查询课程列表，返回 200；第二条从仓库内 JSON 文件读取课程输入并创建记录，返回 201 和新 UUID。使用文件传递 JSON 适用于 Windows PowerShell 的引号规则。macOS/Linux 将 `curl.exe` 换成 `curl`，在同一目录执行即可。
+
+需要完整演示创建任务、拒绝重复任务、状态更新及历史查询时执行：
+
+```powershell
+.\scripts\Verify-Api.ps1
+```
+
+脚本检查 19 次真实 HTTP 请求；成功时显示 `SUCCESS: 19 HTTP checks passed`。每次生成新演示课程，保留成功和失败两条任务历史，方便再次查询。
+
+### 新电脑安装 MySQL 与手动连接
+
+1. 安装 JDK 25，并配置 `JAVA_HOME`；项目使用自带 Maven Wrapper，无须另装 Maven。
+2. 按 [MySQL 官方 Windows 安装说明](https://dev.mysql.com/doc/refman/8.4/en/windows-installation.html) 安装 MySQL 8.4 LTS，记住安装时设置的 root 密码，确认 `mysql.exe` 可运行。本机已有版本是 8.0.45，已实际验证通过。
+3. 若采用仓库初始化脚本，将 MySQL 的 bin 目录加入 PATH，或给 `.\scripts\Initialize-LocalMySql.ps1` 传入 `-MySqlBin 'D:\mysql\bin'`。它默认使用英文数据路径和独立端口 13306。在其他机器上执行 `Start-Local.ps1` 时传入真实 `-JdkHome`；脚本中的 Maven 缓存目录也可按需调整。
+4. 若使用自己已经配置好的 MySQL 服务，在 `monolith/` 中打开 MySQL 命令行：
+
+```powershell
+mysql.exe -h 127.0.0.1 -P 3306 -u root -p
+```
+
+输入 root 密码后，在出现的 `mysql>` 中执行下面 SQL（先把项目账号密码替换为自己设置的密码，斜杠路径按实际仓库位置调整）：
+
+```sql
+SOURCE D:/study/GitHub/microservices-practice-2420100402/monolith/scripts/schema.sql;
+CREATE USER IF NOT EXISTS 'courselens'@'localhost' IDENTIFIED BY 'replace-with-your-own-password';
+GRANT SELECT, INSERT, UPDATE, DELETE ON courselens.* TO 'courselens'@'localhost';
+SOURCE D:/study/GitHub/microservices-practice-2420100402/monolith/scripts/demo-data.sql;
+EXIT;
+```
+
+若本机 MySQL 命令行不能识别中文 SOURCE 路径，将两份 SQL 复制到英文目录（例如 `D:/courselens-sql/`），再从该目录 SOURCE。示例数据脚本可以重复执行，不删除或覆盖已经存在的课程和任务。
+
+在 PowerShell 配置连接后启动：
+
+```powershell
+$env:JAVA_HOME = 'D:\study\jdk-25\jdk-25.0.4.1+1'
+$env:Path = "$env:JAVA_HOME\bin;$env:Path"
+$env:MAVEN_USER_HOME = 'D:\study\maven-user-home'
+$env:MAVEN_OPTS = '-Dmaven.repo.local=D:\study\maven-repository'
+$env:DB_URL = 'jdbc:mysql://127.0.0.1:3306/courselens?serverTimezone=UTC&characterEncoding=UTF-8'
+$env:DB_USER = 'courselens'
+$env:DB_PASSWORD = Read-Host '输入刚才设置的 courselens 数据库密码' -MaskInput
 .\mvnw.cmd spring-boot:run
 ```
 
-macOS/Linux 对应使用 `./mvnw test` 和 `./mvnw spring-boot:run`。启动后访问：
+`-MaskInput` 适用于 PowerShell 7；Windows PowerShell 5 可将最后的密码输入改为 `Read-Host`。连接 13306 时相应修改 URL。不要将真实密码写进 application.yml 或提交到 GitHub。生产 `ddl-auto: validate` 只校验结构，建表使用 SQL 脚本。详细字段、关系和约束见 [数据库文档](docs/database.md)。
 
-- 问候接口：<http://localhost:8080/api/hello>，应返回 `CourseLens is running`；
-- 健康检查：<http://localhost:8080/actuator/health>，应返回包含 `"status":"UP"` 的 JSON。
+### 自动测试（不需要 MySQL）
 
-本机已验证：启动测试 1 个通过、构建成功，问候接口返回 `CourseLens is running`，健康检查返回 `UP`。代码、配置、启动、接口与测试截图见 [Week 03 作业记录](docs/homework/week-03/index.md)。目前只交付工程骨架和运行验证；上传、课程处理、笔记等业务能力仍在规划阶段，不应把这两个验证接口理解为业务功能。
+打开 PowerShell，在 `monolith/` 中设置上面的 JDK 与 Maven 环境（无需 DB 环境变量），然后执行：
+
+```powershell
+.\mvnw.cmd clean test
+.\mvnw.cmd test
+```
+
+macOS/Linux 配置好 JDK 25 后使用 `./mvnw clean test` 与 `./mvnw test`。测试连接隔离的 H2，自动准备数据，不修改本地 MySQL。
+
+## 11. 第四周已实现内容
+
+本周实现“登记课程资料 → 创建处理任务 → 记录状态 → 查询历史”，与既有 CourseLens 选题保持一致。
+
+| 方法 | 接口 | 功能 |
+| --- | --- | --- |
+| POST | /api/courses | 登记课程归属、标题、资料引用 |
+| GET | /api/courses | 查询课程列表 |
+| GET | /api/courses/{courseId} | 查询课程详情 |
+| POST | /api/courses/{courseId}/tasks | 创建待处理任务 |
+| GET | /api/courses/{courseId}/tasks | 查询课程任务历史 |
+| GET | /api/tasks/{taskId} | 查询任务详情 |
+| PATCH | /api/tasks/{taskId}/status | 更新为 RUNNING、SUCCEEDED 或 FAILED |
+
+新增 Course 和 ProcessingTask 两类 JPA 实体、两个 Repository、一个 Service、两个 Controller，以及输入输出 DTO。Controller 仅处理 HTTP；Service 检查同一课程不能有多条未结束任务，并控制状态路径。事务、课程行锁和活动任务唯一键防止并发重复提交。任务结束可重试且保留历史；失败必须提供原因。
+
+错误响应：输入错误 400、资源不存在 404、重复活动任务或非法状态转换 409。数据保存在 MySQL，应用重启仍可查询。
+
+2026-10-12 实测：**31 项自动测试全部通过，clean test 后再运行 test 仍全部通过**；**19 项真实 HTTP 检查通过**；MySQL 写入、应用重启读取与历史查询通过；同时两次创建返回 201 和 409，活动任务只保存一条。
+
+作业要求、原始证据、截图及四项可复制提交说明见 [Week 04 作业记录](docs/homework/week-04/index.md)。设计见 [项目选题简案](docs/project-proposal.md)，表结构见 [数据库文档](docs/database.md)。
+
+当前资料引用只登记路径/来源，任务状态由调用方提交。文件上传、后台转写、AI 笔记生成、登录授权和学习页面仍属于后续功能。本周完成的是这些功能所需的课程与任务管理基础。

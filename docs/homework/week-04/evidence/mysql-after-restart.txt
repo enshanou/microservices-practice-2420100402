@@ -1,0 +1,16 @@
+mysql_version
+8.0.45
+id	title	source_reference
+195f8e89-8f26-49df-8fa3-184dbc1b229a	Week04 persistence verification	imports/demo.srt
+id	course_id	status	active_course_id	failure_reason
+6d82bc8d-1f3b-4d6e-a129-bcbc8570c80a	195f8e89-8f26-49df-8fa3-184dbc1b229a	SUCCEEDED	NULL	NULL
+8c731b00-a21b-47bc-8487-15ef50d4af44	195f8e89-8f26-49df-8fa3-184dbc1b229a	FAILED	NULL	Demo: missing subtitle input
+CONSTRAINT_NAME	CONSTRAINT_TYPE
+ck_tasks_status	CHECK
+ck_tasks_active	CHECK
+ck_tasks_failure	CHECK
+fk_tasks_course	FOREIGN KEY
+PRIMARY	PRIMARY KEY
+uk_tasks_active_course	UNIQUE
+concurrent_active_count
+1
