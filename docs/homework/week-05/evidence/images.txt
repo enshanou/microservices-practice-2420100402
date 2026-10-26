@@ -1,0 +1,2 @@
+IMAGE               ID             DISK USAGE   CONTENT SIZE   EXTRA
+courselens:week05   550679a8fff8        588MB          171MB   U

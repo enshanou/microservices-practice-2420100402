@@ -1,0 +1,40 @@
+GET http://localhost:18080/actuator/health -> 200
+{"groups":["liveness","readiness"],"status":"UP"}
+POST http://localhost:18080/api/courses -> 201
+{"id":"f75de9e6-ed6e-43d6-9de4-a42299f5183c","ownerId":"2420100402","title":"Week05 persistence 3c0d602e","sourceReference":"imports/week05-demo.srt","createdAt":"2026-10-26T15:16:04.521036Z"}
+GET http://localhost:18080/api/courses/f75de9e6-ed6e-43d6-9de4-a42299f5183c -> 200
+{"id":"f75de9e6-ed6e-43d6-9de4-a42299f5183c","ownerId":"2420100402","title":"Week05 persistence 3c0d602e","sourceReference":"imports/week05-demo.srt","createdAt":"2026-10-26T15:16:04.521036Z"}
+Recreating the app and database containers; keeping the named volume.
+ Container courselens-week05-app-1 Stopping
+ Container courselens-week05-app-1 Stopped
+ Container courselens-week05-app-1 Removing
+ Container courselens-week05-app-1 Removed
+ Container courselens-week05-mysql-1 Stopping
+ Container courselens-week05-mysql-1 Stopped
+ Container courselens-week05-mysql-1 Removing
+ Container courselens-week05-mysql-1 Removed
+ Network courselens-week05_backend Removing
+ Network courselens-week05_backend Removed
+ Network courselens-week05_backend Creating
+ Network courselens-week05_backend Creating
+ Network courselens-week05_backend Created
+ Network courselens-week05_backend Created
+ Container courselens-week05-mysql-1 Creating
+ Container courselens-week05-mysql-1 Created
+ Container courselens-week05-app-1 Creating
+ Container courselens-week05-app-1 Created
+ Container courselens-week05-mysql-1 Starting
+ Container courselens-week05-mysql-1 Started
+ Container courselens-week05-mysql-1 Waiting
+ Container courselens-week05-mysql-1 Healthy
+ Container courselens-week05-app-1 Starting
+ Container courselens-week05-app-1 Started
+GET http://localhost:18080/actuator/health -> 200
+{"groups":["liveness","readiness"],"status":"UP"}
+GET http://localhost:18080/api/courses/f75de9e6-ed6e-43d6-9de4-a42299f5183c -> 200
+{"id":"f75de9e6-ed6e-43d6-9de4-a42299f5183c","ownerId":"2420100402","title":"Week05 persistence 3c0d602e","sourceReference":"imports/week05-demo.srt","createdAt":"2026-10-26T15:16:04.521036Z"}
+NAME                        IMAGE               COMMAND                  SERVICE   CREATED          STATUS                    PORTS
+courselens-week05-app-1     courselens:week05   "java -jar /app/app.…"   app       15 seconds ago   Up 9 seconds              127.0.0.1:18080->8080/tcp
+courselens-week05-mysql-1   mysql:8.4.11        "docker-entrypoint.s…"   mysql     16 seconds ago   Up 14 seconds (healthy)   3306/tcp, 33060/tcp
+PASS: health 200/UP, create 201, query 200, same record after container recreation. ID=f75de9e6-ed6e-43d6-9de4-a42299f5183c
+Before and after responses are saved in docs/homework/week-05/evidence/.

@@ -1,0 +1,21 @@
+PASS GET /actuator/health -> 200
+PASS GET /api/hello -> 200
+PASS POST /api/courses -> 201
+PASS GET /api/courses -> 200
+PASS GET /api/courses/3fc9e507-5411-4101-85fa-24e3e9c9cadc -> 200
+PASS POST /api/courses/3fc9e507-5411-4101-85fa-24e3e9c9cadc/tasks -> 201
+PASS GET /api/tasks/d0a008a5-c604-47a7-bdbd-51a5371e8a90 -> 200
+PASS GET /api/courses/3fc9e507-5411-4101-85fa-24e3e9c9cadc/tasks -> 200
+PASS POST /api/courses/3fc9e507-5411-4101-85fa-24e3e9c9cadc/tasks -> 409
+PASS PATCH /api/tasks/d0a008a5-c604-47a7-bdbd-51a5371e8a90/status -> 409
+PASS PATCH /api/tasks/d0a008a5-c604-47a7-bdbd-51a5371e8a90/status -> 200
+PASS PATCH /api/tasks/d0a008a5-c604-47a7-bdbd-51a5371e8a90/status -> 400
+PASS PATCH /api/tasks/d0a008a5-c604-47a7-bdbd-51a5371e8a90/status -> 200
+PASS POST /api/courses/3fc9e507-5411-4101-85fa-24e3e9c9cadc/tasks -> 201
+PASS PATCH /api/tasks/b0b4571f-2537-4aaf-81bb-2f99d8ea900e/status -> 200
+PASS PATCH /api/tasks/b0b4571f-2537-4aaf-81bb-2f99d8ea900e/status -> 200
+PASS GET /api/courses/3fc9e507-5411-4101-85fa-24e3e9c9cadc/tasks -> 200
+PASS POST /api/courses -> 400
+PASS GET /api/courses/00000000-0000-0000-0000-000000000000 -> 404
+SUCCESS: 19 HTTP checks passed; task history contains 2 records.
+Verification course: 3fc9e507-5411-4101-85fa-24e3e9c9cadc. Demo records are retained in MySQL.

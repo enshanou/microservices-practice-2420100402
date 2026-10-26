@@ -13,7 +13,7 @@
 | 业务背景 | 视频课程按时间线性呈现，学习者课前难以了解全貌，观看时频繁暂停抄写会打断思考，课后笔记又难以定位原视频核对 |
 | 目标用户 | 学习高校课程、公开课、技术教程和岗位培训视频的学生、自学者与职业学习者；管理员负责保障用户、资源和处理任务正常运行 |
 
-**作业记录：**[Week 02：项目选题与功能规划](docs/homework/week-02/index.md) · [Week 03：Spring Boot 工程与运行验证](docs/homework/week-03/index.md) · [Week 04：业务建模、API、数据库与测试](docs/homework/week-04/index.md) · [项目选题简案](docs/project-proposal.md)
+**作业记录：**[Week 02：项目选题与功能规划](docs/homework/week-02/index.md) · [Week 03：Spring Boot 工程与运行验证](docs/homework/week-03/index.md) · [Week 04：业务建模、API、数据库与测试](docs/homework/week-04/index.md) · [Week 05：Docker 与 Compose 容器化](docs/homework/week-05/index.md) · [项目选题简案](docs/project-proposal.md)
 
 ---
 
@@ -396,3 +396,36 @@ macOS/Linux 配置好 JDK 25 后使用 `./mvnw clean test` 与 `./mvnw test`。�
 作业要求、原始证据、截图及四项可复制提交说明见 [Week 04 作业记录](docs/homework/week-04/index.md)。设计见 [项目选题简案](docs/project-proposal.md)，表结构见 [数据库文档](docs/database.md)。
 
 当前资料引用只登记路径/来源，任务状态由调用方提交。文件上传、后台转写、AI 笔记生成、登录授权和学习页面仍属于后续功能。本周完成的是这些功能所需的课程与任务管理基础。
+
+
+## Week 05：Docker 与 Compose
+
+完整构建、环境配置、启动/停止、健康检查和创建/查询业务 API 的可复制命令见 [第五周作业](docs/homework/week-05/index.md)。
+
+```powershell
+# 仓库根目录；已有 .env 时不要覆盖
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
+# 编辑 .env，替换两个密码后执行
+notepad .env
+# 独立构建镜像；构建环境由 Docker 提供，无需本机 Maven / Java
+docker build -t courselens:week05 ./monolith
+docker images courselens
+docker compose up -d --build
+docker compose ps
+curl.exe -i http://localhost:18080/actuator/health
+powershell -ExecutionPolicy Bypass -File .\docs\homework\week-05\Verify-Week05.ps1
+docker compose down
+```
+
+创建和查询业务接口（应用启动后在同一 PowerShell 执行）：
+
+```powershell
+$body = @{ownerId='2420100402'; title='Week05 Docker course'; sourceReference='imports/week05-demo.srt'} | ConvertTo-Json
+$course = Invoke-RestMethod http://localhost:18080/api/courses -Method Post -ContentType 'application/json' -Body $body
+$course | ConvertTo-Json
+Invoke-RestMethod "http://localhost:18080/api/courses/$($course.id)" | ConvertTo-Json
+```
+
+应用使用服务名 `mysql` 连接数据库，MySQL 8.4.11 的数据保存在命名卷中。验证容器重建时使用 `docker compose down`，不要加 `-v`。
+
+本周验证：容器内 31 项自动测试、19 项 HTTP 检查及容器重建持久化验证通过。[9 张操作截图](docs/homework/week-05/screenshots/README.md)与[实际验证记录](docs/homework/week-05/verification.md)已归档。

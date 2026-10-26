@@ -1,0 +1,9 @@
+# Local credentials and generated artifacts
+.env
+.env.*
+!.env.example
+**/target/
+**/.idea/
+**/.vscode/
+*.iml
+*.log
