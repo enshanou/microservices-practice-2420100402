@@ -1,43 +1,92 @@
-name: courselens-week05
+name: courselens-week06
 services:
-  mysql:
+  user-db:
     image: mysql:8.4.11
     environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-courselens}
-      MYSQL_USER: ${MYSQL_USER:-courselens}
+      MYSQL_DATABASE: courselens_user
+      MYSQL_USER: user_app
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in .env}
     volumes:
-      - mysql_data:/var/lib/mysql
-      - ./monolith/docker/init.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - user_data:/var/lib/mysql
     healthcheck:
-      test:
-        - CMD-SHELL
-        - >-
-          MYSQL_PWD="$$MYSQL_PASSWORD" mysql --protocol=TCP -h 127.0.0.1 -u"$$MYSQL_USER" "$$MYSQL_DATABASE" -e 'SELECT 1' >/dev/null 2>&1
+      test: [CMD-SHELL, 'MYSQL_PWD="$$MYSQL_PASSWORD" mysql --protocol=TCP -h 127.0.0.1 -u"$$MYSQL_USER" "$$MYSQL_DATABASE" -e "SELECT 1" >/dev/null 2>&1']
       interval: 5s
       timeout: 5s
       retries: 30
       start_period: 30s
-    networks:
-      - backend
-  app:
-    image: courselens:week05
-    build:
-      context: ./monolith
+  user-service:
+    image: courselens-user:week06
+    build: ./services/user-service
     ports:
-      - "127.0.0.1:${APP_PORT:-18080}:8080"
+      - "127.0.0.1:18081:8080"
     environment:
       SERVER_PORT: 8080
-      DB_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-courselens}?serverTimezone=UTC&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=false
-      DB_USER: ${MYSQL_USER:-courselens}
+      DB_URL: jdbc:mysql://user-db:3306/courselens_user?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+      DB_USER: user_app
       DB_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
     depends_on:
-      mysql:
+      user-db:
         condition: service_healthy
-    networks:
-      - backend
-networks:
-  backend:
+  course-db:
+    image: mysql:8.4.11
+    environment:
+      MYSQL_DATABASE: courselens_course
+      MYSQL_USER: course_app
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in .env}
+    volumes:
+      - course_data:/var/lib/mysql
+    healthcheck:
+      test: [CMD-SHELL, 'MYSQL_PWD="$$MYSQL_PASSWORD" mysql --protocol=TCP -h 127.0.0.1 -u"$$MYSQL_USER" "$$MYSQL_DATABASE" -e "SELECT 1" >/dev/null 2>&1']
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+  course-service:
+    image: courselens-course:week06
+    build: ./services/course-service
+    ports:
+      - "127.0.0.1:18082:8080"
+    environment:
+      SERVER_PORT: 8080
+      DB_URL: jdbc:mysql://course-db:3306/courselens_course?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+      DB_USER: course_app
+      DB_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
+      USER_SERVICE_URL: http://user-service:8080
+    depends_on:
+      course-db:
+        condition: service_healthy
+  task-db:
+    image: mysql:8.4.11
+    environment:
+      MYSQL_DATABASE: courselens_task
+      MYSQL_USER: task_app
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in .env}
+    volumes:
+      - task_data:/var/lib/mysql
+    healthcheck:
+      test: [CMD-SHELL, 'MYSQL_PWD="$$MYSQL_PASSWORD" mysql --protocol=TCP -h 127.0.0.1 -u"$$MYSQL_USER" "$$MYSQL_DATABASE" -e "SELECT 1" >/dev/null 2>&1']
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+  task-service:
+    image: courselens-task:week06
+    build: ./services/task-service
+    ports:
+      - "127.0.0.1:18083:8080"
+    environment:
+      SERVER_PORT: 8080
+      DB_URL: jdbc:mysql://task-db:3306/courselens_task?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+      DB_USER: task_app
+      DB_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
+      COURSE_SERVICE_URL: http://course-service:8080
+    depends_on:
+      task-db:
+        condition: service_healthy
 volumes:
-  mysql_data:
+  user_data:
+  course_data:
+  task_data:

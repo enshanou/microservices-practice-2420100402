@@ -1,0 +1,95 @@
+GET http://user-service:8080/actuator/health
+request=null
+HTTP 200 {"groups":["liveness","readiness"],"status":"UP"}
+
+GET http://course-service:8080/actuator/health
+request=null
+HTTP 200 {"groups":["liveness","readiness"],"status":"UP"}
+
+GET http://task-service:8080/actuator/health
+request=null
+HTTP 200 {"groups":["liveness","readiness"],"status":"UP"}
+
+GET http://user-service:8080/api/users
+request=null
+HTTP 200 [{"displayName":"2420100402 Week06","id":"7b47852a-54eb-4e5f-922d-a18863b14e48"},{"displayName":"2420100402 Week06","id":"d4a40c27-33fa-4d39-b9d3-9173a05732b3"}]
+
+GET http://course-service:8080/api/courses
+request=null
+HTTP 200 [{"id":"cc757f64-8449-4529-a27e-e40ca28898fe","ownerId":"d4a40c27-33fa-4d39-b9d3-9173a05732b3","sourceReference":"imports/week06.srt","title":"Week06 CourseLens"},{"id":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","ownerId":"7b47852a-54eb-4e5f-922d-a18863b14e48","sourceReference":"imports/week06.srt","title":"Week06 CourseLens"}]
+
+GET http://task-service:8080/api/tasks
+request=null
+HTTP 200 [{"activeCourseId":null,"courseId":"cc757f64-8449-4529-a27e-e40ca28898fe","failureReason":null,"id":"4ee61461-e409-4afd-9355-6d320caf3db4","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","failureReason":null,"id":"cc97a86b-bec4-46c4-8f9f-febae508f830","status":"SUCCEEDED"}]
+
+POST http://user-service:8080/api/users
+request={"displayName": "2420100402 Week06"}
+HTTP 201 {"displayName":"2420100402 Week06","id":"097987c9-8fe3-4fd8-b15a-ea4a32dd87f8"}
+
+POST http://course-service:8080/api/courses
+request={"ownerId": "097987c9-8fe3-4fd8-b15a-ea4a32dd87f8", "title": "Week06 CourseLens", "sourceReference": "imports/week06.srt"}
+HTTP 201 {"id":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","ownerId":"097987c9-8fe3-4fd8-b15a-ea4a32dd87f8","sourceReference":"imports/week06.srt","title":"Week06 CourseLens"}
+
+POST http://task-service:8080/api/tasks
+request={"courseId": "3cd7e3f9-0c6c-43c3-b475-516e99d05a87"}
+HTTP 201 {"activeCourseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","courseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","failureReason":null,"id":"02be0468-bc29-4e1e-8966-a20c31e7454d","status":"PENDING"}
+
+POST http://task-service:8080/api/tasks
+request={"courseId": "3cd7e3f9-0c6c-43c3-b475-516e99d05a87"}
+HTTP 409 {"error":"Duplicate or conflicting data"}
+
+PATCH http://task-service:8080/api/tasks/02be0468-bc29-4e1e-8966-a20c31e7454d/status
+request={"status": "RUNNING"}
+HTTP 200 {"activeCourseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","courseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","failureReason":null,"id":"02be0468-bc29-4e1e-8966-a20c31e7454d","status":"RUNNING"}
+
+PATCH http://task-service:8080/api/tasks/02be0468-bc29-4e1e-8966-a20c31e7454d/status
+request={"status": "SUCCEEDED"}
+HTTP 200 {"activeCourseId":null,"courseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","failureReason":null,"id":"02be0468-bc29-4e1e-8966-a20c31e7454d","status":"SUCCEEDED"}
+
+GET http://user-service:8080/api/users
+request=null
+HTTP 200 [{"displayName":"2420100402 Week06","id":"097987c9-8fe3-4fd8-b15a-ea4a32dd87f8"},{"displayName":"2420100402 Week06","id":"7b47852a-54eb-4e5f-922d-a18863b14e48"},{"displayName":"2420100402 Week06","id":"d4a40c27-33fa-4d39-b9d3-9173a05732b3"}]
+
+DATA user: before=2, after=3; delta=1
+
+GET http://course-service:8080/api/courses
+request=null
+HTTP 200 [{"id":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","ownerId":"097987c9-8fe3-4fd8-b15a-ea4a32dd87f8","sourceReference":"imports/week06.srt","title":"Week06 CourseLens"},{"id":"cc757f64-8449-4529-a27e-e40ca28898fe","ownerId":"d4a40c27-33fa-4d39-b9d3-9173a05732b3","sourceReference":"imports/week06.srt","title":"Week06 CourseLens"},{"id":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","ownerId":"7b47852a-54eb-4e5f-922d-a18863b14e48","sourceReference":"imports/week06.srt","title":"Week06 CourseLens"}]
+
+DATA course: before=2, after=3; delta=1
+
+GET http://task-service:8080/api/tasks
+request=null
+HTTP 200 [{"activeCourseId":null,"courseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","failureReason":null,"id":"02be0468-bc29-4e1e-8966-a20c31e7454d","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"cc757f64-8449-4529-a27e-e40ca28898fe","failureReason":null,"id":"4ee61461-e409-4afd-9355-6d320caf3db4","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","failureReason":null,"id":"cc97a86b-bec4-46c4-8f9f-febae508f830","status":"SUCCEEDED"}]
+
+DATA task: before=2, after=3; delta=1
+
+GET http://course-service:8080/api/courses
+request=null
+HTTP 200 [{"id":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","ownerId":"097987c9-8fe3-4fd8-b15a-ea4a32dd87f8","sourceReference":"imports/week06.srt","title":"Week06 CourseLens"},{"id":"cc757f64-8449-4529-a27e-e40ca28898fe","ownerId":"d4a40c27-33fa-4d39-b9d3-9173a05732b3","sourceReference":"imports/week06.srt","title":"Week06 CourseLens"},{"id":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","ownerId":"7b47852a-54eb-4e5f-922d-a18863b14e48","sourceReference":"imports/week06.srt","title":"Week06 CourseLens"}]
+
+POST http://course-service:8080/api/courses
+request={"ownerId": "00000000-0000-0000-0000-000000000000", "title": "Rejected", "sourceReference": "missing.srt"}
+HTTP 404 {"error":"Dependency resource does not exist"}
+
+GET http://course-service:8080/api/courses
+request=null
+HTTP 200 [{"id":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","ownerId":"097987c9-8fe3-4fd8-b15a-ea4a32dd87f8","sourceReference":"imports/week06.srt","title":"Week06 CourseLens"},{"id":"cc757f64-8449-4529-a27e-e40ca28898fe","ownerId":"d4a40c27-33fa-4d39-b9d3-9173a05732b3","sourceReference":"imports/week06.srt","title":"Week06 CourseLens"},{"id":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","ownerId":"7b47852a-54eb-4e5f-922d-a18863b14e48","sourceReference":"imports/week06.srt","title":"Week06 CourseLens"}]
+
+DATA course: before=3, after=3; unchanged=True
+
+GET http://task-service:8080/api/tasks
+request=null
+HTTP 200 [{"activeCourseId":null,"courseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","failureReason":null,"id":"02be0468-bc29-4e1e-8966-a20c31e7454d","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"cc757f64-8449-4529-a27e-e40ca28898fe","failureReason":null,"id":"4ee61461-e409-4afd-9355-6d320caf3db4","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","failureReason":null,"id":"cc97a86b-bec4-46c4-8f9f-febae508f830","status":"SUCCEEDED"}]
+
+POST http://task-service:8080/api/tasks
+request={"courseId": "00000000-0000-0000-0000-000000000000"}
+HTTP 404 {"error":"Dependency resource does not exist"}
+
+GET http://task-service:8080/api/tasks
+request=null
+HTTP 200 [{"activeCourseId":null,"courseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","failureReason":null,"id":"02be0468-bc29-4e1e-8966-a20c31e7454d","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"cc757f64-8449-4529-a27e-e40ca28898fe","failureReason":null,"id":"4ee61461-e409-4afd-9355-6d320caf3db4","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","failureReason":null,"id":"cc97a86b-bec4-46c4-8f9f-febae508f830","status":"SUCCEEDED"}]
+
+DATA task: before=3, after=3; unchanged=True
+
+PASS core

@@ -13,7 +13,9 @@
 | 业务背景 | 视频课程按时间线性呈现，学习者课前难以了解全貌，观看时频繁暂停抄写会打断思考，课后笔记又难以定位原视频核对 |
 | 目标用户 | 学习高校课程、公开课、技术教程和岗位培训视频的学生、自学者与职业学习者；管理员负责保障用户、资源和处理任务正常运行 |
 
-**作业记录：**[Week 02：项目选题与功能规划](docs/homework/week-02/index.md) · [Week 03：Spring Boot 工程与运行验证](docs/homework/week-03/index.md) · [Week 04：业务建模、API、数据库与测试](docs/homework/week-04/index.md) · [Week 05：Docker 与 Compose 容器化](docs/homework/week-05/index.md) · [项目选题简案](docs/project-proposal.md)
+**作业记录：**[Week 06：微服务拆分与本地编排](docs/homework/week-06/index.md) · [Week 02：项目选题与功能规划](docs/homework/week-02/index.md) · [Week 03：Spring Boot 工程与运行验证](docs/homework/week-03/index.md) · [Week 04：业务建模、API、数据库与测试](docs/homework/week-04/index.md) · [Week 05：Docker 与 Compose 容器化](docs/homework/week-05/index.md) · [项目选题简案](docs/project-proposal.md)
+
+> 当前默认运行 Week 06 的三个微服务，使用 `docker compose up -d --build`。复现下文 Week 05 单体时，使用 `docker compose -f compose.week05.yaml`，详见[本周记录](docs/homework/week-06/index.md)。
 
 ---
 
@@ -429,3 +431,9 @@ Invoke-RestMethod "http://localhost:18080/api/courses/$($course.id)" | ConvertTo
 应用使用服务名 `mysql` 连接数据库，MySQL 8.4.11 的数据保存在命名卷中。验证容器重建时使用 `docker compose down`，不要加 `-v`。
 
 本周验证：容器内 31 项自动测试、19 项 HTTP 检查及容器重建持久化验证通过。[9 张操作截图](docs/homework/week-05/screenshots/README.md)与[实际验证记录](docs/homework/week-05/verification.md)已归档。
+
+## Week 06 运行入口
+
+根目录 `compose.yaml` 现用于三个微服务及三个独立数据库。启动：`docker compose up -d --build`；验证：`powershell -ExecutionPolicy Bypass -File .\docs\homework\week-06\Verify-Week06.ps1`。9 张本人截图已归档，见[截图对应关系](docs/homework/week-06/screenshots/README.md)。
+
+前文 Week 05 命令复现时，请把 `docker compose` 替换为 `docker compose -f compose.week05.yaml`，保留原来的单体、项目名和数据卷。

@@ -1,0 +1,8 @@
+GET http://127.0.0.1:18081/actuator/health
+HTTP 200 {"groups": ["liveness", "readiness"], "status": "UP"}
+
+GET http://127.0.0.1:18082/actuator/health
+HTTP 200 {"groups": ["liveness", "readiness"], "status": "UP"}
+
+GET http://127.0.0.1:18083/actuator/health
+HTTP 200 {"groups": ["liveness", "readiness"], "status": "UP"}

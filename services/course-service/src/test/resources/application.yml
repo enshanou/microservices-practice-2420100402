@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:course;MODE=MySQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  sql:
+    init:
+      mode: always
+dependency:
+  base-url: http://127.0.0.1:1
+  connect-timeout-ms: 200
+  read-timeout-ms: 200

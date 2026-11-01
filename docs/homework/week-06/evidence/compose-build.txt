@@ -1,0 +1,1762 @@
+ Image courselens-course:week06 Building
+ Image courselens-task:week06 Building
+ Image courselens-user:week06 Building
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.76kB 0.1s done
+#1 DONE 0.1s
+
+#2 [task-service internal] load build definition from Dockerfile
+#2 transferring dockerfile: 30B 0.0s
+#2 transferring dockerfile: 503B 0.1s done
+#2 DONE 0.2s
+
+#3 [user-service internal] load build definition from Dockerfile
+#3 transferring dockerfile: 503B 0.0s done
+#3 DONE 0.2s
+
+#4 [course-service internal] load build definition from Dockerfile
+#4 transferring dockerfile: 505B 0.0s done
+#4 DONE 0.2s
+
+#5 [task-service internal] load metadata for docker.io/library/eclipse-temurin:25.0.4.1_1-jre
+#5 DONE 1.1s
+
+#6 [user-service internal] load metadata for docker.io/library/maven:3.9.16-eclipse-temurin-25
+#6 DONE 1.1s
+
+#7 [course-service internal] load .dockerignore
+#7 transferring context: 32B
+#7 transferring context: 74B 0.0s done
+#7 DONE 0.2s
+
+#8 [user-service internal] load .dockerignore
+#8 transferring context: 74B done
+#8 DONE 0.2s
+
+#9 [task-service internal] load .dockerignore
+#9 transferring context: 74B done
+#9 DONE 0.2s
+
+#10 [user-service internal] load build context
+#10 DONE 0.0s
+
+#11 [course-service runtime 1/4] FROM docker.io/library/eclipse-temurin:25.0.4.1_1-jre@sha256:dbb43d81099eec91e0800226ed2296d03146ee7857165b95112372ad0d67e87f
+#11 resolve docker.io/library/eclipse-temurin:25.0.4.1_1-jre@sha256:dbb43d81099eec91e0800226ed2296d03146ee7857165b95112372ad0d67e87f 0.1s done
+#11 DONE 0.1s
+
+#12 [course-service internal] load build context
+#12 DONE 0.0s
+
+#13 [user-service build 1/6] FROM docker.io/library/maven:3.9.16-eclipse-temurin-25@sha256:93b8a14ea2f412782e4e842651273b4d903e35cc496284f178fbbe2d67d00976
+#13 resolve docker.io/library/maven:3.9.16-eclipse-temurin-25@sha256:93b8a14ea2f412782e4e842651273b4d903e35cc496284f178fbbe2d67d00976 0.1s done
+#13 DONE 0.1s
+
+#14 [task-service runtime 2/4] WORKDIR /app
+#14 CACHED
+
+#15 [task-service runtime 3/4] RUN groupadd --system app && useradd --system --gid app app
+#15 CACHED
+
+#14 [course-service runtime 2/4] WORKDIR /app
+#14 CACHED
+
+#10 [user-service internal] load build context
+#10 transferring context: 10.35kB 0.0s done
+#10 DONE 0.2s
+
+#16 [user-service build 2/6] WORKDIR /build
+#16 CACHED
+
+#17 [task-service internal] load build context
+#17 transferring context: 18.14kB 0.1s done
+#17 DONE 0.3s
+
+#12 [course-service internal] load build context
+#12 transferring context: 14.85kB 0.1s done
+#12 DONE 0.3s
+
+#18 [task-service build 3/6] COPY pom.xml ./
+#18 ...
+
+#19 [user-service build 3/6] COPY pom.xml ./
+#19 DONE 0.2s
+
+#20 [course-service build 3/6] COPY pom.xml ./
+#20 DONE 0.2s
+
+#18 [task-service build 3/6] COPY pom.xml ./
+#18 DONE 0.2s
+
+#21 [task-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#21 3.836 [INFO] Scanning for projects...
+#21 ...
+
+#22 [user-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#22 3.969 [INFO] Scanning for projects...
+#22 ...
+
+#23 [course-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#23 3.824 [INFO] Scanning for projects...
+#23 ...
+
+#22 [user-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#22 19.29 [INFO]
+#22 19.29 [INFO] ---------------< com.zjgsu.oes:courselens-user-service >----------------
+#22 19.29 [INFO] Building CourseLens User Service 0.0.1-SNAPSHOT
+#22 19.29 [INFO]   from pom.xml
+#22 19.29 [INFO] --------------------------------[ jar ]---------------------------------
+#22 19.31 [INFO]
+#22 19.31 [INFO] --- dependency:3.9.0:go-offline (default-cli) @ courselens-user-service ---
+#22 ...
+
+#21 [task-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#21 19.15 [INFO]
+#21 19.15 [INFO] ---------------< com.zjgsu.oes:courselens-task-service >----------------
+#21 19.15 [INFO] Building CourseLens Task Service 0.0.1-SNAPSHOT
+#21 19.15 [INFO]   from pom.xml
+#21 19.15 [INFO] --------------------------------[ jar ]---------------------------------
+#21 19.17 [INFO]
+#21 19.17 [INFO] --- dependency:3.9.0:go-offline (default-cli) @ courselens-task-service ---
+#21 ...
+
+#23 [course-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#23 19.31 [INFO]
+#23 19.31 [INFO] --------------< com.zjgsu.oes:courselens-course-service >---------------
+#23 19.31 [INFO] Building CourseLens Course Service 0.0.1-SNAPSHOT
+#23 19.31 [INFO]   from pom.xml
+#23 19.31 [INFO] --------------------------------[ jar ]---------------------------------
+#23 19.35 [INFO]
+#23 19.35 [INFO] --- dependency:3.9.0:go-offline (default-cli) @ courselens-course-service ---
+#23 ...
+
+#22 [user-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#22 61.61 [INFO] Resolved plugin: maven-compiler-plugin-3.14.1.jar
+#22 61.61 [INFO] Resolved plugin dependency:
+#22 65.25 [INFO]       maven-compiler-plugin-3.14.1.jar
+#22 65.25 [INFO]       asm-9.8.jar
+#22 65.25 [INFO]       maven-shared-utils-3.4.2.jar
+#22 65.25 [INFO]       slf4j-api-1.7.36.jar
+#22 65.25 [INFO]       commons-io-2.11.0.jar
+#22 65.25 [INFO]       maven-shared-incremental-1.1.jar
+#22 65.25 [INFO]       plexus-java-1.5.0.jar
+#22 65.25 [INFO]       qdox-2.2.0.jar
+#22 65.25 [INFO]       plexus-compiler-api-2.15.0.jar
+#22 65.25 [INFO]       plexus-compiler-manager-2.15.0.jar
+#22 65.25 [INFO]       javax.inject-1.jar
+#22 65.25 [INFO]       plexus-xml-3.0.1.jar
+#22 65.25 [INFO]       plexus-compiler-javac-2.15.0.jar
+#22 65.25 [INFO]       plexus-utils-4.0.2.jar
+#22 65.45 [INFO] Resolved plugin: maven-surefire-plugin-3.5.6.jar
+#22 65.45 [INFO] Resolved plugin dependency:
+#22 ...
+
+#23 [course-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#23 62.07 [INFO] Resolved plugin: maven-compiler-plugin-3.14.1.jar
+#23 62.07 [INFO] Resolved plugin dependency:
+#23 65.69 [INFO]       maven-compiler-plugin-3.14.1.jar
+#23 65.69 [INFO]       asm-9.8.jar
+#23 65.69 [INFO]       maven-shared-utils-3.4.2.jar
+#23 65.69 [INFO]       slf4j-api-1.7.36.jar
+#23 65.69 [INFO]       commons-io-2.11.0.jar
+#23 65.69 [INFO]       maven-shared-incremental-1.1.jar
+#23 65.69 [INFO]       plexus-java-1.5.0.jar
+#23 65.69 [INFO]       qdox-2.2.0.jar
+#23 65.69 [INFO]       plexus-compiler-api-2.15.0.jar
+#23 65.69 [INFO]       plexus-compiler-manager-2.15.0.jar
+#23 65.69 [INFO]       javax.inject-1.jar
+#23 65.69 [INFO]       plexus-xml-3.0.1.jar
+#23 65.69 [INFO]       plexus-compiler-javac-2.15.0.jar
+#23 65.69 [INFO]       plexus-utils-4.0.2.jar
+#23 65.88 [INFO] Resolved plugin: maven-surefire-plugin-3.5.6.jar
+#23 65.88 [INFO] Resolved plugin dependency:
+#23 ...
+
+#22 [user-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#22 69.07 [INFO]       maven-surefire-plugin-3.5.6.jar
+#22 69.07 [INFO]       surefire-api-3.5.6.jar
+#22 69.07 [INFO]       surefire-logger-api-3.5.6.jar
+#22 69.07 [INFO]       surefire-shared-utils-3.5.6.jar
+#22 69.07 [INFO]       surefire-extensions-api-3.5.6.jar
+#22 69.07 [INFO]       maven-surefire-common-3.5.6.jar
+#22 69.07 [INFO]       surefire-booter-3.5.6.jar
+#22 69.07 [INFO]       surefire-extensions-spi-3.5.6.jar
+#22 69.07 [INFO]       maven-resolver-util-1.4.1.jar
+#22 69.07 [INFO]       maven-resolver-api-1.4.1.jar
+#22 69.07 [INFO]       maven-common-artifact-filters-3.4.0.jar
+#22 69.07 [INFO]       slf4j-api-1.7.36.jar
+#22 69.07 [INFO]       plexus-java-1.5.2.jar
+#22 69.07 [INFO]       asm-9.9.1.jar
+#22 69.08 [INFO]       qdox-2.2.0.jar
+#22 69.26 [INFO] Resolved plugin: maven-jar-plugin-3.4.2.jar
+#22 69.26 [INFO] Resolved plugin dependency:
+#22 72.09 [INFO]       maven-jar-plugin-3.4.2.jar
+#22 72.09 [INFO]       file-management-3.1.0.jar
+#22 ...
+
+#21 [task-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#21 61.82 [INFO] Resolved plugin: maven-compiler-plugin-3.14.1.jar
+#21 61.82 [INFO] Resolved plugin dependency:
+#21 65.45 [INFO]       maven-compiler-plugin-3.14.1.jar
+#21 65.45 [INFO]       asm-9.8.jar
+#21 65.45 [INFO]       maven-shared-utils-3.4.2.jar
+#21 65.45 [INFO]       slf4j-api-1.7.36.jar
+#21 65.45 [INFO]       commons-io-2.11.0.jar
+#21 65.45 [INFO]       maven-shared-incremental-1.1.jar
+#21 65.45 [INFO]       plexus-java-1.5.0.jar
+#21 65.45 [INFO]       qdox-2.2.0.jar
+#21 65.45 [INFO]       plexus-compiler-api-2.15.0.jar
+#21 65.45 [INFO]       plexus-compiler-manager-2.15.0.jar
+#21 65.45 [INFO]       javax.inject-1.jar
+#21 65.45 [INFO]       plexus-xml-3.0.1.jar
+#21 65.45 [INFO]       plexus-compiler-javac-2.15.0.jar
+#21 65.45 [INFO]       plexus-utils-4.0.2.jar
+#21 65.64 [INFO] Resolved plugin: maven-surefire-plugin-3.5.6.jar
+#21 65.64 [INFO] Resolved plugin dependency:
+#21 69.65 [INFO]       maven-surefire-plugin-3.5.6.jar
+#21 69.65 [INFO]       surefire-api-3.5.6.jar
+#21 69.65 [INFO]       surefire-logger-api-3.5.6.jar
+#21 69.65 [INFO]       surefire-shared-utils-3.5.6.jar
+#21 69.65 [INFO]       surefire-extensions-api-3.5.6.jar
+#21 69.65 [INFO]       maven-surefire-common-3.5.6.jar
+#21 69.65 [INFO]       surefire-booter-3.5.6.jar
+#21 69.65 [INFO]       surefire-extensions-spi-3.5.6.jar
+#21 69.65 [INFO]       maven-resolver-util-1.4.1.jar
+#21 69.65 [INFO]       maven-resolver-api-1.4.1.jar
+#21 69.65 [INFO]       maven-common-artifact-filters-3.4.0.jar
+#21 69.65 [INFO]       slf4j-api-1.7.36.jar
+#21 69.65 [INFO]       plexus-java-1.5.2.jar
+#21 69.65 [INFO]       asm-9.9.1.jar
+#21 69.65 [INFO]       qdox-2.2.0.jar
+#21 69.86 [INFO] Resolved plugin: maven-jar-plugin-3.4.2.jar
+#21 69.86 [INFO] Resolved plugin dependency:
+#21 ...
+
+#22 [user-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#22 72.09 [INFO]       plexus-utils-4.0.1.jar
+#22 72.09 [INFO]       commons-io-2.16.1.jar
+#22 72.09 [INFO]       maven-archiver-3.6.2.jar
+#22 72.09 [INFO]       plexus-interpolation-1.27.jar
+#22 72.09 [INFO]       plexus-archiver-4.9.2.jar
+#22 72.09 [INFO]       plexus-io-3.4.2.jar
+#22 72.09 [INFO]       commons-compress-1.26.1.jar
+#22 72.09 [INFO]       commons-lang3-3.14.0.jar
+#22 72.09 [INFO]       commons-codec-1.16.1.jar
+#22 72.09 [INFO]       snappy-0.4.jar
+#22 72.09 [INFO]       xz-1.9.jar
+#22 72.09 [INFO]       zstd-jni-1.5.5-11.jar
+#22 72.09 [INFO]       javax.inject-1.jar
+#22 72.09 [INFO]       slf4j-api-1.7.36.jar
+#22 72.38 [INFO] Resolved plugin: maven-clean-plugin-3.5.0.jar
+#22 72.38 [INFO] Resolved plugin dependency:
+#22 72.80 [INFO]       maven-clean-plugin-3.5.0.jar
+#22 72.80 [INFO]       plexus-utils-4.0.2.jar
+#22 72.99 [INFO] Resolved plugin: maven-install-plugin-3.1.4.jar
+#22 72.99 [INFO] Resolved plugin dependency:
+#22 74.58 [INFO]       maven-install-plugin-3.1.4.jar
+#22 74.58 [INFO]       maven-resolver-util-1.9.22.jar
+#22 74.58 [INFO]       maven-resolver-api-1.9.22.jar
+#22 74.58 [INFO]       plexus-utils-4.0.1.jar
+#22 74.58 [INFO]       plexus-xml-3.0.1.jar
+#22 74.78 [INFO] Resolved plugin: maven-site-plugin-3.12.1.jar
+#22 74.78 [INFO] Resolved plugin dependency:
+#22 ...
+
+#23 [course-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#23 69.54 [INFO]       maven-surefire-plugin-3.5.6.jar
+#23 69.54 [INFO]       surefire-api-3.5.6.jar
+#23 69.54 [INFO]       surefire-logger-api-3.5.6.jar
+#23 69.54 [INFO]       surefire-shared-utils-3.5.6.jar
+#23 69.54 [INFO]       surefire-extensions-api-3.5.6.jar
+#23 69.54 [INFO]       maven-surefire-common-3.5.6.jar
+#23 69.54 [INFO]       surefire-booter-3.5.6.jar
+#23 69.54 [INFO]       surefire-extensions-spi-3.5.6.jar
+#23 69.54 [INFO]       maven-resolver-util-1.4.1.jar
+#23 69.54 [INFO]       maven-resolver-api-1.4.1.jar
+#23 69.54 [INFO]       maven-common-artifact-filters-3.4.0.jar
+#23 69.54 [INFO]       slf4j-api-1.7.36.jar
+#23 69.54 [INFO]       plexus-java-1.5.2.jar
+#23 69.54 [INFO]       asm-9.9.1.jar
+#23 69.54 [INFO]       qdox-2.2.0.jar
+#23 69.76 [INFO] Resolved plugin: maven-jar-plugin-3.4.2.jar
+#23 69.76 [INFO] Resolved plugin dependency:
+#23 72.62 [INFO]       maven-jar-plugin-3.4.2.jar
+#23 72.62 [INFO]       file-management-3.1.0.jar
+#23 72.62 [INFO]       plexus-utils-4.0.1.jar
+#23 72.62 [INFO]       commons-io-2.16.1.jar
+#23 72.62 [INFO]       maven-archiver-3.6.2.jar
+#23 72.62 [INFO]       plexus-interpolation-1.27.jar
+#23 72.62 [INFO]       plexus-archiver-4.9.2.jar
+#23 72.62 [INFO]       plexus-io-3.4.2.jar
+#23 72.62 [INFO]       commons-compress-1.26.1.jar
+#23 72.62 [INFO]       commons-lang3-3.14.0.jar
+#23 72.62 [INFO]       commons-codec-1.16.1.jar
+#23 72.62 [INFO]       snappy-0.4.jar
+#23 72.62 [INFO]       xz-1.9.jar
+#23 72.62 [INFO]       zstd-jni-1.5.5-11.jar
+#23 72.62 [INFO]       javax.inject-1.jar
+#23 72.62 [INFO]       slf4j-api-1.7.36.jar
+#23 72.82 [INFO] Resolved plugin: maven-clean-plugin-3.5.0.jar
+#23 72.82 [INFO] Resolved plugin dependency:
+#23 73.19 [INFO]       maven-clean-plugin-3.5.0.jar
+#23 73.19 [INFO]       plexus-utils-4.0.2.jar
+#23 73.39 [INFO] Resolved plugin: maven-install-plugin-3.1.4.jar
+#23 73.39 [INFO] Resolved plugin dependency:
+#23 74.75 [INFO]       maven-install-plugin-3.1.4.jar
+#23 74.75 [INFO]       maven-resolver-util-1.9.22.jar
+#23 74.75 [INFO]       maven-resolver-api-1.9.22.jar
+#23 74.75 [INFO]       plexus-utils-4.0.1.jar
+#23 74.75 [INFO]       plexus-xml-3.0.1.jar
+#23 74.95 [INFO] Resolved plugin: maven-site-plugin-3.12.1.jar
+#23 74.95 [INFO] Resolved plugin dependency:
+#23 ...
+
+#21 [task-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#21 72.51 [INFO]       maven-jar-plugin-3.4.2.jar
+#21 72.51 [INFO]       file-management-3.1.0.jar
+#21 72.51 [INFO]       plexus-utils-4.0.1.jar
+#21 72.51 [INFO]       commons-io-2.16.1.jar
+#21 72.51 [INFO]       maven-archiver-3.6.2.jar
+#21 72.51 [INFO]       plexus-interpolation-1.27.jar
+#21 72.51 [INFO]       plexus-archiver-4.9.2.jar
+#21 72.51 [INFO]       plexus-io-3.4.2.jar
+#21 72.51 [INFO]       commons-compress-1.26.1.jar
+#21 72.51 [INFO]       commons-lang3-3.14.0.jar
+#21 72.51 [INFO]       commons-codec-1.16.1.jar
+#21 72.51 [INFO]       snappy-0.4.jar
+#21 72.51 [INFO]       xz-1.9.jar
+#21 72.51 [INFO]       zstd-jni-1.5.5-11.jar
+#21 72.51 [INFO]       javax.inject-1.jar
+#21 72.51 [INFO]       slf4j-api-1.7.36.jar
+#21 72.70 [INFO] Resolved plugin: maven-clean-plugin-3.5.0.jar
+#21 72.70 [INFO] Resolved plugin dependency:
+#21 73.08 [INFO]       maven-clean-plugin-3.5.0.jar
+#21 73.08 [INFO]       plexus-utils-4.0.2.jar
+#21 73.28 [INFO] Resolved plugin: maven-install-plugin-3.1.4.jar
+#21 73.28 [INFO] Resolved plugin dependency:
+#21 74.66 [INFO]       maven-install-plugin-3.1.4.jar
+#21 74.66 [INFO]       maven-resolver-util-1.9.22.jar
+#21 74.66 [INFO]       maven-resolver-api-1.9.22.jar
+#21 74.66 [INFO]       plexus-utils-4.0.1.jar
+#21 74.66 [INFO]       plexus-xml-3.0.1.jar
+#21 74.86 [INFO] Resolved plugin: maven-site-plugin-3.12.1.jar
+#21 74.86 [INFO] Resolved plugin dependency:
+#21 ...
+
+#22 [user-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#22 127.6 [INFO]       maven-site-plugin-3.12.1.jar
+#22 127.6 [INFO]       maven-reporting-api-3.1.1.jar
+#22 127.6 [INFO]       maven-reporting-exec-1.6.0.jar
+#22 127.6 [INFO]       maven-artifact-3.2.5.jar
+#22 127.6 [INFO]       maven-core-3.2.5.jar
+#22 127.6 [INFO]       maven-repository-metadata-3.2.5.jar
+#22 127.6 [INFO]       maven-model-builder-3.2.5.jar
+#22 127.6 [INFO]       maven-aether-provider-3.2.5.jar
+#22 127.6 [INFO]       aether-spi-1.0.0.v20140518.jar
+#22 127.6 [INFO]       aether-impl-1.0.0.v20140518.jar
+#22 127.6 [INFO]       aether-api-1.0.0.v20140518.jar
+#22 127.6 [INFO]       org.eclipse.sisu.plexus-0.3.5.jar
+#22 127.6 [INFO]       javax.annotation-api-1.2.jar
+#22 127.6 [INFO]       cdi-api-1.2.jar
+#22 127.6 [INFO]       org.eclipse.sisu.inject-0.3.5.jar
+#22 127.6 [INFO]       sisu-guice-3.2.3-no_aop.jar
+#22 127.6 [INFO]       javax.inject-1.jar
+#22 127.6 [INFO]       aopalliance-1.0.jar
+#22 127.6 [INFO]       guava-16.0.1.jar
+#22 127.6 [INFO]       plexus-classworlds-2.5.2.jar
+#22 127.6 [INFO]       plexus-sec-dispatcher-1.3.jar
+#22 127.6 [INFO]       plexus-cipher-1.4.jar
+#22 127.6 [INFO]       maven-model-3.2.5.jar
+#22 127.6 [INFO]       maven-plugin-api-3.2.5.jar
+#22 127.6 [INFO]       maven-settings-3.2.5.jar
+#22 127.6 [INFO]       maven-settings-builder-3.2.5.jar
+#22 127.6 [INFO]       aether-util-1.0.0.v20140518.jar
+#22 127.6 [INFO]       maven-shared-utils-3.3.4.jar
+#22 127.6 [INFO]       commons-io-2.6.jar
+#22 127.6 [INFO]       maven-archiver-3.5.2.jar
+#22 127.6 [INFO]       commons-compress-1.20.jar
+#22 127.6 [INFO]       plexus-interpolation-1.26.jar
+#22 127.6 [INFO]       plexus-archiver-4.2.7.jar
+#22 127.6 [INFO]       plexus-io-3.2.0.jar
+#22 127.6 [INFO]       snappy-0.4.jar
+#22 127.6 [INFO]       xz-1.9.jar
+#22 127.6 [INFO]       plexus-i18n-1.0-beta-10.jar
+#22 127.6 [INFO]       plexus-utils-3.4.2.jar
+#22 127.6 [INFO]       doxia-sink-api-1.11.1.jar
+#22 127.6 [INFO]       doxia-logging-api-1.11.1.jar
+#22 127.6 [INFO]       doxia-core-1.11.1.jar
+#22 127.6 [INFO]       plexus-container-default-2.1.0.jar
+#22 127.6 [INFO]       xbean-reflect-3.7.jar
+#22 127.6 [INFO]       google-collections-1.0.jar
+#22 127.6 [INFO]       plexus-component-annotations-2.1.1.jar
+#22 127.6 [INFO]       commons-lang3-3.8.1.jar
+#22 127.6 [INFO]       commons-text-1.3.jar
+#22 127.6 [INFO]       httpclient-4.5.13.jar
+#22 127.6 [INFO]       commons-logging-1.2.jar
+#22 127.6 [INFO]       commons-codec-1.11.jar
+#22 127.6 [INFO]       httpcore-4.4.14.jar
+#22 127.6 [INFO]       doxia-module-xhtml-1.11.1.jar
+#22 127.6 [INFO]       doxia-module-xhtml5-1.11.1.jar
+#22 127.6 [INFO]       doxia-module-apt-1.11.1.jar
+#22 127.6 [INFO]       doxia-module-xdoc-1.11.1.jar
+#22 127.6 [INFO]       doxia-module-fml-1.11.1.jar
+#22 127.6 [INFO]       doxia-module-markdown-1.11.1.jar
+#22 127.6 [INFO]       flexmark-all-0.42.14.jar
+#22 127.6 [INFO]       flexmark-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-abbreviation-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-admonition-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-anchorlink-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-aside-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-attributes-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-autolink-0.42.14.jar
+#22 127.6 [INFO]       autolink-0.6.0.jar
+#22 127.6 [INFO]       flexmark-ext-definition-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-emoji-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-enumerated-reference-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-escaped-character-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-footnotes-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-gfm-issues-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-gfm-strikethrough-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-gfm-tables-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-gfm-tasklist-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-gfm-users-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-gitlab-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-jekyll-front-matter-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-jekyll-tag-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-media-tags-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-macros-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-ins-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-xwiki-macros-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-superscript-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-tables-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-toc-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-typographic-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-wikilink-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-yaml-front-matter-0.42.14.jar
+#22 127.6 [INFO]       flexmark-ext-youtube-embedded-0.42.14.jar
+#22 127.6 [INFO]       flexmark-formatter-0.42.14.jar
+#22 127.6 [INFO]       flexmark-html-parser-0.42.14.jar
+#22 127.6 [INFO]       jsoup-1.10.2.jar
+#22 127.6 [INFO]       flexmark-jira-converter-0.42.14.jar
+#22 127.6 [INFO]       flexmark-profile-pegdown-0.42.14.jar
+#22 127.6 [INFO]       flexmark-util-0.42.14.jar
+#22 127.6 [INFO]       flexmark-youtrack-converter-0.42.14.jar
+#22 127.6 [INFO]       doxia-module-confluence-1.11.1.jar
+#22 127.6 [INFO]       doxia-module-docbook-simple-1.11.1.jar
+#22 127.6 [INFO]       doxia-module-twiki-1.11.1.jar
+#22 127.6 [INFO]       doxia-decoration-model-1.11.1.jar
+#22 127.6 [INFO]       doxia-site-renderer-1.11.1.jar
+#22 127.6 [INFO]       doxia-skin-model-1.11.1.jar
+#22 127.6 [INFO]       plexus-velocity-1.2.jar
+#22 127.6 [INFO]       velocity-1.7.jar
+#22 127.6 [INFO]       commons-lang-2.4.jar
+#22 127.6 [INFO]       velocity-tools-2.0.jar
+#22 127.6 [INFO]       commons-beanutils-1.7.0.jar
+#22 127.6 [INFO]       commons-digester-1.8.jar
+#22 127.6 [INFO]       commons-chain-1.1.jar
+#22 127.6 [INFO]       dom4j-1.1.jar
+#22 127.6 [INFO]       oro-2.0.8.jar
+#22 127.6 [INFO]       commons-collections-3.2.2.jar
+#22 127.6 [INFO]       doxia-integration-tools-1.11.1.jar
+#22 127.6 [INFO]       jetty-server-9.4.46.v20220331.jar
+#22 127.6 [INFO]       javax.servlet-api-3.1.0.jar
+#22 127.6 [INFO]       jetty-http-9.4.46.v20220331.jar
+#22 127.6 [INFO]       jetty-io-9.4.46.v20220331.jar
+#22 127.6 [INFO]       jetty-servlet-9.4.46.v20220331.jar
+#22 127.6 [INFO]       jetty-security-9.4.46.v20220331.jar
+#22 127.6 [INFO]       jetty-util-ajax-9.4.46.v20220331.jar
+#22 127.6 [INFO]       jetty-webapp-9.4.46.v20220331.jar
+#22 127.6 [INFO]       jetty-xml-9.4.46.v20220331.jar
+#22 127.6 [INFO]       jetty-util-9.4.46.v20220331.jar
+#22 128.0 [INFO] Resolved plugin: maven-resources-plugin-3.3.1.jar
+#22 128.0 [INFO] Resolved plugin dependency:
+#22 130.0 [INFO]       maven-resources-plugin-3.3.1.jar
+#22 130.0 [INFO]       plexus-interpolation-1.26.jar
+#22 130.0 [INFO]       plexus-utils-3.5.1.jar
+#22 130.0 [INFO]       maven-filtering-3.3.1.jar
+#22 130.0 [INFO]       javax.inject-1.jar
+#22 130.0 [INFO]       slf4j-api-1.7.36.jar
+#22 130.0 [INFO]       plexus-build-api-0.0.7.jar
+#22 130.0 [INFO]       commons-io-2.11.0.jar
+#22 130.0 [INFO]       commons-lang3-3.12.0.jar
+#22 130.2 [INFO] Resolved plugin: spring-boot-maven-plugin-4.0.8.jar
+#22 130.2 [INFO] Resolved plugin dependency:
+#22 ...
+
+#23 [course-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#23 128.6 [INFO]       maven-site-plugin-3.12.1.jar
+#23 128.6 [INFO]       maven-reporting-api-3.1.1.jar
+#23 128.6 [INFO]       maven-reporting-exec-1.6.0.jar
+#23 128.6 [INFO]       maven-artifact-3.2.5.jar
+#23 128.6 [INFO]       maven-core-3.2.5.jar
+#23 128.6 [INFO]       maven-repository-metadata-3.2.5.jar
+#23 128.6 [INFO]       maven-model-builder-3.2.5.jar
+#23 128.6 [INFO]       maven-aether-provider-3.2.5.jar
+#23 128.6 [INFO]       aether-spi-1.0.0.v20140518.jar
+#23 128.6 [INFO]       aether-impl-1.0.0.v20140518.jar
+#23 128.6 [INFO]       aether-api-1.0.0.v20140518.jar
+#23 128.6 [INFO]       org.eclipse.sisu.plexus-0.3.5.jar
+#23 128.6 [INFO]       javax.annotation-api-1.2.jar
+#23 128.6 [INFO]       cdi-api-1.2.jar
+#23 128.6 [INFO]       org.eclipse.sisu.inject-0.3.5.jar
+#23 128.6 [INFO]       sisu-guice-3.2.3-no_aop.jar
+#23 128.6 [INFO]       javax.inject-1.jar
+#23 128.6 [INFO]       aopalliance-1.0.jar
+#23 128.6 [INFO]       guava-16.0.1.jar
+#23 128.6 [INFO]       plexus-classworlds-2.5.2.jar
+#23 128.6 [INFO]       plexus-sec-dispatcher-1.3.jar
+#23 128.6 [INFO]       plexus-cipher-1.4.jar
+#23 128.6 [INFO]       maven-model-3.2.5.jar
+#23 128.6 [INFO]       maven-plugin-api-3.2.5.jar
+#23 128.6 [INFO]       maven-settings-3.2.5.jar
+#23 128.6 [INFO]       maven-settings-builder-3.2.5.jar
+#23 128.6 [INFO]       aether-util-1.0.0.v20140518.jar
+#23 128.6 [INFO]       maven-shared-utils-3.3.4.jar
+#23 128.6 [INFO]       commons-io-2.6.jar
+#23 128.6 [INFO]       maven-archiver-3.5.2.jar
+#23 128.6 [INFO]       commons-compress-1.20.jar
+#23 128.6 [INFO]       plexus-interpolation-1.26.jar
+#23 128.6 [INFO]       plexus-archiver-4.2.7.jar
+#23 128.6 [INFO]       plexus-io-3.2.0.jar
+#23 128.6 [INFO]       snappy-0.4.jar
+#23 128.6 [INFO]       xz-1.9.jar
+#23 128.6 [INFO]       plexus-i18n-1.0-beta-10.jar
+#23 128.6 [INFO]       plexus-utils-3.4.2.jar
+#23 128.6 [INFO]       doxia-sink-api-1.11.1.jar
+#23 128.6 [INFO]       doxia-logging-api-1.11.1.jar
+#23 128.6 [INFO]       doxia-core-1.11.1.jar
+#23 128.6 [INFO]       plexus-container-default-2.1.0.jar
+#23 128.6 [INFO]       xbean-reflect-3.7.jar
+#23 128.6 [INFO]       google-collections-1.0.jar
+#23 128.6 [INFO]       plexus-component-annotations-2.1.1.jar
+#23 128.6 [INFO]       commons-lang3-3.8.1.jar
+#23 128.6 [INFO]       commons-text-1.3.jar
+#23 128.6 [INFO]       httpclient-4.5.13.jar
+#23 128.6 [INFO]       commons-logging-1.2.jar
+#23 128.6 [INFO]       commons-codec-1.11.jar
+#23 128.6 [INFO]       httpcore-4.4.14.jar
+#23 128.6 [INFO]       doxia-module-xhtml-1.11.1.jar
+#23 128.6 [INFO]       doxia-module-xhtml5-1.11.1.jar
+#23 128.6 [INFO]       doxia-module-apt-1.11.1.jar
+#23 128.6 [INFO]       doxia-module-xdoc-1.11.1.jar
+#23 128.6 [INFO]       doxia-module-fml-1.11.1.jar
+#23 128.6 [INFO]       doxia-module-markdown-1.11.1.jar
+#23 128.6 [INFO]       flexmark-all-0.42.14.jar
+#23 128.6 [INFO]       flexmark-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-abbreviation-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-admonition-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-anchorlink-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-aside-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-attributes-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-autolink-0.42.14.jar
+#23 128.6 [INFO]       autolink-0.6.0.jar
+#23 128.6 [INFO]       flexmark-ext-definition-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-emoji-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-enumerated-reference-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-escaped-character-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-footnotes-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-gfm-issues-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-gfm-strikethrough-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-gfm-tables-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-gfm-tasklist-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-gfm-users-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-gitlab-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-jekyll-front-matter-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-jekyll-tag-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-media-tags-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-macros-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-ins-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-xwiki-macros-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-superscript-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-tables-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-toc-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-typographic-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-wikilink-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-yaml-front-matter-0.42.14.jar
+#23 128.6 [INFO]       flexmark-ext-youtube-embedded-0.42.14.jar
+#23 128.6 [INFO]       flexmark-formatter-0.42.14.jar
+#23 128.6 [INFO]       flexmark-html-parser-0.42.14.jar
+#23 128.6 [INFO]       jsoup-1.10.2.jar
+#23 128.6 [INFO]       flexmark-jira-converter-0.42.14.jar
+#23 128.6 [INFO]       flexmark-profile-pegdown-0.42.14.jar
+#23 128.6 [INFO]       flexmark-util-0.42.14.jar
+#23 128.6 [INFO]       flexmark-youtrack-converter-0.42.14.jar
+#23 128.6 [INFO]       doxia-module-confluence-1.11.1.jar
+#23 128.6 [INFO]       doxia-module-docbook-simple-1.11.1.jar
+#23 128.6 [INFO]       doxia-module-twiki-1.11.1.jar
+#23 128.6 [INFO]       doxia-decoration-model-1.11.1.jar
+#23 128.6 [INFO]       doxia-site-renderer-1.11.1.jar
+#23 128.6 [INFO]       doxia-skin-model-1.11.1.jar
+#23 128.6 [INFO]       plexus-velocity-1.2.jar
+#23 128.6 [INFO]       velocity-1.7.jar
+#23 128.6 [INFO]       commons-lang-2.4.jar
+#23 128.6 [INFO]       velocity-tools-2.0.jar
+#23 128.6 [INFO]       commons-beanutils-1.7.0.jar
+#23 128.6 [INFO]       commons-digester-1.8.jar
+#23 128.6 [INFO]       commons-chain-1.1.jar
+#23 128.6 [INFO]       dom4j-1.1.jar
+#23 128.6 [INFO]       oro-2.0.8.jar
+#23 128.6 [INFO]       commons-collections-3.2.2.jar
+#23 128.6 [INFO]       doxia-integration-tools-1.11.1.jar
+#23 128.6 [INFO]       jetty-server-9.4.46.v20220331.jar
+#23 128.6 [INFO]       javax.servlet-api-3.1.0.jar
+#23 128.6 [INFO]       jetty-http-9.4.46.v20220331.jar
+#23 128.6 [INFO]       jetty-io-9.4.46.v20220331.jar
+#23 128.6 [INFO]       jetty-servlet-9.4.46.v20220331.jar
+#23 128.6 [INFO]       jetty-security-9.4.46.v20220331.jar
+#23 128.6 [INFO]       jetty-util-ajax-9.4.46.v20220331.jar
+#23 128.6 [INFO]       jetty-webapp-9.4.46.v20220331.jar
+#23 128.6 [INFO]       jetty-xml-9.4.46.v20220331.jar
+#23 128.6 [INFO]       jetty-util-9.4.46.v20220331.jar
+#23 128.8 [INFO] Resolved plugin: maven-resources-plugin-3.3.1.jar
+#23 128.8 [INFO] Resolved plugin dependency:
+#23 131.0 [INFO]       maven-resources-plugin-3.3.1.jar
+#23 131.0 [INFO]       plexus-interpolation-1.26.jar
+#23 131.0 [INFO]       plexus-utils-3.5.1.jar
+#23 131.0 [INFO]       maven-filtering-3.3.1.jar
+#23 131.0 [INFO]       javax.inject-1.jar
+#23 131.0 [INFO]       slf4j-api-1.7.36.jar
+#23 131.0 [INFO]       plexus-build-api-0.0.7.jar
+#23 131.0 [INFO]       commons-io-2.11.0.jar
+#23 131.0 [INFO]       commons-lang3-3.12.0.jar
+#23 131.2 [INFO] Resolved plugin: spring-boot-maven-plugin-4.0.8.jar
+#23 131.2 [INFO] Resolved plugin dependency:
+#23 ...
+
+#21 [task-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#21 128.9 [INFO]       maven-site-plugin-3.12.1.jar
+#21 128.9 [INFO]       maven-reporting-api-3.1.1.jar
+#21 128.9 [INFO]       maven-reporting-exec-1.6.0.jar
+#21 128.9 [INFO]       maven-artifact-3.2.5.jar
+#21 128.9 [INFO]       maven-core-3.2.5.jar
+#21 128.9 [INFO]       maven-repository-metadata-3.2.5.jar
+#21 128.9 [INFO]       maven-model-builder-3.2.5.jar
+#21 128.9 [INFO]       maven-aether-provider-3.2.5.jar
+#21 128.9 [INFO]       aether-spi-1.0.0.v20140518.jar
+#21 128.9 [INFO]       aether-impl-1.0.0.v20140518.jar
+#21 128.9 [INFO]       aether-api-1.0.0.v20140518.jar
+#21 128.9 [INFO]       org.eclipse.sisu.plexus-0.3.5.jar
+#21 128.9 [INFO]       javax.annotation-api-1.2.jar
+#21 128.9 [INFO]       cdi-api-1.2.jar
+#21 128.9 [INFO]       org.eclipse.sisu.inject-0.3.5.jar
+#21 128.9 [INFO]       sisu-guice-3.2.3-no_aop.jar
+#21 128.9 [INFO]       javax.inject-1.jar
+#21 128.9 [INFO]       aopalliance-1.0.jar
+#21 128.9 [INFO]       guava-16.0.1.jar
+#21 128.9 [INFO]       plexus-classworlds-2.5.2.jar
+#21 128.9 [INFO]       plexus-sec-dispatcher-1.3.jar
+#21 128.9 [INFO]       plexus-cipher-1.4.jar
+#21 128.9 [INFO]       maven-model-3.2.5.jar
+#21 128.9 [INFO]       maven-plugin-api-3.2.5.jar
+#21 128.9 [INFO]       maven-settings-3.2.5.jar
+#21 128.9 [INFO]       maven-settings-builder-3.2.5.jar
+#21 128.9 [INFO]       aether-util-1.0.0.v20140518.jar
+#21 128.9 [INFO]       maven-shared-utils-3.3.4.jar
+#21 128.9 [INFO]       commons-io-2.6.jar
+#21 128.9 [INFO]       maven-archiver-3.5.2.jar
+#21 128.9 [INFO]       commons-compress-1.20.jar
+#21 128.9 [INFO]       plexus-interpolation-1.26.jar
+#21 128.9 [INFO]       plexus-archiver-4.2.7.jar
+#21 128.9 [INFO]       plexus-io-3.2.0.jar
+#21 128.9 [INFO]       snappy-0.4.jar
+#21 128.9 [INFO]       xz-1.9.jar
+#21 128.9 [INFO]       plexus-i18n-1.0-beta-10.jar
+#21 128.9 [INFO]       plexus-utils-3.4.2.jar
+#21 128.9 [INFO]       doxia-sink-api-1.11.1.jar
+#21 128.9 [INFO]       doxia-logging-api-1.11.1.jar
+#21 128.9 [INFO]       doxia-core-1.11.1.jar
+#21 128.9 [INFO]       plexus-container-default-2.1.0.jar
+#21 128.9 [INFO]       xbean-reflect-3.7.jar
+#21 128.9 [INFO]       google-collections-1.0.jar
+#21 128.9 [INFO]       plexus-component-annotations-2.1.1.jar
+#21 128.9 [INFO]       commons-lang3-3.8.1.jar
+#21 128.9 [INFO]       commons-text-1.3.jar
+#21 128.9 [INFO]       httpclient-4.5.13.jar
+#21 128.9 [INFO]       commons-logging-1.2.jar
+#21 128.9 [INFO]       commons-codec-1.11.jar
+#21 128.9 [INFO]       httpcore-4.4.14.jar
+#21 128.9 [INFO]       doxia-module-xhtml-1.11.1.jar
+#21 128.9 [INFO]       doxia-module-xhtml5-1.11.1.jar
+#21 128.9 [INFO]       doxia-module-apt-1.11.1.jar
+#21 128.9 [INFO]       doxia-module-xdoc-1.11.1.jar
+#21 128.9 [INFO]       doxia-module-fml-1.11.1.jar
+#21 128.9 [INFO]       doxia-module-markdown-1.11.1.jar
+#21 128.9 [INFO]       flexmark-all-0.42.14.jar
+#21 128.9 [INFO]       flexmark-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-abbreviation-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-admonition-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-anchorlink-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-aside-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-attributes-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-autolink-0.42.14.jar
+#21 128.9 [INFO]       autolink-0.6.0.jar
+#21 128.9 [INFO]       flexmark-ext-definition-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-emoji-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-enumerated-reference-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-escaped-character-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-footnotes-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-gfm-issues-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-gfm-strikethrough-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-gfm-tables-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-gfm-tasklist-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-gfm-users-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-gitlab-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-jekyll-front-matter-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-jekyll-tag-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-media-tags-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-macros-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-ins-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-xwiki-macros-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-superscript-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-tables-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-toc-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-typographic-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-wikilink-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-yaml-front-matter-0.42.14.jar
+#21 128.9 [INFO]       flexmark-ext-youtube-embedded-0.42.14.jar
+#21 128.9 [INFO]       flexmark-formatter-0.42.14.jar
+#21 128.9 [INFO]       flexmark-html-parser-0.42.14.jar
+#21 128.9 [INFO]       jsoup-1.10.2.jar
+#21 128.9 [INFO]       flexmark-jira-converter-0.42.14.jar
+#21 128.9 [INFO]       flexmark-profile-pegdown-0.42.14.jar
+#21 128.9 [INFO]       flexmark-util-0.42.14.jar
+#21 128.9 [INFO]       flexmark-youtrack-converter-0.42.14.jar
+#21 128.9 [INFO]       doxia-module-confluence-1.11.1.jar
+#21 128.9 [INFO]       doxia-module-docbook-simple-1.11.1.jar
+#21 128.9 [INFO]       doxia-module-twiki-1.11.1.jar
+#21 128.9 [INFO]       doxia-decoration-model-1.11.1.jar
+#21 128.9 [INFO]       doxia-site-renderer-1.11.1.jar
+#21 128.9 [INFO]       doxia-skin-model-1.11.1.jar
+#21 128.9 [INFO]       plexus-velocity-1.2.jar
+#21 128.9 [INFO]       velocity-1.7.jar
+#21 128.9 [INFO]       commons-lang-2.4.jar
+#21 128.9 [INFO]       velocity-tools-2.0.jar
+#21 128.9 [INFO]       commons-beanutils-1.7.0.jar
+#21 128.9 [INFO]       commons-digester-1.8.jar
+#21 128.9 [INFO]       commons-chain-1.1.jar
+#21 128.9 [INFO]       dom4j-1.1.jar
+#21 128.9 [INFO]       oro-2.0.8.jar
+#21 128.9 [INFO]       commons-collections-3.2.2.jar
+#21 128.9 [INFO]       doxia-integration-tools-1.11.1.jar
+#21 128.9 [INFO]       jetty-server-9.4.46.v20220331.jar
+#21 128.9 [INFO]       javax.servlet-api-3.1.0.jar
+#21 128.9 [INFO]       jetty-http-9.4.46.v20220331.jar
+#21 128.9 [INFO]       jetty-io-9.4.46.v20220331.jar
+#21 128.9 [INFO]       jetty-servlet-9.4.46.v20220331.jar
+#21 128.9 [INFO]       jetty-security-9.4.46.v20220331.jar
+#21 128.9 [INFO]       jetty-util-ajax-9.4.46.v20220331.jar
+#21 128.9 [INFO]       jetty-webapp-9.4.46.v20220331.jar
+#21 128.9 [INFO]       jetty-xml-9.4.46.v20220331.jar
+#21 128.9 [INFO]       jetty-util-9.4.46.v20220331.jar
+#21 129.1 [INFO] Resolved plugin: maven-resources-plugin-3.3.1.jar
+#21 129.1 [INFO] Resolved plugin dependency:
+#21 131.2 [INFO]       maven-resources-plugin-3.3.1.jar
+#21 131.2 [INFO]       plexus-interpolation-1.26.jar
+#21 131.2 [INFO]       plexus-utils-3.5.1.jar
+#21 131.2 [INFO]       maven-filtering-3.3.1.jar
+#21 131.2 [INFO]       javax.inject-1.jar
+#21 131.2 [INFO]       slf4j-api-1.7.36.jar
+#21 131.2 [INFO]       plexus-build-api-0.0.7.jar
+#21 131.2 [INFO]       commons-io-2.11.0.jar
+#21 131.2 [INFO]       commons-lang3-3.12.0.jar
+#21 131.4 [INFO] Resolved plugin: spring-boot-maven-plugin-4.0.8.jar
+#21 131.4 [INFO] Resolved plugin dependency:
+#21 ...
+
+#22 [user-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#22 141.4 [INFO]       spring-boot-maven-plugin-4.0.8.jar
+#22 141.4 [INFO]       spring-boot-buildpack-platform-4.0.8.jar
+#22 141.4 [INFO]       jna-platform-5.17.0.jar
+#22 141.4 [INFO]       jna-5.17.0.jar
+#22 141.4 [INFO]       commons-compress-1.27.1.jar
+#22 141.4 [INFO]       commons-codec-1.17.1.jar
+#22 141.4 [INFO]       commons-lang3-3.16.0.jar
+#22 141.4 [INFO]       httpclient5-5.5.2.jar
+#22 141.4 [INFO]       httpcore5-5.3.6.jar
+#22 141.4 [INFO]       httpcore5-h2-5.3.6.jar
+#22 141.4 [INFO]       tomlj-1.0.0.jar
+#22 141.4 [INFO]       antlr4-runtime-4.7.2.jar
+#22 141.4 [INFO]       jsr305-3.0.2.jar
+#22 141.4 [INFO]       jackson-databind-3.1.5.jar
+#22 141.4 [INFO]       jackson-annotations-2.21.jar
+#22 141.4 [INFO]       jackson-core-3.1.5.jar
+#22 141.4 [INFO]       spring-boot-loader-tools-4.0.8.jar
+#22 141.4 [INFO]       maven-common-artifact-filters-3.4.0.jar
+#22 141.4 [INFO]       slf4j-api-1.7.36.jar
+#22 141.4 [INFO]       maven-resolver-util-1.4.1.jar
+#22 141.4 [INFO]       maven-resolver-api-1.4.1.jar
+#22 141.4 [INFO]       plexus-build-api-0.0.7.jar
+#22 141.4 [INFO]       spring-core-7.0.9.jar
+#22 141.4 [INFO]       commons-logging-1.3.5.jar
+#22 141.4 [INFO]       jspecify-1.0.0.jar
+#22 141.4 [INFO]       spring-context-7.0.9.jar
+#22 141.4 [INFO]       spring-aop-7.0.9.jar
+#22 141.4 [INFO]       spring-beans-7.0.9.jar
+#22 141.4 [INFO]       spring-expression-7.0.9.jar
+#22 141.4 [INFO]       micrometer-observation-1.16.7.jar
+#22 141.4 [INFO]       micrometer-commons-1.16.7.jar
+#22 141.4 [INFO]       maven-shade-plugin-3.6.0.jar
+#22 141.4 [INFO]       plexus-utils-3.5.1.jar
+#22 141.4 [INFO]       asm-9.7.jar
+#22 141.4 [INFO]       asm-commons-9.7.jar
+#22 141.4 [INFO]       asm-tree-9.7.jar
+#22 141.4 [INFO]       jdom2-2.0.6.1.jar
+#22 141.4 [INFO]       commons-io-2.16.1.jar
+#22 141.4 [INFO]       jdependency-2.10.jar
+#22 141.7 [INFO] Resolved plugin: maven-deploy-plugin-3.1.4.jar
+#22 141.7 [INFO] Resolved plugin dependency:
+#22 141.9 [INFO]       maven-deploy-plugin-3.1.4.jar
+#22 141.9 [INFO]       plexus-utils-4.0.1.jar
+#22 141.9 [INFO]       plexus-xml-3.0.1.jar
+#22 141.9 [INFO]       maven-resolver-util-1.9.22.jar
+#22 141.9 [INFO]       maven-resolver-api-1.9.22.jar
+#22 ...
+
+#23 [course-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#23 142.3 [INFO]       spring-boot-maven-plugin-4.0.8.jar
+#23 142.3 [INFO]       spring-boot-buildpack-platform-4.0.8.jar
+#23 142.3 [INFO]       jna-platform-5.17.0.jar
+#23 142.3 [INFO]       jna-5.17.0.jar
+#23 142.3 [INFO]       commons-compress-1.27.1.jar
+#23 142.3 [INFO]       commons-codec-1.17.1.jar
+#23 142.3 [INFO]       commons-lang3-3.16.0.jar
+#23 142.3 [INFO]       httpclient5-5.5.2.jar
+#23 142.3 [INFO]       httpcore5-5.3.6.jar
+#23 142.3 [INFO]       httpcore5-h2-5.3.6.jar
+#23 142.3 [INFO]       tomlj-1.0.0.jar
+#23 142.3 [INFO]       antlr4-runtime-4.7.2.jar
+#23 142.3 [INFO]       jsr305-3.0.2.jar
+#23 142.3 [INFO]       jackson-databind-3.1.5.jar
+#23 142.3 [INFO]       jackson-annotations-2.21.jar
+#23 142.3 [INFO]       jackson-core-3.1.5.jar
+#23 142.3 [INFO]       spring-boot-loader-tools-4.0.8.jar
+#23 142.3 [INFO]       maven-common-artifact-filters-3.4.0.jar
+#23 142.3 [INFO]       slf4j-api-1.7.36.jar
+#23 142.3 [INFO]       maven-resolver-util-1.4.1.jar
+#23 142.3 [INFO]       maven-resolver-api-1.4.1.jar
+#23 142.3 [INFO]       plexus-build-api-0.0.7.jar
+#23 142.3 [INFO]       spring-core-7.0.9.jar
+#23 142.3 [INFO]       commons-logging-1.3.5.jar
+#23 142.3 [INFO]       jspecify-1.0.0.jar
+#23 142.3 [INFO]       spring-context-7.0.9.jar
+#23 142.3 [INFO]       spring-aop-7.0.9.jar
+#23 142.3 [INFO]       spring-beans-7.0.9.jar
+#23 142.3 [INFO]       spring-expression-7.0.9.jar
+#23 142.3 [INFO]       micrometer-observation-1.16.7.jar
+#23 142.3 [INFO]       micrometer-commons-1.16.7.jar
+#23 142.3 [INFO]       maven-shade-plugin-3.6.0.jar
+#23 142.3 [INFO]       plexus-utils-3.5.1.jar
+#23 142.3 [INFO]       asm-9.7.jar
+#23 142.3 [INFO]       asm-commons-9.7.jar
+#23 142.4 [INFO]       asm-tree-9.7.jar
+#23 142.4 [INFO]       jdom2-2.0.6.1.jar
+#23 142.4 [INFO]       commons-io-2.16.1.jar
+#23 142.4 [INFO]       jdependency-2.10.jar
+#23 142.6 [INFO] Resolved plugin: maven-deploy-plugin-3.1.4.jar
+#23 142.6 [INFO] Resolved plugin dependency:
+#23 142.8 [INFO]       maven-deploy-plugin-3.1.4.jar
+#23 142.8 [INFO]       plexus-utils-4.0.1.jar
+#23 142.8 [INFO]       plexus-xml-3.0.1.jar
+#23 142.8 [INFO]       maven-resolver-util-1.9.22.jar
+#23 142.8 [INFO]       maven-resolver-api-1.9.22.jar
+#23 ...
+
+#21 [task-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#21 142.6 [INFO]       spring-boot-maven-plugin-4.0.8.jar
+#21 142.6 [INFO]       spring-boot-buildpack-platform-4.0.8.jar
+#21 142.6 [INFO]       jna-platform-5.17.0.jar
+#21 142.6 [INFO]       jna-5.17.0.jar
+#21 142.6 [INFO]       commons-compress-1.27.1.jar
+#21 142.6 [INFO]       commons-codec-1.17.1.jar
+#21 142.6 [INFO]       commons-lang3-3.16.0.jar
+#21 142.6 [INFO]       httpclient5-5.5.2.jar
+#21 142.6 [INFO]       httpcore5-5.3.6.jar
+#21 142.6 [INFO]       httpcore5-h2-5.3.6.jar
+#21 142.6 [INFO]       tomlj-1.0.0.jar
+#21 142.6 [INFO]       antlr4-runtime-4.7.2.jar
+#21 142.6 [INFO]       jsr305-3.0.2.jar
+#21 142.6 [INFO]       jackson-databind-3.1.5.jar
+#21 142.6 [INFO]       jackson-annotations-2.21.jar
+#21 142.6 [INFO]       jackson-core-3.1.5.jar
+#21 142.6 [INFO]       spring-boot-loader-tools-4.0.8.jar
+#21 142.6 [INFO]       maven-common-artifact-filters-3.4.0.jar
+#21 142.6 [INFO]       slf4j-api-1.7.36.jar
+#21 142.6 [INFO]       maven-resolver-util-1.4.1.jar
+#21 142.6 [INFO]       maven-resolver-api-1.4.1.jar
+#21 142.6 [INFO]       plexus-build-api-0.0.7.jar
+#21 142.6 [INFO]       spring-core-7.0.9.jar
+#21 142.6 [INFO]       commons-logging-1.3.5.jar
+#21 142.6 [INFO]       jspecify-1.0.0.jar
+#21 142.6 [INFO]       spring-context-7.0.9.jar
+#21 142.6 [INFO]       spring-aop-7.0.9.jar
+#21 142.6 [INFO]       spring-beans-7.0.9.jar
+#21 142.6 [INFO]       spring-expression-7.0.9.jar
+#21 142.6 [INFO]       micrometer-observation-1.16.7.jar
+#21 142.6 [INFO]       micrometer-commons-1.16.7.jar
+#21 142.6 [INFO]       maven-shade-plugin-3.6.0.jar
+#21 142.6 [INFO]       plexus-utils-3.5.1.jar
+#21 142.6 [INFO]       asm-9.7.jar
+#21 142.6 [INFO]       asm-commons-9.7.jar
+#21 142.6 [INFO]       asm-tree-9.7.jar
+#21 142.6 [INFO]       jdom2-2.0.6.1.jar
+#21 142.6 [INFO]       commons-io-2.16.1.jar
+#21 142.6 [INFO]       jdependency-2.10.jar
+#21 142.8 [INFO] Resolved plugin: maven-deploy-plugin-3.1.4.jar
+#21 142.8 [INFO] Resolved plugin dependency:
+#21 143.0 [INFO]       maven-deploy-plugin-3.1.4.jar
+#21 143.0 [INFO]       plexus-utils-4.0.1.jar
+#21 143.0 [INFO]       plexus-xml-3.0.1.jar
+#21 143.0 [INFO]       maven-resolver-util-1.9.22.jar
+#21 143.0 [INFO]       maven-resolver-api-1.9.22.jar
+#21 ...
+
+#22 [user-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#22 177.8 [INFO] Resolved dependency: spring-boot-starter-test-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-starter-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-starter-logging-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: logback-classic-1.5.38.jar
+#22 177.8 [INFO] Resolved dependency: logback-core-1.5.38.jar
+#22 177.8 [INFO] Resolved dependency: log4j-to-slf4j-2.25.5.jar
+#22 177.8 [INFO] Resolved dependency: log4j-api-2.25.5.jar
+#22 177.8 [INFO] Resolved dependency: jul-to-slf4j-2.0.18.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-autoconfigure-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: jakarta.annotation-api-3.0.0.jar
+#22 177.8 [INFO] Resolved dependency: snakeyaml-2.5.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-test-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-context-7.0.9.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-test-autoconfigure-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: json-path-2.10.0.jar
+#22 177.8 [INFO] Resolved dependency: slf4j-api-2.0.18.jar
+#22 177.8 [INFO] Resolved dependency: jakarta.xml.bind-api-4.0.5.jar
+#22 177.8 [INFO] Resolved dependency: jakarta.activation-api-2.1.4.jar
+#22 177.8 [INFO] Resolved dependency: json-smart-2.6.0.jar
+#22 177.8 [INFO] Resolved dependency: accessors-smart-2.6.0.jar
+#22 177.8 [INFO] Resolved dependency: asm-9.7.1.jar
+#22 177.8 [INFO] Resolved dependency: assertj-core-3.27.7.jar
+#22 177.8 [INFO] Resolved dependency: byte-buddy-1.17.8.jar
+#22 177.8 [INFO] Resolved dependency: awaitility-4.3.0.jar
+#22 177.8 [INFO] Resolved dependency: hamcrest-3.0.jar
+#22 177.8 [INFO] Resolved dependency: junit-jupiter-6.0.3.jar
+#22 177.8 [INFO] Resolved dependency: junit-jupiter-api-6.0.3.jar
+#22 177.8 [INFO] Resolved dependency: opentest4j-1.3.0.jar
+#22 177.8 [INFO] Resolved dependency: junit-platform-commons-6.0.3.jar
+#22 177.8 [INFO] Resolved dependency: apiguardian-api-1.1.2.jar
+#22 177.8 [INFO] Resolved dependency: junit-jupiter-params-6.0.3.jar
+#22 177.8 [INFO] Resolved dependency: junit-jupiter-engine-6.0.3.jar
+#22 177.8 [INFO] Resolved dependency: junit-platform-engine-6.0.3.jar
+#22 177.8 [INFO] Resolved dependency: mockito-core-5.20.0.jar
+#22 177.8 [INFO] Resolved dependency: byte-buddy-agent-1.17.8.jar
+#22 177.8 [INFO] Resolved dependency: objenesis-3.3.jar
+#22 177.8 [INFO] Resolved dependency: mockito-junit-jupiter-5.20.0.jar
+#22 177.8 [INFO] Resolved dependency: jsonassert-1.5.3.jar
+#22 177.8 [INFO] Resolved dependency: android-json-0.0.20131108.vaadin1.jar
+#22 177.8 [INFO] Resolved dependency: spring-core-7.0.9.jar
+#22 177.8 [INFO] Resolved dependency: commons-logging-1.3.6.jar
+#22 177.8 [INFO] Resolved dependency: jspecify-1.0.1.jar
+#22 177.8 [INFO] Resolved dependency: spring-test-7.0.9.jar
+#22 177.8 [INFO] Resolved dependency: xmlunit-core-2.10.4.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-starter-validation-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-validation-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: tomcat-embed-el-11.0.24.jar
+#22 177.8 [INFO] Resolved dependency: hibernate-validator-9.0.1.Final.jar
+#22 177.8 [INFO] Resolved dependency: jakarta.validation-api-3.1.1.jar
+#22 177.8 [INFO] Resolved dependency: jboss-logging-3.6.3.Final.jar
+#22 177.8 [INFO] Resolved dependency: classmate-1.7.3.jar
+#22 177.8 [INFO] Resolved dependency: mysql-connector-j-9.7.0.jar
+#22 177.8 [INFO] Resolved dependency: h2-2.4.240.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-starter-data-jpa-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-starter-jdbc-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: HikariCP-7.0.2.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-data-jpa-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-data-commons-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-persistence-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-data-commons-4.0.7.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-hibernate-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-jpa-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: jakarta.persistence-api-3.2.0.jar
+#22 177.8 [INFO] Resolved dependency: hibernate-core-7.2.24.Final.jar
+#22 177.8 [INFO] Resolved dependency: jakarta.transaction-api-2.0.1.jar
+#22 177.8 [INFO] Resolved dependency: hibernate-models-1.0.1.jar
+#22 177.8 [INFO] Resolved dependency: jaxb-runtime-4.0.9.jar
+#22 177.8 [INFO] Resolved dependency: jaxb-core-4.0.9.jar
+#22 177.8 [INFO] Resolved dependency: angus-activation-2.0.3.jar
+#22 177.8 [INFO] Resolved dependency: txw2-4.0.9.jar
+#22 177.8 [INFO] Resolved dependency: istack-commons-runtime-4.1.2.jar
+#22 177.8 [INFO] Resolved dependency: jakarta.inject-api-2.0.1.jar
+#22 177.8 [INFO] Resolved dependency: spring-orm-7.0.9.jar
+#22 177.8 [INFO] Resolved dependency: spring-data-jpa-4.0.7.jar
+#22 177.8 [INFO] Resolved dependency: spring-aop-7.0.9.jar
+#22 177.8 [INFO] Resolved dependency: spring-tx-7.0.9.jar
+#22 177.8 [INFO] Resolved dependency: spring-beans-7.0.9.jar
+#22 177.8 [INFO] Resolved dependency: antlr4-runtime-4.13.2.jar
+#22 177.8 [INFO] Resolved dependency: spring-aspects-7.0.9.jar
+#22 177.8 [INFO] Resolved dependency: aspectjweaver-1.9.25.1.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-jdbc-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-sql-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-transaction-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-jdbc-7.0.9.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-starter-webmvc-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-starter-jackson-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-jackson-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: jackson-databind-3.1.5.jar
+#22 177.8 [INFO] Resolved dependency: jackson-annotations-2.21.jar
+#22 177.8 [INFO] Resolved dependency: jackson-core-3.1.5.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-starter-tomcat-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-starter-tomcat-runtime-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: tomcat-embed-core-11.0.24.jar
+#22 177.8 [INFO] Resolved dependency: tomcat-embed-websocket-11.0.24.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-tomcat-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-http-converter-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-web-7.0.9.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-webmvc-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-servlet-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-webmvc-7.0.9.jar
+#22 177.8 [INFO] Resolved dependency: spring-expression-7.0.9.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-starter-webmvc-test-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-starter-jackson-test-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-webmvc-test-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-web-server-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-resttestclient-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-starter-actuator-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-starter-micrometer-metrics-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-micrometer-metrics-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-micrometer-observation-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-actuator-autoconfigure-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-actuator-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: spring-boot-health-4.0.8.jar
+#22 177.8 [INFO] Resolved dependency: micrometer-observation-1.16.7.jar
+#22 177.8 [INFO] Resolved dependency: micrometer-commons-1.16.7.jar
+#22 177.8 [INFO] Resolved dependency: micrometer-jakarta9-1.16.7.jar
+#22 177.8 [INFO] Resolved dependency: micrometer-core-1.16.7.jar
+#22 177.8 [INFO] Resolved dependency: HdrHistogram-2.2.2.jar
+#22 177.8 [INFO] Resolved dependency: LatencyUtils-2.0.3.jar
+#22 177.8 [INFO] ------------------------------------------------------------------------
+#22 177.8 [INFO] BUILD SUCCESS
+#22 177.8 [INFO] ------------------------------------------------------------------------
+#22 177.8 [INFO] Total time:  02:53 min
+#22 177.8 [INFO] Finished at: 2026-11-01T09:10:22Z
+#22 177.8 [INFO] ------------------------------------------------------------------------
+#22 DONE 178.6s
+
+#23 [course-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#23 ...
+
+#21 [task-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#21 178.5 [INFO] Resolved dependency: spring-boot-starter-test-4.0.8.jar
+#21 178.5 [INFO] Resolved dependency: spring-boot-starter-4.0.8.jar
+#21 178.5 [INFO] Resolved dependency: spring-boot-starter-logging-4.0.8.jar
+#21 178.5 [INFO] Resolved dependency: logback-classic-1.5.38.jar
+#21 178.5 [INFO] Resolved dependency: logback-core-1.5.38.jar
+#21 178.5 [INFO] Resolved dependency: log4j-to-slf4j-2.25.5.jar
+#21 178.5 [INFO] Resolved dependency: log4j-api-2.25.5.jar
+#21 178.5 [INFO] Resolved dependency: jul-to-slf4j-2.0.18.jar
+#21 178.5 [INFO] Resolved dependency: spring-boot-autoconfigure-4.0.8.jar
+#21 178.5 [INFO] Resolved dependency: jakarta.annotation-api-3.0.0.jar
+#21 178.5 [INFO] Resolved dependency: snakeyaml-2.5.jar
+#21 178.5 [INFO] Resolved dependency: spring-boot-test-4.0.8.jar
+#21 178.5 [INFO] Resolved dependency: spring-boot-4.0.8.jar
+#21 178.5 [INFO] Resolved dependency: spring-context-7.0.9.jar
+#21 178.5 [INFO] Resolved dependency: spring-boot-test-autoconfigure-4.0.8.jar
+#21 178.5 [INFO] Resolved dependency: json-path-2.10.0.jar
+#21 178.6 [INFO] Resolved dependency: slf4j-api-2.0.18.jar
+#21 178.6 [INFO] Resolved dependency: jakarta.xml.bind-api-4.0.5.jar
+#21 178.6 [INFO] Resolved dependency: jakarta.activation-api-2.1.4.jar
+#21 178.6 [INFO] Resolved dependency: json-smart-2.6.0.jar
+#21 178.6 [INFO] Resolved dependency: accessors-smart-2.6.0.jar
+#21 178.6 [INFO] Resolved dependency: asm-9.7.1.jar
+#21 178.6 [INFO] Resolved dependency: assertj-core-3.27.7.jar
+#21 178.6 [INFO] Resolved dependency: byte-buddy-1.17.8.jar
+#21 178.6 [INFO] Resolved dependency: awaitility-4.3.0.jar
+#21 178.6 [INFO] Resolved dependency: hamcrest-3.0.jar
+#21 178.6 [INFO] Resolved dependency: junit-jupiter-6.0.3.jar
+#21 178.6 [INFO] Resolved dependency: junit-jupiter-api-6.0.3.jar
+#21 178.6 [INFO] Resolved dependency: opentest4j-1.3.0.jar
+#21 178.6 [INFO] Resolved dependency: junit-platform-commons-6.0.3.jar
+#21 178.6 [INFO] Resolved dependency: apiguardian-api-1.1.2.jar
+#21 178.6 [INFO] Resolved dependency: junit-jupiter-params-6.0.3.jar
+#21 178.6 [INFO] Resolved dependency: junit-jupiter-engine-6.0.3.jar
+#21 178.6 [INFO] Resolved dependency: junit-platform-engine-6.0.3.jar
+#21 178.6 [INFO] Resolved dependency: mockito-core-5.20.0.jar
+#21 178.6 [INFO] Resolved dependency: byte-buddy-agent-1.17.8.jar
+#21 178.6 [INFO] Resolved dependency: objenesis-3.3.jar
+#21 178.6 [INFO] Resolved dependency: mockito-junit-jupiter-5.20.0.jar
+#21 178.6 [INFO] Resolved dependency: jsonassert-1.5.3.jar
+#21 178.6 [INFO] Resolved dependency: android-json-0.0.20131108.vaadin1.jar
+#21 178.6 [INFO] Resolved dependency: spring-core-7.0.9.jar
+#21 178.6 [INFO] Resolved dependency: commons-logging-1.3.6.jar
+#21 178.6 [INFO] Resolved dependency: jspecify-1.0.1.jar
+#21 178.6 [INFO] Resolved dependency: spring-test-7.0.9.jar
+#21 178.6 [INFO] Resolved dependency: xmlunit-core-2.10.4.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-starter-validation-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-validation-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: tomcat-embed-el-11.0.24.jar
+#21 178.6 [INFO] Resolved dependency: hibernate-validator-9.0.1.Final.jar
+#21 178.6 [INFO] Resolved dependency: jakarta.validation-api-3.1.1.jar
+#21 178.6 [INFO] Resolved dependency: jboss-logging-3.6.3.Final.jar
+#21 178.6 [INFO] Resolved dependency: classmate-1.7.3.jar
+#21 178.6 [INFO] Resolved dependency: mysql-connector-j-9.7.0.jar
+#21 178.6 [INFO] Resolved dependency: h2-2.4.240.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-starter-data-jpa-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-starter-jdbc-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: HikariCP-7.0.2.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-data-jpa-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-data-commons-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-persistence-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-data-commons-4.0.7.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-hibernate-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-jpa-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: jakarta.persistence-api-3.2.0.jar
+#21 178.6 [INFO] Resolved dependency: hibernate-core-7.2.24.Final.jar
+#21 178.6 [INFO] Resolved dependency: jakarta.transaction-api-2.0.1.jar
+#21 178.6 [INFO] Resolved dependency: hibernate-models-1.0.1.jar
+#21 178.6 [INFO] Resolved dependency: jaxb-runtime-4.0.9.jar
+#21 178.6 [INFO] Resolved dependency: jaxb-core-4.0.9.jar
+#21 178.6 [INFO] Resolved dependency: angus-activation-2.0.3.jar
+#21 178.6 [INFO] Resolved dependency: txw2-4.0.9.jar
+#21 178.6 [INFO] Resolved dependency: istack-commons-runtime-4.1.2.jar
+#21 178.6 [INFO] Resolved dependency: jakarta.inject-api-2.0.1.jar
+#21 178.6 [INFO] Resolved dependency: spring-orm-7.0.9.jar
+#21 178.6 [INFO] Resolved dependency: spring-data-jpa-4.0.7.jar
+#21 178.6 [INFO] Resolved dependency: spring-aop-7.0.9.jar
+#21 178.6 [INFO] Resolved dependency: spring-tx-7.0.9.jar
+#21 178.6 [INFO] Resolved dependency: spring-beans-7.0.9.jar
+#21 178.6 [INFO] Resolved dependency: antlr4-runtime-4.13.2.jar
+#21 178.6 [INFO] Resolved dependency: spring-aspects-7.0.9.jar
+#21 178.6 [INFO] Resolved dependency: aspectjweaver-1.9.25.1.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-jdbc-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-sql-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-transaction-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-jdbc-7.0.9.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-starter-webmvc-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-starter-jackson-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-jackson-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: jackson-databind-3.1.5.jar
+#21 178.6 [INFO] Resolved dependency: jackson-annotations-2.21.jar
+#21 178.6 [INFO] Resolved dependency: jackson-core-3.1.5.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-starter-tomcat-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-starter-tomcat-runtime-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: tomcat-embed-core-11.0.24.jar
+#21 178.6 [INFO] Resolved dependency: tomcat-embed-websocket-11.0.24.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-tomcat-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-http-converter-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-web-7.0.9.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-webmvc-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-servlet-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-webmvc-7.0.9.jar
+#21 178.6 [INFO] Resolved dependency: spring-expression-7.0.9.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-starter-webmvc-test-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-starter-jackson-test-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-webmvc-test-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-web-server-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-resttestclient-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-starter-actuator-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-starter-micrometer-metrics-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-micrometer-metrics-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-micrometer-observation-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-actuator-autoconfigure-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-actuator-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: spring-boot-health-4.0.8.jar
+#21 178.6 [INFO] Resolved dependency: micrometer-observation-1.16.7.jar
+#21 178.6 [INFO] Resolved dependency: micrometer-commons-1.16.7.jar
+#21 178.6 [INFO] Resolved dependency: micrometer-jakarta9-1.16.7.jar
+#21 178.6 [INFO] Resolved dependency: micrometer-core-1.16.7.jar
+#21 178.6 [INFO] Resolved dependency: HdrHistogram-2.2.2.jar
+#21 178.6 [INFO] Resolved dependency: LatencyUtils-2.0.3.jar
+#21 178.6 [INFO] ------------------------------------------------------------------------
+#21 178.6 [INFO] BUILD SUCCESS
+#21 178.6 [INFO] ------------------------------------------------------------------------
+#21 178.6 [INFO] Total time:  02:54 min
+#21 178.6 [INFO] Finished at: 2026-11-01T09:10:23Z
+#21 178.6 [INFO] ------------------------------------------------------------------------
+#21 DONE 178.7s
+
+#24 [user-service build 5/6] COPY src ./src
+#24 DONE 0.3s
+
+#25 [user-service build 6/6] RUN mvn -B -ntp clean package
+#25 ...
+
+#26 [task-service build 5/6] COPY src ./src
+#26 DONE 0.3s
+
+#27 [task-service build 6/6] RUN mvn -B -ntp clean package
+#27 ...
+
+#23 [course-service build 4/6] RUN mvn -B -ntp dependency:go-offline
+#23 180.3 [INFO] Resolved dependency: h2-2.4.240.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-starter-webmvc-test-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-starter-jackson-test-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-webmvc-test-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-web-server-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-resttestclient-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-web-7.0.9.jar
+#23 180.3 [INFO] Resolved dependency: spring-beans-7.0.9.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-starter-validation-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-starter-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-starter-logging-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: logback-classic-1.5.38.jar
+#23 180.3 [INFO] Resolved dependency: logback-core-1.5.38.jar
+#23 180.3 [INFO] Resolved dependency: log4j-to-slf4j-2.25.5.jar
+#23 180.3 [INFO] Resolved dependency: log4j-api-2.25.5.jar
+#23 180.3 [INFO] Resolved dependency: jul-to-slf4j-2.0.18.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-autoconfigure-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: jakarta.annotation-api-3.0.0.jar
+#23 180.3 [INFO] Resolved dependency: snakeyaml-2.5.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-validation-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-context-7.0.9.jar
+#23 180.3 [INFO] Resolved dependency: tomcat-embed-el-11.0.24.jar
+#23 180.3 [INFO] Resolved dependency: hibernate-validator-9.0.1.Final.jar
+#23 180.3 [INFO] Resolved dependency: jakarta.validation-api-3.1.1.jar
+#23 180.3 [INFO] Resolved dependency: jboss-logging-3.6.3.Final.jar
+#23 180.3 [INFO] Resolved dependency: classmate-1.7.3.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-starter-actuator-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-starter-micrometer-metrics-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-micrometer-metrics-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-micrometer-observation-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-actuator-autoconfigure-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-actuator-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-health-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: micrometer-observation-1.16.7.jar
+#23 180.3 [INFO] Resolved dependency: jspecify-1.0.1.jar
+#23 180.3 [INFO] Resolved dependency: micrometer-commons-1.16.7.jar
+#23 180.3 [INFO] Resolved dependency: micrometer-jakarta9-1.16.7.jar
+#23 180.3 [INFO] Resolved dependency: micrometer-core-1.16.7.jar
+#23 180.3 [INFO] Resolved dependency: HdrHistogram-2.2.2.jar
+#23 180.3 [INFO] Resolved dependency: LatencyUtils-2.0.3.jar
+#23 180.3 [INFO] Resolved dependency: mysql-connector-j-9.7.0.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-starter-test-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-test-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-test-autoconfigure-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: json-path-2.10.0.jar
+#23 180.3 [INFO] Resolved dependency: slf4j-api-2.0.18.jar
+#23 180.3 [INFO] Resolved dependency: jakarta.xml.bind-api-4.0.5.jar
+#23 180.3 [INFO] Resolved dependency: jakarta.activation-api-2.1.4.jar
+#23 180.3 [INFO] Resolved dependency: json-smart-2.6.0.jar
+#23 180.3 [INFO] Resolved dependency: accessors-smart-2.6.0.jar
+#23 180.3 [INFO] Resolved dependency: asm-9.7.1.jar
+#23 180.3 [INFO] Resolved dependency: assertj-core-3.27.7.jar
+#23 180.3 [INFO] Resolved dependency: byte-buddy-1.17.8.jar
+#23 180.3 [INFO] Resolved dependency: awaitility-4.3.0.jar
+#23 180.3 [INFO] Resolved dependency: hamcrest-3.0.jar
+#23 180.3 [INFO] Resolved dependency: junit-jupiter-6.0.3.jar
+#23 180.3 [INFO] Resolved dependency: junit-jupiter-api-6.0.3.jar
+#23 180.3 [INFO] Resolved dependency: opentest4j-1.3.0.jar
+#23 180.3 [INFO] Resolved dependency: junit-platform-commons-6.0.3.jar
+#23 180.3 [INFO] Resolved dependency: apiguardian-api-1.1.2.jar
+#23 180.3 [INFO] Resolved dependency: junit-jupiter-params-6.0.3.jar
+#23 180.3 [INFO] Resolved dependency: junit-jupiter-engine-6.0.3.jar
+#23 180.3 [INFO] Resolved dependency: junit-platform-engine-6.0.3.jar
+#23 180.3 [INFO] Resolved dependency: mockito-core-5.20.0.jar
+#23 180.3 [INFO] Resolved dependency: byte-buddy-agent-1.17.8.jar
+#23 180.3 [INFO] Resolved dependency: objenesis-3.3.jar
+#23 180.3 [INFO] Resolved dependency: mockito-junit-jupiter-5.20.0.jar
+#23 180.3 [INFO] Resolved dependency: jsonassert-1.5.3.jar
+#23 180.3 [INFO] Resolved dependency: android-json-0.0.20131108.vaadin1.jar
+#23 180.3 [INFO] Resolved dependency: spring-core-7.0.9.jar
+#23 180.3 [INFO] Resolved dependency: commons-logging-1.3.6.jar
+#23 180.3 [INFO] Resolved dependency: spring-test-7.0.9.jar
+#23 180.3 [INFO] Resolved dependency: xmlunit-core-2.10.4.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-starter-webmvc-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-starter-jackson-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-jackson-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: jackson-databind-3.1.5.jar
+#23 180.3 [INFO] Resolved dependency: jackson-annotations-2.21.jar
+#23 180.3 [INFO] Resolved dependency: jackson-core-3.1.5.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-starter-tomcat-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-starter-tomcat-runtime-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: tomcat-embed-core-11.0.24.jar
+#23 180.3 [INFO] Resolved dependency: tomcat-embed-websocket-11.0.24.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-tomcat-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-http-converter-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-webmvc-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-servlet-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-webmvc-7.0.9.jar
+#23 180.3 [INFO] Resolved dependency: spring-aop-7.0.9.jar
+#23 180.3 [INFO] Resolved dependency: spring-expression-7.0.9.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-starter-data-jpa-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-starter-jdbc-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: HikariCP-7.0.2.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-data-jpa-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-data-commons-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-persistence-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-data-commons-4.0.7.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-hibernate-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-jpa-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: jakarta.persistence-api-3.2.0.jar
+#23 180.3 [INFO] Resolved dependency: hibernate-core-7.2.24.Final.jar
+#23 180.3 [INFO] Resolved dependency: jakarta.transaction-api-2.0.1.jar
+#23 180.3 [INFO] Resolved dependency: hibernate-models-1.0.1.jar
+#23 180.3 [INFO] Resolved dependency: jaxb-runtime-4.0.9.jar
+#23 180.3 [INFO] Resolved dependency: jaxb-core-4.0.9.jar
+#23 180.3 [INFO] Resolved dependency: angus-activation-2.0.3.jar
+#23 180.3 [INFO] Resolved dependency: txw2-4.0.9.jar
+#23 180.3 [INFO] Resolved dependency: istack-commons-runtime-4.1.2.jar
+#23 180.3 [INFO] Resolved dependency: jakarta.inject-api-2.0.1.jar
+#23 180.3 [INFO] Resolved dependency: spring-orm-7.0.9.jar
+#23 180.3 [INFO] Resolved dependency: spring-data-jpa-4.0.7.jar
+#23 180.3 [INFO] Resolved dependency: spring-tx-7.0.9.jar
+#23 180.3 [INFO] Resolved dependency: antlr4-runtime-4.13.2.jar
+#23 180.3 [INFO] Resolved dependency: spring-aspects-7.0.9.jar
+#23 180.3 [INFO] Resolved dependency: aspectjweaver-1.9.25.1.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-jdbc-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-sql-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-boot-transaction-4.0.8.jar
+#23 180.3 [INFO] Resolved dependency: spring-jdbc-7.0.9.jar
+#23 180.3 [INFO] ------------------------------------------------------------------------
+#23 180.3 [INFO] BUILD SUCCESS
+#23 180.3 [INFO] ------------------------------------------------------------------------
+#23 180.3 [INFO] Total time:  02:56 min
+#23 180.3 [INFO] Finished at: 2026-11-01T09:10:24Z
+#23 180.3 [INFO] ------------------------------------------------------------------------
+#23 DONE 180.4s
+
+#28 [course-service build 5/6] COPY src ./src
+#28 DONE 0.2s
+
+#27 [task-service build 6/6] RUN mvn -B -ntp clean package
+#27 2.418 [INFO] Scanning for projects...
+#27 2.901 [INFO]
+#27 2.901 [INFO] ---------------< com.zjgsu.oes:courselens-task-service >----------------
+#27 2.901 [INFO] Building CourseLens Task Service 0.0.1-SNAPSHOT
+#27 2.901 [INFO]   from pom.xml
+#27 2.904 [INFO] --------------------------------[ jar ]---------------------------------
+#27 3.662 [INFO]
+#27 3.662 [INFO] --- clean:3.5.0:clean (default-clean) @ courselens-task-service ---
+#27 3.750 [INFO]
+#27 3.750 [INFO] --- resources:3.3.1:resources (default-resources) @ courselens-task-service ---
+#27 3.874 [INFO] Copying 1 resource from src/main/resources to target/classes
+#27 3.891 [INFO] Copying 1 resource from src/main/resources to target/classes
+#27 3.895 [INFO]
+#27 3.895 [INFO] --- compiler:3.14.1:compile (default-compile) @ courselens-task-service ---
+#27 4.062 [INFO] Recompiling the module because of changed source code.
+#27 4.073 [INFO] Compiling 7 source files with javac [debug parameters release 25] to target/classes
+#27 5.867 [INFO]
+#27 5.868 [INFO] --- resources:3.3.1:testResources (default-testResources) @ courselens-task-service ---
+#27 5.890 [INFO] Copying 1 resource from src/test/resources to target/test-classes
+#27 5.894 [INFO]
+#27 5.894 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ courselens-task-service ---
+#27 5.926 [INFO] Recompiling the module because of changed dependency.
+#27 5.928 [INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+#27 6.769 [INFO]
+#27 6.769 [INFO] --- surefire:3.5.6:test (default-test) @ courselens-task-service ---
+#27 7.015 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+#27 ...
+
+#29 [course-service build 6/6] RUN mvn -B -ntp clean package
+#29 2.461 [INFO] Scanning for projects...
+#29 2.911 [INFO]
+#29 2.912 [INFO] --------------< com.zjgsu.oes:courselens-course-service >---------------
+#29 2.912 [INFO] Building CourseLens Course Service 0.0.1-SNAPSHOT
+#29 2.914 [INFO]   from pom.xml
+#29 2.914 [INFO] --------------------------------[ jar ]---------------------------------
+#29 3.896 [INFO]
+#29 3.897 [INFO] --- clean:3.5.0:clean (default-clean) @ courselens-course-service ---
+#29 4.013 [INFO]
+#29 4.013 [INFO] --- resources:3.3.1:resources (default-resources) @ courselens-course-service ---
+#29 4.248 [INFO] Copying 1 resource from src/main/resources to target/classes
+#29 4.284 [INFO] Copying 1 resource from src/main/resources to target/classes
+#29 4.292 [INFO]
+#29 4.292 [INFO] --- compiler:3.14.1:compile (default-compile) @ courselens-course-service ---
+#29 4.638 [INFO] Recompiling the module because of changed source code.
+#29 4.661 [INFO] Compiling 7 source files with javac [debug parameters release 25] to target/classes
+#29 6.366 [INFO]
+#29 6.366 [INFO] --- resources:3.3.1:testResources (default-testResources) @ courselens-course-service ---
+#29 6.372 [INFO] Copying 1 resource from src/test/resources to target/test-classes
+#29 6.373 [INFO]
+#29 6.373 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ courselens-course-service ---
+#29 6.380 [INFO] Recompiling the module because of changed dependency.
+#29 6.381 [INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+#29 6.673 [INFO]
+#29 6.673 [INFO] --- surefire:3.5.6:test (default-test) @ courselens-course-service ---
+#29 6.861 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+#29 ...
+
+#25 [user-service build 6/6] RUN mvn -B -ntp clean package
+#25 2.486 [INFO] Scanning for projects...
+#25 2.873 [INFO]
+#25 2.873 [INFO] ---------------< com.zjgsu.oes:courselens-user-service >----------------
+#25 2.873 [INFO] Building CourseLens User Service 0.0.1-SNAPSHOT
+#25 2.873 [INFO]   from pom.xml
+#25 2.873 [INFO] --------------------------------[ jar ]---------------------------------
+#25 3.668 [INFO]
+#25 3.668 [INFO] --- clean:3.5.0:clean (default-clean) @ courselens-user-service ---
+#25 3.754 [INFO]
+#25 3.754 [INFO] --- resources:3.3.1:resources (default-resources) @ courselens-user-service ---
+#25 3.872 [INFO] Copying 1 resource from src/main/resources to target/classes
+#25 3.898 [INFO] Copying 1 resource from src/main/resources to target/classes
+#25 3.898 [INFO]
+#25 3.898 [INFO] --- compiler:3.14.1:compile (default-compile) @ courselens-user-service ---
+#25 4.088 [INFO] Recompiling the module because of changed source code.
+#25 4.103 [INFO] Compiling 6 source files with javac [debug parameters release 25] to target/classes
+#25 5.703 [INFO]
+#25 5.704 [INFO] --- resources:3.3.1:testResources (default-testResources) @ courselens-user-service ---
+#25 5.723 [INFO] Copying 1 resource from src/test/resources to target/test-classes
+#25 5.724 [INFO]
+#25 5.724 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ courselens-user-service ---
+#25 5.759 [INFO] Recompiling the module because of changed dependency.
+#25 5.762 [INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+#25 6.438 [INFO]
+#25 6.438 [INFO] --- surefire:3.5.6:test (default-test) @ courselens-user-service ---
+#25 6.765 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+#25 11.81 [INFO]
+#25 11.81 [INFO] -------------------------------------------------------
+#25 11.81 [INFO]  T E S T S
+#25 11.81 [INFO] -------------------------------------------------------
+#25 ...
+
+#27 [task-service build 6/6] RUN mvn -B -ntp clean package
+#27 12.01 [INFO]
+#27 12.01 [INFO] -------------------------------------------------------
+#27 12.01 [INFO]  T E S T S
+#27 12.01 [INFO] -------------------------------------------------------
+#27 13.26 [INFO] Running com.zjgsu.courselens.ApiTests
+#27 13.56 09:10:37.021 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.zjgsu.courselens.ApiTests]: ApiTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#27 13.86 09:10:37.318 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.zjgsu.courselens.Application for test class com.zjgsu.courselens.ApiTests
+#27 14.07 09:10:37.485 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.zjgsu.courselens.ApiTests]: ApiTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#27 14.07 09:10:37.490 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.zjgsu.courselens.Application for test class com.zjgsu.courselens.ApiTests
+#27 14.67
+#27 14.67   .   ____          _            __ _ _
+#27 14.67  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+#27 14.67 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+#27 14.67  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+#27 14.67   '  |____| .__|_| |_|_| |_\__, | / / / /
+#27 14.67  =========|_|==============|___/=/_/_/_/
+#27 14.67
+#27 14.67  :: Spring Boot ::                (v4.0.8)
+#27 14.67
+#27 14.77 2026-11-01T09:10:38.249Z  INFO 93 --- [           main] com.zjgsu.courselens.ApiTests            : Starting ApiTests using Java 25.0.4.1 with PID 93 (started by root in /build)
+#27 14.77 2026-11-01T09:10:38.252Z  INFO 93 --- [           main] com.zjgsu.courselens.ApiTests            : No active profile set, falling back to 1 default profile: "default"
+#27 16.28 2026-11-01T09:10:39.737Z  INFO 93 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+#27 16.49 2026-11-01T09:10:39.869Z  INFO 93 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 101 ms. Found 1 JPA repository interface.
+#27 18.02 2026-11-01T09:10:41.426Z  INFO 93 --- [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 0 (http)
+#27 18.02 2026-11-01T09:10:41.452Z  INFO 93 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+#27 18.02 2026-11-01T09:10:41.454Z  INFO 93 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+#27 18.11 2026-11-01T09:10:41.527Z  INFO 93 --- [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 3217 ms
+#27 18.52 2026-11-01T09:10:41.937Z  INFO 93 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+#27 18.92 2026-11-01T09:10:42.376Z  INFO 93 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:task user=SA
+#27 18.92 2026-11-01T09:10:42.378Z  INFO 93 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+#27 19.22 2026-11-01T09:10:42.622Z  INFO 93 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+#27 19.32 2026-11-01T09:10:42.737Z  INFO 93 --- [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.24.Final
+#27 ...
+
+#25 [user-service build 6/6] RUN mvn -B -ntp clean package
+#25 12.96 [INFO] Running com.zjgsu.courselens.ApiTests
+#25 13.30 09:10:36.427 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.zjgsu.courselens.ApiTests]: ApiTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#25 13.50 09:10:36.673 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.zjgsu.courselens.Application for test class com.zjgsu.courselens.ApiTests
+#25 13.60 09:10:36.814 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.zjgsu.courselens.ApiTests]: ApiTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#25 13.60 09:10:36.816 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.zjgsu.courselens.Application for test class com.zjgsu.courselens.ApiTests
+#25 14.20
+#25 14.20   .   ____          _            __ _ _
+#25 14.20  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+#25 14.20 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+#25 14.20  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+#25 14.20   '  |____| .__|_| |_|_| |_\__, | / / / /
+#25 14.20  =========|_|==============|___/=/_/_/_/
+#25 14.20
+#25 14.21  :: Spring Boot ::                (v4.0.8)
+#25 14.21
+#25 14.32 2026-11-01T09:10:37.468Z  INFO 92 --- [           main] com.zjgsu.courselens.ApiTests            : Starting ApiTests using Java 25.0.4.1 with PID 92 (started by root in /build)
+#25 14.32 2026-11-01T09:10:37.472Z  INFO 92 --- [           main] com.zjgsu.courselens.ApiTests            : No active profile set, falling back to 1 default profile: "default"
+#25 15.93 2026-11-01T09:10:39.133Z  INFO 92 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+#25 16.13 2026-11-01T09:10:39.250Z  INFO 92 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 94 ms. Found 1 JPA repository interface.
+#25 17.46 2026-11-01T09:10:40.616Z  INFO 92 --- [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 0 (http)
+#25 17.46 2026-11-01T09:10:40.650Z  INFO 92 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+#25 17.46 2026-11-01T09:10:40.651Z  INFO 92 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+#25 17.56 2026-11-01T09:10:40.726Z  INFO 92 --- [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 3213 ms
+#25 17.97 2026-11-01T09:10:41.166Z  INFO 92 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+#25 18.37 2026-11-01T09:10:41.577Z  INFO 92 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:user user=SA
+#25 18.37 2026-11-01T09:10:41.582Z  INFO 92 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+#25 18.57 2026-11-01T09:10:41.788Z  INFO 92 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+#25 18.67 2026-11-01T09:10:41.890Z  INFO 92 --- [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.24.Final
+#25 19.79 2026-11-01T09:10:42.916Z  INFO 92 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+#25 19.89 2026-11-01T09:10:43.072Z  INFO 92 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+#25 19.89 	Database JDBC URL [jdbc:h2:mem:user]
+#25 19.89 	Database driver: H2 JDBC Driver
+#25 19.89 	Database dialect: H2Dialect
+#25 19.89 	Database version: 2.4.240
+#25 19.89 	Default catalog/schema: USER/PUBLIC
+#25 19.89 	Autocommit mode: undefined/unknown
+#25 19.89 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+#25 19.89 	JDBC fetch size: 100
+#25 19.89 	Pool: DataSourceConnectionProvider
+#25 19.89 	Minimum pool size: undefined/unknown
+#25 19.89 	Maximum pool size: undefined/unknown
+#25 ...
+
+#27 [task-service build 6/6] RUN mvn -B -ntp clean package
+#27 20.35 2026-11-01T09:10:43.737Z  INFO 93 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+#27 20.45 2026-11-01T09:10:43.905Z  INFO 93 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+#27 20.45 	Database JDBC URL [jdbc:h2:mem:task]
+#27 20.45 	Database driver: H2 JDBC Driver
+#27 20.45 	Database dialect: H2Dialect
+#27 20.45 	Database version: 2.4.240
+#27 20.45 	Default catalog/schema: TASK/PUBLIC
+#27 20.45 	Autocommit mode: undefined/unknown
+#27 20.45 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+#27 20.45 	JDBC fetch size: 100
+#27 20.45 	Pool: DataSourceConnectionProvider
+#27 20.45 	Minimum pool size: undefined/unknown
+#27 20.45 	Maximum pool size: undefined/unknown
+#27 22.37 2026-11-01T09:10:45.826Z  INFO 93 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+#27 22.47 2026-11-01T09:10:45.913Z  INFO 93 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+#27 22.77 2026-11-01T09:10:46.177Z  INFO 93 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+#27 ...
+
+#29 [course-service build 6/6] RUN mvn -B -ntp clean package
+#29 11.49 [INFO]
+#29 11.49 [INFO] -------------------------------------------------------
+#29 11.49 [INFO]  T E S T S
+#29 11.49 [INFO] -------------------------------------------------------
+#29 13.03 [INFO] Running com.zjgsu.courselens.ApiTests
+#29 13.50 09:10:38.531 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.zjgsu.courselens.ApiTests]: ApiTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#29 13.79 09:10:38.831 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.zjgsu.courselens.Application for test class com.zjgsu.courselens.ApiTests
+#29 13.89 09:10:39.003 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.zjgsu.courselens.ApiTests]: ApiTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#29 13.89 09:10:39.006 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.zjgsu.courselens.Application for test class com.zjgsu.courselens.ApiTests
+#29 14.59
+#29 14.59   .   ____          _            __ _ _
+#29 14.59  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+#29 14.59 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+#29 14.59  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+#29 14.59   '  |____| .__|_| |_|_| |_\__, | / / / /
+#29 14.59  =========|_|==============|___/=/_/_/_/
+#29 14.59
+#29 14.59  :: Spring Boot ::                (v4.0.8)
+#29 14.59
+#29 14.70 2026-11-01T09:10:39.773Z  INFO 92 --- [           main] com.zjgsu.courselens.ApiTests            : Starting ApiTests using Java 25.0.4.1 with PID 92 (started by root in /build)
+#29 14.70 2026-11-01T09:10:39.804Z  INFO 92 --- [           main] com.zjgsu.courselens.ApiTests            : No active profile set, falling back to 1 default profile: "default"
+#29 17.02 2026-11-01T09:10:42.084Z  INFO 92 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+#29 17.12 2026-11-01T09:10:42.207Z  INFO 92 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 95 ms. Found 1 JPA repository interface.
+#29 18.64 2026-11-01T09:10:43.735Z  INFO 92 --- [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 0 (http)
+#29 18.74 2026-11-01T09:10:43.764Z  INFO 92 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+#29 18.74 2026-11-01T09:10:43.765Z  INFO 92 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+#29 18.74 2026-11-01T09:10:43.851Z  INFO 92 --- [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 3971 ms
+#29 19.24 2026-11-01T09:10:44.266Z  INFO 92 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+#29 19.74 2026-11-01T09:10:44.783Z  INFO 92 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:course user=SA
+#29 19.74 2026-11-01T09:10:44.795Z  INFO 92 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+#29 20.05 2026-11-01T09:10:45.082Z  INFO 92 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+#29 20.15 2026-11-01T09:10:45.233Z  INFO 92 --- [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.24.Final
+#29 21.36 2026-11-01T09:10:46.435Z  INFO 92 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+#29 21.56 2026-11-01T09:10:46.605Z  INFO 92 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+#29 21.56 	Database JDBC URL [jdbc:h2:mem:course]
+#29 21.56 	Database driver: H2 JDBC Driver
+#29 21.56 	Database dialect: H2Dialect
+#29 21.56 	Database version: 2.4.240
+#29 21.56 	Default catalog/schema: COURSE/PUBLIC
+#29 21.56 	Autocommit mode: undefined/unknown
+#29 21.56 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+#29 21.56 	JDBC fetch size: 100
+#29 21.56 	Pool: DataSourceConnectionProvider
+#29 21.56 	Minimum pool size: undefined/unknown
+#29 21.56 	Maximum pool size: undefined/unknown
+#29 ...
+
+#25 [user-service build 6/6] RUN mvn -B -ntp clean package
+#25 21.81 2026-11-01T09:10:44.993Z  INFO 92 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+#25 22.01 2026-11-01T09:10:45.157Z  INFO 92 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+#25 22.41 2026-11-01T09:10:45.532Z  INFO 92 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+#25 22.71 2026-11-01T09:10:45.894Z  WARN 92 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+#25 23.82 2026-11-01T09:10:46.970Z  INFO 92 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+#25 23.92 2026-11-01T09:10:47.112Z  INFO 92 --- [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 36337 (http) with context path '/'
+#25 23.92 2026-11-01T09:10:47.126Z  INFO 92 --- [           main] com.zjgsu.courselens.ApiTests            : Started ApiTests in 10.205 seconds (process running for 12.027)
+#25 24.72 2026-11-01T09:10:47.877Z  INFO 92 --- [o-auto-1-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+#25 24.72 2026-11-01T09:10:47.878Z  INFO 92 --- [o-auto-1-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+#25 24.72 2026-11-01T09:10:47.880Z  INFO 92 --- [o-auto-1-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+#25 25.61 [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.58 s -- in com.zjgsu.courselens.ApiTests
+#25 26.00 [INFO]
+#25 26.00 [INFO] Results:
+#25 26.00 [INFO]
+#25 26.00 [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+#25 26.00 [INFO]
+#25 26.01 [INFO]
+#25 26.01 [INFO] --- jar:3.4.2:jar (default-jar) @ courselens-user-service ---
+#25 26.41 [INFO] Building jar: /build/target/courselens-user-service-0.0.1-SNAPSHOT.jar
+#25 26.47 [INFO]
+#25 26.47 [INFO] --- spring-boot:4.0.8:repackage (repackage) @ courselens-user-service ---
+#25 26.94 [INFO] Replacing main artifact /build/target/courselens-user-service-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+#25 26.94 [INFO] The original artifact has been renamed to /build/target/courselens-user-service-0.0.1-SNAPSHOT.jar.original
+#25 26.95 [INFO] ------------------------------------------------------------------------
+#25 26.95 [INFO] BUILD SUCCESS
+#25 26.95 [INFO] ------------------------------------------------------------------------
+#25 26.95 [INFO] Total time:  24.491 s
+#25 26.95 [INFO] Finished at: 2026-11-01T09:10:50Z
+#25 26.95 [INFO] ------------------------------------------------------------------------
+#25 DONE 27.8s
+
+#27 [task-service build 6/6] RUN mvn -B -ntp clean package
+#27 23.98 2026-11-01T09:10:47.376Z  WARN 93 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+#27 24.70 2026-11-01T09:10:48.068Z  INFO 93 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+#27 24.79 2026-11-01T09:10:48.227Z  INFO 93 --- [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 39353 (http) with context path '/'
+#27 24.79 2026-11-01T09:10:48.240Z  INFO 93 --- [           main] com.zjgsu.courselens.ApiTests            : Started ApiTests in 10.593 seconds (process running for 12.665)
+#27 25.50 2026-11-01T09:10:48.936Z  INFO 93 --- [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+#27 25.50 2026-11-01T09:10:48.937Z  INFO 93 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+#27 25.50 2026-11-01T09:10:48.938Z  INFO 93 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+#27 26.21 2026-11-01T09:10:49.591Z  WARN 93 --- [o-auto-1-exec-6] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 23505, SQLState: 23505
+#27 26.21 2026-11-01T09:10:49.592Z  WARN 93 --- [o-auto-1-exec-6] org.hibernate.orm.jdbc.error             : Unique index or primary key violation: "PUBLIC.CONSTRAINT_33 INDEX PUBLIC.CONSTRAINT_INDEX_3 ON PUBLIC.PROCESSING_TASKS(ACTIVE_COURSE_ID NULLS FIRST) VALUES ( /* 2 */ '11111111-1111-1111-1111-111111111111' )"; SQL statement:
+#27 26.21 insert into processing_tasks (active_course_id,course_id,failure_reason,status,id) values (?,?,?,?,?) [23505-240]
+#27 26.86 [INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.52 s -- in com.zjgsu.courselens.ApiTests
+#27 27.24 [INFO]
+#27 27.24 [INFO] Results:
+#27 27.24 [INFO]
+#27 27.24 [INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+#27 27.24 [INFO]
+#27 27.24 [INFO]
+#27 27.24 [INFO] --- jar:3.4.2:jar (default-jar) @ courselens-task-service ---
+#27 27.45 [INFO] Building jar: /build/target/courselens-task-service-0.0.1-SNAPSHOT.jar
+#27 27.50 [INFO]
+#27 27.50 [INFO] --- spring-boot:4.0.8:repackage (repackage) @ courselens-task-service ---
+#27 28.02 [INFO] Replacing main artifact /build/target/courselens-task-service-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+#27 28.02 [INFO] The original artifact has been renamed to /build/target/courselens-task-service-0.0.1-SNAPSHOT.jar.original
+#27 28.02 [INFO] ------------------------------------------------------------------------
+#27 28.02 [INFO] BUILD SUCCESS
+#27 28.02 [INFO] ------------------------------------------------------------------------
+#27 28.02 [INFO] Total time:  25.630 s
+#27 28.02 [INFO] Finished at: 2026-11-01T09:10:51Z
+#27 28.02 [INFO] ------------------------------------------------------------------------
+#27 ...
+
+#30 [user-service runtime 4/4] COPY --from=build --chown=app:app /build/target/courselens-user-service-0.0.1-SNAPSHOT.jar /app/app.jar
+#30 DONE 2.3s
+
+#29 [course-service build 6/6] RUN mvn -B -ntp clean package
+#29 22.76 2026-11-01T09:10:47.800Z  INFO 92 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+#29 22.76 2026-11-01T09:10:47.874Z  INFO 92 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+#29 22.96 2026-11-01T09:10:47.997Z  INFO 92 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+#29 23.16 2026-11-01T09:10:48.265Z  WARN 92 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+#29 23.97 2026-11-01T09:10:49.032Z  INFO 92 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+#29 24.07 2026-11-01T09:10:49.128Z  INFO 92 --- [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 41903 (http) with context path '/'
+#29 24.07 2026-11-01T09:10:49.147Z  INFO 92 --- [           main] com.zjgsu.courselens.ApiTests            : Started ApiTests in 10.001 seconds (process running for 12.435)
+#29 24.97 2026-11-01T09:10:50.004Z  INFO 92 --- [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+#29 24.97 2026-11-01T09:10:50.004Z  INFO 92 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+#29 24.97 2026-11-01T09:10:50.006Z  INFO 92 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+#29 25.88 [INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.83 s -- in com.zjgsu.courselens.ApiTests
+#29 26.26 [INFO]
+#29 26.26 [INFO] Results:
+#29 26.26 [INFO]
+#29 26.26 [INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
+#29 26.26 [INFO]
+#29 26.26 [INFO]
+#29 26.26 [INFO] --- jar:3.4.2:jar (default-jar) @ courselens-course-service ---
+#29 26.57 [INFO] Building jar: /build/target/courselens-course-service-0.0.1-SNAPSHOT.jar
+#29 26.61 [INFO]
+#29 26.61 [INFO] --- spring-boot:4.0.8:repackage (repackage) @ courselens-course-service ---
+#29 26.95 [INFO] Replacing main artifact /build/target/courselens-course-service-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+#29 26.95 [INFO] The original artifact has been renamed to /build/target/courselens-course-service-0.0.1-SNAPSHOT.jar.original
+#29 26.95 [INFO] ------------------------------------------------------------------------
+#29 26.95 [INFO] BUILD SUCCESS
+#29 26.95 [INFO] ------------------------------------------------------------------------
+#29 26.95 [INFO] Total time:  24.521 s
+#29 26.95 [INFO] Finished at: 2026-11-01T09:10:52Z
+#29 26.95 [INFO] ------------------------------------------------------------------------
+#29 DONE 28.4s
+
+#27 [task-service build 6/6] RUN mvn -B -ntp clean package
+#27 DONE 30.0s
+
+#31 [course-service runtime 4/4] COPY --from=build --chown=app:app /build/target/courselens-course-service-0.0.1-SNAPSHOT.jar /app/app.jar
+#31 ...
+
+#32 [task-service runtime 4/4] COPY --from=build --chown=app:app /build/target/courselens-task-service-0.0.1-SNAPSHOT.jar /app/app.jar
+#32 DONE 1.5s
+
+#31 [course-service runtime 4/4] COPY --from=build --chown=app:app /build/target/courselens-course-service-0.0.1-SNAPSHOT.jar /app/app.jar
+#31 DONE 1.6s
+
+#33 [course-service] exporting to image
+#33 exporting layers
+#33 ...
+
+#34 [user-service] exporting to image
+#34 exporting layers 3.1s done
+#34 exporting manifest sha256:bb7c5da427353878ad6539fbd501b9e4e1e4b7cd9564599305858d56dc24ccb2 0.0s done
+#34 exporting config sha256:08a5683dfe1ba706001c0d06c1ce85af44a9e692c7b5416a6d2713218eb373db 0.1s done
+#34 exporting attestation manifest sha256:555fdcc35664eb0303d22e41e2cec0cd2e7416c8b99f3af445e27a59a89fdb29 0.0s done
+#34 exporting manifest list sha256:e2c66f5ef5da49234c567c0d9648586f5655efea49d224e592a71da653754df8 0.0s done
+#34 naming to docker.io/library/courselens-user:week06 done
+#34 unpacking to docker.io/library/courselens-user:week06 1.5s done
+#34 DONE 4.9s
+
+#33 [course-service] exporting to image
+#33 exporting layers 3.4s done
+#33 exporting manifest sha256:3da4842be8cba1655c6a69f631f0be5533cc27592f7edf9ffe9faccb8e7ebda6 0.1s done
+#33 exporting config sha256:ef015b868e5d5c0382c854a5a81ecd60420d222fa52c2ae5c476cbae58c0fff3
+#33 exporting config sha256:ef015b868e5d5c0382c854a5a81ecd60420d222fa52c2ae5c476cbae58c0fff3 0.1s done
+#33 exporting attestation manifest sha256:13a965fa114c5a21bf0d3817524f58f4595b7839dc4da5a9458e970e822c0c81 0.1s done
+#33 exporting manifest list sha256:e97df5fcec4ae751c53c74a838add05c26aa35ee2f4fe236cb7ca3e243ba4e52
+#33 exporting manifest list sha256:e97df5fcec4ae751c53c74a838add05c26aa35ee2f4fe236cb7ca3e243ba4e52 0.1s done
+#33 naming to docker.io/library/courselens-course:week06 0.0s done
+#33 unpacking to docker.io/library/courselens-course:week06
+#33 ...
+
+#35 [user-service] resolving provenance for metadata file
+#35 DONE 0.1s
+
+#36 [task-service] exporting to image
+#36 exporting layers 3.4s done
+#36 exporting manifest sha256:142f4177849501787f030c7c8529ba7f9d10f28b848964aeec552e7db38f4099 0.1s done
+#36 exporting config sha256:751e64ab2805e24b80b06252d62c045b65668acfe445448c162fe74c27c95ed8 0.2s done
+#36 exporting attestation manifest sha256:91b836a9c4c19e552e15527b42b7768efa7562847d83ffd275548ca6412eb9e0 0.2s done
+#36 exporting manifest list sha256:dbd21527658e6c983875819ff161a47de49ee6eeb5f903b2c3d2aa85439d64a2 0.1s done
+#36 naming to docker.io/library/courselens-task:week06 0.0s done
+#36 unpacking to docker.io/library/courselens-task:week06
+#36 unpacking to docker.io/library/courselens-task:week06 0.5s done
+#36 DONE 4.5s
+
+#33 [course-service] exporting to image
+#33 unpacking to docker.io/library/courselens-course:week06 0.5s done
+#33 DONE 4.5s
+
+#37 [course-service] resolving provenance for metadata file
+#37 DONE 0.2s
+
+#38 [task-service] resolving provenance for metadata file
+#38 DONE 0.0s
+ Image courselens-course:week06 Built
+ Image courselens-task:week06 Built
+ Image courselens-user:week06 Built
+ Volume courselens-week06_user_data Creating
+ Volume courselens-week06_course_data Creating
+ Network courselens-week06_default Creating
+ Volume courselens-week06_task_data Creating
+ Volume courselens-week06_user_data Creating
+ Volume courselens-week06_course_data Creating
+ Volume courselens-week06_task_data Creating
+ Network courselens-week06_default Creating
+ Volume courselens-week06_user_data Created
+ Volume courselens-week06_user_data Created
+ Volume courselens-week06_course_data Created
+ Volume courselens-week06_course_data Created
+ Volume courselens-week06_task_data Created
+ Volume courselens-week06_task_data Created
+ Network courselens-week06_default Created
+ Network courselens-week06_default Created
+ Container courselens-week06-user-db-1 Creating
+ Container courselens-week06-task-db-1 Creating
+ Container courselens-week06-course-db-1 Creating
+ Container courselens-week06-user-db-1 Created
+ Container courselens-week06-user-service-1 Creating
+ Container courselens-week06-task-db-1 Created
+ Container courselens-week06-task-service-1 Creating
+ Container courselens-week06-course-db-1 Created
+ Container courselens-week06-course-service-1 Creating
+ Container courselens-week06-course-service-1 Created
+ Container courselens-week06-task-service-1 Created
+ Container courselens-week06-user-service-1 Created
+ Container courselens-week06-task-db-1 Starting
+ Container courselens-week06-course-db-1 Starting
+ Container courselens-week06-user-db-1 Starting
+ Container courselens-week06-task-db-1 Started
+ Container courselens-week06-task-db-1 Waiting
+ Container courselens-week06-course-db-1 Started
+ Container courselens-week06-course-db-1 Waiting
+ Container courselens-week06-user-db-1 Started
+ Container courselens-week06-user-db-1 Waiting
+ Container courselens-week06-task-db-1 Healthy
+ Container courselens-week06-task-service-1 Starting
+ Container courselens-week06-course-db-1 Healthy
+ Container courselens-week06-course-service-1 Starting
+ Container courselens-week06-task-service-1 Started
+ Container courselens-week06-user-db-1 Healthy
+ Container courselens-week06-user-service-1 Starting
+ Container courselens-week06-course-service-1 Started
+ Container courselens-week06-user-service-1 Started

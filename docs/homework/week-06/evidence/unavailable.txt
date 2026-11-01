@@ -1,0 +1,15 @@
+GET http://task-service:8080/api/tasks
+request=null
+HTTP 200 [{"activeCourseId":null,"courseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","failureReason":null,"id":"02be0468-bc29-4e1e-8966-a20c31e7454d","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"cc757f64-8449-4529-a27e-e40ca28898fe","failureReason":null,"id":"4ee61461-e409-4afd-9355-6d320caf3db4","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","failureReason":null,"id":"cc97a86b-bec4-46c4-8f9f-febae508f830","status":"SUCCEEDED"}]
+
+POST http://task-service:8080/api/tasks
+request={"courseId": "3cd7e3f9-0c6c-43c3-b475-516e99d05a87"}
+HTTP 503 {"error":"Dependency unavailable or timed out"}
+
+GET http://task-service:8080/api/tasks
+request=null
+HTTP 200 [{"activeCourseId":null,"courseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","failureReason":null,"id":"02be0468-bc29-4e1e-8966-a20c31e7454d","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"cc757f64-8449-4529-a27e-e40ca28898fe","failureReason":null,"id":"4ee61461-e409-4afd-9355-6d320caf3db4","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","failureReason":null,"id":"cc97a86b-bec4-46c4-8f9f-febae508f830","status":"SUCCEEDED"}]
+
+DATA task: before=3, after=3; unchanged=True
+
+PASS unavailable

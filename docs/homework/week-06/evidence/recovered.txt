@@ -1,0 +1,25 @@
+GET http://user-service:8080/actuator/health
+request=null
+HTTP 200 {"groups":["liveness","readiness"],"status":"UP"}
+
+GET http://course-service:8080/actuator/health
+request=null
+HTTP 200 {"groups":["liveness","readiness"],"status":"UP"}
+
+GET http://task-service:8080/actuator/health
+request=null
+HTTP 200 {"groups":["liveness","readiness"],"status":"UP"}
+
+GET http://user-service:8080/api/users/097987c9-8fe3-4fd8-b15a-ea4a32dd87f8
+request=null
+HTTP 200 {"displayName":"2420100402 Week06","id":"097987c9-8fe3-4fd8-b15a-ea4a32dd87f8"}
+
+GET http://course-service:8080/api/courses/3cd7e3f9-0c6c-43c3-b475-516e99d05a87
+request=null
+HTTP 200 {"id":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","ownerId":"097987c9-8fe3-4fd8-b15a-ea4a32dd87f8","sourceReference":"imports/week06.srt","title":"Week06 CourseLens"}
+
+GET http://task-service:8080/api/tasks/02be0468-bc29-4e1e-8966-a20c31e7454d
+request=null
+HTTP 200 {"activeCourseId":null,"courseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","failureReason":null,"id":"02be0468-bc29-4e1e-8966-a20c31e7454d","status":"SUCCEEDED"}
+
+PASS recovered
