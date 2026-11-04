@@ -1,0 +1,132 @@
+Week07 live HTTP verification, 2026-11-04 Asia/Shanghai. Counts use Python len(JSON array), not PowerShell array wrapping.
+
+GET http://127.0.0.1:18081/actuator/health
+request=null
+HTTP 200 {"groups":["liveness","readiness"],"status":"UP"}
+
+GET http://127.0.0.1:18082/actuator/health
+request=null
+HTTP 200 {"groups":["liveness","readiness"],"status":"UP"}
+
+GET http://127.0.0.1:18083/actuator/health
+request=null
+HTTP 200 {"groups":["liveness","readiness"],"status":"UP"}
+
+Nacos console http://127.0.0.1:18080/ HTTP 200
+
+POST http://127.0.0.1:18081/api/users
+request={"displayName": "Week07 verification 20261104-115928"}
+HTTP 201 {"displayName":"Week07 verification 20261104-115928","id":"29e6544e-c15f-455f-84c6-c38ddf7c0118"}
+
+POST http://127.0.0.1:18082/api/courses
+request={"ownerId": "29e6544e-c15f-455f-84c6-c38ddf7c0118", "title": "Week07 verification 20261104-115928", "sourceReference": "imports/week07.srt"}
+HTTP 201 {"id":"32c45960-139d-4996-9cc0-98812cf80cc6","ownerId":"29e6544e-c15f-455f-84c6-c38ddf7c0118","sourceReference":"imports/week07.srt","title":"Week07 verification 20261104-115928"}
+
+GET http://127.0.0.1:18083/api/tasks
+request=null
+HTTP 200 [{"activeCourseId":null,"courseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","failureReason":null,"id":"02be0468-bc29-4e1e-8966-a20c31e7454d","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","failureReason":null,"id":"04aafe8c-04cd-4d2f-86e2-a5b1f0d7923a","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"cc757f64-8449-4529-a27e-e40ca28898fe","failureReason":null,"id":"4ee61461-e409-4afd-9355-6d320caf3db4","status":"SUCCEEDED"},{"activeCourseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","courseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","failureReason":null,"id":"6a5e1f23-eb80-464f-8665-a7a0d631481a","status":"PENDING"},{"activeCourseId":null,"courseId":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","failureReason":null,"id":"cc97a86b-bec4-46c4-8f9f-febae508f830","status":"SUCCEEDED"}]
+
+POST http://127.0.0.1:18083/api/tasks
+request={"courseId": "32c45960-139d-4996-9cc0-98812cf80cc6"}
+HTTP 201 {"activeCourseId":"32c45960-139d-4996-9cc0-98812cf80cc6","courseId":"32c45960-139d-4996-9cc0-98812cf80cc6","failureReason":null,"id":"bdc84f40-e1a0-42fc-b02e-228ba5cf9c6c","status":"PENDING"}
+
+GET http://127.0.0.1:18083/api/tasks
+request=null
+HTTP 200 [{"activeCourseId":null,"courseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","failureReason":null,"id":"02be0468-bc29-4e1e-8966-a20c31e7454d","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","failureReason":null,"id":"04aafe8c-04cd-4d2f-86e2-a5b1f0d7923a","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"cc757f64-8449-4529-a27e-e40ca28898fe","failureReason":null,"id":"4ee61461-e409-4afd-9355-6d320caf3db4","status":"SUCCEEDED"},{"activeCourseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","courseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","failureReason":null,"id":"6a5e1f23-eb80-464f-8665-a7a0d631481a","status":"PENDING"},{"activeCourseId":"32c45960-139d-4996-9cc0-98812cf80cc6","courseId":"32c45960-139d-4996-9cc0-98812cf80cc6","failureReason":null,"id":"bdc84f40-e1a0-42fc-b02e-228ba5cf9c6c","status":"PENDING"},{"activeCourseId":null,"courseId":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","failureReason":null,"id":"cc97a86b-bec4-46c4-8f9f-febae508f830","status":"SUCCEEDED"}]
+
+NORMAL: before=5, after=6, delta=1
+
+PATCH http://127.0.0.1:18083/api/tasks/bdc84f40-e1a0-42fc-b02e-228ba5cf9c6c/status
+request={"status": "RUNNING"}
+HTTP 200 {"activeCourseId":"32c45960-139d-4996-9cc0-98812cf80cc6","courseId":"32c45960-139d-4996-9cc0-98812cf80cc6","failureReason":null,"id":"bdc84f40-e1a0-42fc-b02e-228ba5cf9c6c","status":"RUNNING"}
+
+PATCH http://127.0.0.1:18083/api/tasks/bdc84f40-e1a0-42fc-b02e-228ba5cf9c6c/status
+request={"status": "SUCCEEDED"}
+HTTP 200 {"activeCourseId":null,"courseId":"32c45960-139d-4996-9cc0-98812cf80cc6","failureReason":null,"id":"bdc84f40-e1a0-42fc-b02e-228ba5cf9c6c","status":"SUCCEEDED"}
+
+POST http://127.0.0.1:18083/api/tasks
+request={"courseId": "00000000-0000-0000-0000-000000000000"}
+HTTP 404 {"error":"Dependency resource does not exist"}
+
+GET http://127.0.0.1:18083/api/tasks
+request=null
+HTTP 200 [{"activeCourseId":null,"courseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","failureReason":null,"id":"02be0468-bc29-4e1e-8966-a20c31e7454d","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","failureReason":null,"id":"04aafe8c-04cd-4d2f-86e2-a5b1f0d7923a","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"cc757f64-8449-4529-a27e-e40ca28898fe","failureReason":null,"id":"4ee61461-e409-4afd-9355-6d320caf3db4","status":"SUCCEEDED"},{"activeCourseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","courseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","failureReason":null,"id":"6a5e1f23-eb80-464f-8665-a7a0d631481a","status":"PENDING"},{"activeCourseId":null,"courseId":"32c45960-139d-4996-9cc0-98812cf80cc6","failureReason":null,"id":"bdc84f40-e1a0-42fc-b02e-228ba5cf9c6c","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","failureReason":null,"id":"cc97a86b-bec4-46c4-8f9f-febae508f830","status":"SUCCEEDED"}]
+
+MISSING RESOURCE: HTTP 404, no new task
+
+task-service-1  | 2026-11-04T03:59:30.723Z  INFO 1 --- [task-service] [nio-8080-exec-4] com.zjgsu.oes.DependencyClient           : Discovered service=course-service uri=http://172.20.0.8:8080/api/courses/32c45960-139d-4996-9cc0-98812cf80cc6
+
+task-service-1  | 2026-11-04T03:59:31.221Z  INFO 1 --- [task-service] [nio-8080-exec-8] com.zjgsu.oes.DependencyClient           : Discovered service=course-service uri=http://172.20.0.8:8080/api/courses/00000000-0000-0000-0000-000000000000
+
+course-service-1  | 2026-11-04T03:59:29.608Z  INFO 1 --- [course-service] [nio-8080-exec-3] com.zjgsu.oes.DependencyClient           : Discovered service=user-service uri=http://172.20.0.6:8080/api/users/29e6544e-c15f-455f-84c6-c38ddf7c0118
+
+$ docker compose stop course-service
+ Container courselens-week06-course-service-1 Stopping
+ Container courselens-week06-course-service-1 Stopped
+
+exit=0
+
+GET http://127.0.0.1:18083/api/tasks
+request=null
+HTTP 200 [{"activeCourseId":null,"courseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","failureReason":null,"id":"02be0468-bc29-4e1e-8966-a20c31e7454d","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","failureReason":null,"id":"04aafe8c-04cd-4d2f-86e2-a5b1f0d7923a","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"cc757f64-8449-4529-a27e-e40ca28898fe","failureReason":null,"id":"4ee61461-e409-4afd-9355-6d320caf3db4","status":"SUCCEEDED"},{"activeCourseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","courseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","failureReason":null,"id":"6a5e1f23-eb80-464f-8665-a7a0d631481a","status":"PENDING"},{"activeCourseId":null,"courseId":"32c45960-139d-4996-9cc0-98812cf80cc6","failureReason":null,"id":"bdc84f40-e1a0-42fc-b02e-228ba5cf9c6c","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","failureReason":null,"id":"cc97a86b-bec4-46c4-8f9f-febae508f830","status":"SUCCEEDED"}]
+
+POST http://127.0.0.1:18083/api/tasks
+request={"courseId": "32c45960-139d-4996-9cc0-98812cf80cc6"}
+HTTP 503 {"error":"No available instance for course-service"}
+
+GET http://127.0.0.1:18083/api/tasks
+request=null
+HTTP 200 [{"activeCourseId":null,"courseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","failureReason":null,"id":"02be0468-bc29-4e1e-8966-a20c31e7454d","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","failureReason":null,"id":"04aafe8c-04cd-4d2f-86e2-a5b1f0d7923a","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"cc757f64-8449-4529-a27e-e40ca28898fe","failureReason":null,"id":"4ee61461-e409-4afd-9355-6d320caf3db4","status":"SUCCEEDED"},{"activeCourseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","courseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","failureReason":null,"id":"6a5e1f23-eb80-464f-8665-a7a0d631481a","status":"PENDING"},{"activeCourseId":null,"courseId":"32c45960-139d-4996-9cc0-98812cf80cc6","failureReason":null,"id":"bdc84f40-e1a0-42fc-b02e-228ba5cf9c6c","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","failureReason":null,"id":"cc97a86b-bec4-46c4-8f9f-febae508f830","status":"SUCCEEDED"}]
+
+OFFLINE: before=6, after=6, unchanged=True
+
+$ D:\Program Files\Git\bin\bash.exe scripts/smoke-test.sh
+Checking Nacos console: http://localhost:18080/
+PASS Nacos console HTTP page
+Checking user-service: http://localhost:18081/actuator/health
+PASS user-service health UP
+Checking course-service: http://localhost:18082/actuator/health
+curl: (7) Failed to connect to localhost port 18082 after 2237 ms: Could not connect to server
+
+exit=7
+
+$ docker compose start course-service
+ Container courselens-week06-course-db-1 Waiting
+ Container courselens-week06-course-db-1 Healthy
+ Container courselens-week06-course-service-1 Starting
+ Container courselens-week06-course-service-1 Started
+
+exit=0
+
+POST http://127.0.0.1:18083/api/tasks
+request={"courseId": "32c45960-139d-4996-9cc0-98812cf80cc6"}
+HTTP 201 {"activeCourseId":"32c45960-139d-4996-9cc0-98812cf80cc6","courseId":"32c45960-139d-4996-9cc0-98812cf80cc6","failureReason":null,"id":"b7c0aecb-a2a0-4686-92ee-39acec48ad87","status":"PENDING"}
+
+GET http://127.0.0.1:18083/api/tasks
+request=null
+HTTP 200 [{"activeCourseId":null,"courseId":"3cd7e3f9-0c6c-43c3-b475-516e99d05a87","failureReason":null,"id":"02be0468-bc29-4e1e-8966-a20c31e7454d","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","failureReason":null,"id":"04aafe8c-04cd-4d2f-86e2-a5b1f0d7923a","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"cc757f64-8449-4529-a27e-e40ca28898fe","failureReason":null,"id":"4ee61461-e409-4afd-9355-6d320caf3db4","status":"SUCCEEDED"},{"activeCourseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","courseId":"883122c0-ed88-41f4-bc8a-ed5a528f1e4e","failureReason":null,"id":"6a5e1f23-eb80-464f-8665-a7a0d631481a","status":"PENDING"},{"activeCourseId":"32c45960-139d-4996-9cc0-98812cf80cc6","courseId":"32c45960-139d-4996-9cc0-98812cf80cc6","failureReason":null,"id":"b7c0aecb-a2a0-4686-92ee-39acec48ad87","status":"PENDING"},{"activeCourseId":null,"courseId":"32c45960-139d-4996-9cc0-98812cf80cc6","failureReason":null,"id":"bdc84f40-e1a0-42fc-b02e-228ba5cf9c6c","status":"SUCCEEDED"},{"activeCourseId":null,"courseId":"fec1ed35-1956-4aa2-ae14-5d0f61d9750b","failureReason":null,"id":"cc97a86b-bec4-46c4-8f9f-febae508f830","status":"SUCCEEDED"}]
+
+RECOVERY: before=6, after=7, delta=1
+
+PATCH http://127.0.0.1:18083/api/tasks/b7c0aecb-a2a0-4686-92ee-39acec48ad87/status
+request={"status": "RUNNING"}
+HTTP 200 {"activeCourseId":"32c45960-139d-4996-9cc0-98812cf80cc6","courseId":"32c45960-139d-4996-9cc0-98812cf80cc6","failureReason":null,"id":"b7c0aecb-a2a0-4686-92ee-39acec48ad87","status":"RUNNING"}
+
+PATCH http://127.0.0.1:18083/api/tasks/b7c0aecb-a2a0-4686-92ee-39acec48ad87/status
+request={"status": "SUCCEEDED"}
+HTTP 200 {"activeCourseId":null,"courseId":"32c45960-139d-4996-9cc0-98812cf80cc6","failureReason":null,"id":"b7c0aecb-a2a0-4686-92ee-39acec48ad87","status":"SUCCEEDED"}
+
+$ D:\Program Files\Git\bin\bash.exe scripts/smoke-test.sh
+Checking Nacos console: http://localhost:18080/
+PASS Nacos console HTTP page
+Checking user-service: http://localhost:18081/actuator/health
+PASS user-service health UP
+Checking course-service: http://localhost:18082/actuator/health
+PASS course-service health UP
+Checking task-service: http://localhost:18083/actuator/health
+PASS task-service health UP
+PASS all smoke checks
+
+exit=0
+
+PASS real registration-dependent business, 404, offline 503/no write, recovery 201/delta=1, smoke nonzero and restored zero.

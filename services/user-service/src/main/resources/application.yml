@@ -1,6 +1,14 @@
 server:
   port: ${SERVER_PORT:18081}
 spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+        username: ${NACOS_USERNAME:nacos}
+        password: ${NACOS_PASSWORD:}
+        namespace: ${NACOS_NAMESPACE:}
+        group: ${NACOS_GROUP:COURSELENS_2420100402}
   application:
     name: user-service
   datasource:

@@ -1,0 +1,23 @@
+Script checks use a local simulated HTTP server; these are NOT real Nacos deployment results.
+
+Simulated dependency failure=False; exit=0
+Checking Nacos console: http://127.0.0.1:5454/
+PASS Nacos console HTTP page
+Checking user-service: http://127.0.0.1:5454/user/health
+PASS user-service health UP
+Checking course-service: http://127.0.0.1:5454/course/health
+PASS course-service health UP
+Checking task-service: http://127.0.0.1:5454/task/health
+PASS task-service health UP
+PASS all smoke checks
+
+
+
+Simulated dependency failure=True; exit=22
+Checking Nacos console: http://127.0.0.1:5454/
+PASS Nacos console HTTP page
+Checking user-service: http://127.0.0.1:5454/user/health
+PASS user-service health UP
+Checking course-service: http://127.0.0.1:5454/course/health
+
+curl: (22) The requested URL returned error: 503

@@ -1,0 +1,12 @@
+{
+  "userId": "29e6544e-c15f-455f-84c6-c38ddf7c0118",
+  "courseId": "32c45960-139d-4996-9cc0-98812cf80cc6",
+  "firstTaskId": "bdc84f40-e1a0-42fc-b02e-228ba5cf9c6c",
+  "smokeFailureExit": 7,
+  "recoveredTaskId": "b7c0aecb-a2a0-4686-92ee-39acec48ad87",
+  "normalBefore": 5,
+  "normalAfter": 6,
+  "offlineBefore": 6,
+  "offlineAfter": 6,
+  "recoveryAfter": 7
+}

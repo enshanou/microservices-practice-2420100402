@@ -7,3 +7,5 @@
 **/.vscode/
 *.iml
 *.log
+# Week 07: keep nested service credentials local as well.
+**/.env

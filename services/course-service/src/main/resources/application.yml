@@ -1,6 +1,14 @@
 server:
   port: ${SERVER_PORT:18082}
 spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+        username: ${NACOS_USERNAME:nacos}
+        password: ${NACOS_PASSWORD:}
+        namespace: ${NACOS_NAMESPACE:}
+        group: ${NACOS_GROUP:COURSELENS_2420100402}
   application:
     name: course-service
   datasource:
@@ -20,6 +28,6 @@ management:
       exposure:
         include: health
 dependency:
-  base-url: ${USER_SERVICE_URL:http://127.0.0.1:18081}
+  service-name: user-service
   connect-timeout-ms: ${CONNECT_TIMEOUT_MS:1500}
   read-timeout-ms: ${READ_TIMEOUT_MS:2000}

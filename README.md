@@ -1,5 +1,40 @@
 # 课览 CourseLens
 
+## Week 07：Nacos 注册与服务发现（当前运行入口）
+
+三个服务继续使用第六周各自的数据库与数据卷。首次运行前，在本地 `.env` 配置 Nacos Token 密钥、server identity 与管理员密码（`.env.example` 只有占位值）。保留已有 MySQL 密码。
+
+1. 根目录 PowerShell 执行 `powershell -ExecutionPolicy Bypass -File .\scripts\Initialize-NacosEnv.ps1`。脚本仅补齐缺失/占位 Nacos 值，保留已有 MySQL 及已配置 Nacos 凭据，不打印密码。然后执行 `docker compose up -d nacos`。
+2. 本地打开 `.env` 查看 `NACOS_PASSWORD`，再打开 <http://localhost:18080/>，首次初始化管理员 nacos 的密码，使两者一致。不要截图或提交 `.env`。若已有管理员，使用原密码。
+3. 初始化后执行 `docker compose up -d --build`。整套环境冷启动时仍应先等待 Nacos 就绪，再执行该命令。
+4. 控制台 public 命名空间、`COURSELENS_2420100402` 分组查看三个服务的实例 IP/端口。
+5. 根目录 Git Bash 执行 `bash scripts/smoke-test.sh`，随后 `echo $?` 查看退出码。成功为 0，任一检查失败为非零。
+
+端口：Nacos 控制台 18080、服务端 8848、SDK gRPC 9848；业务服务 user/course/task 分别是 18081/18082/18083。Compose 内客户端连接 `nacos:8848`；只映射本机回环地址。Nacos 的内嵌存储及日志使用命名卷。保留 Compose 项目名以继续使用已有业务数据库卷，停机不要加 `-v`。
+
+### 不依赖真实 Nacos/MySQL 的测试
+
+本机安装 JDK 25 后，在 PowerShell 从根目录依次执行：
+
+```powershell
+Set-Location services/user-service
+.\mvnw.cmd clean test
+Set-Location ../course-service
+.\mvnw.cmd clean test
+Set-Location ../task-service
+.\mvnw.cmd clean test
+Set-Location ../..
+```
+
+Git Bash/Linux 可在各服务目录运行 `bash mvnw clean test`。无本机 JDK 时，各服务的 Dockerfile 构建也会执行测试：`docker compose build user-service course-service task-service`（需要先设置 `.env`）。测试使用 H2，关闭 Nacos Discovery 与自动注册；两个调用方使用手写 DiscoveryClient 替身和本地 HTTP 模拟，覆盖空实例、下一次操作重新发现、404、远端错误、超时及失败不写入。
+
+烟测只证明控制台与应用健康检查通过；业务成功、服务下线后的 503/数据不变、恢复后的新任务 201 需另行验证，详见 [Week 07 记录](docs/homework/week-07/index.md)。本段为当前入口，后面的 Week 05/06 内容为历史记录；`scripts/smoke-test.py` 仅保留第六周历史用途。
+
+依赖版本采用 [Spring Cloud Alibaba 官方版本表](https://sca.aliyun.com/en/docs/2025.x/overview/version-explain/) 中对应 Boot 4.0.x 的 Cloud 2025.1.x / Alibaba 2025.1.x。未引入 Config Starter，也未单独覆盖 nacos-client 版本。
+
+---
+
+
 > 面向视频课程的智能预习与可编辑笔记工作台。
 >
 > **先览全课，再学重点。**
@@ -15,7 +50,7 @@
 
 **作业记录：**[Week 06：微服务拆分与本地编排](docs/homework/week-06/index.md) · [Week 02：项目选题与功能规划](docs/homework/week-02/index.md) · [Week 03：Spring Boot 工程与运行验证](docs/homework/week-03/index.md) · [Week 04：业务建模、API、数据库与测试](docs/homework/week-04/index.md) · [Week 05：Docker 与 Compose 容器化](docs/homework/week-05/index.md) · [项目选题简案](docs/project-proposal.md)
 
-> 当前默认运行 Week 06 的三个微服务，使用 `docker compose up -d --build`。复现下文 Week 05 单体时，使用 `docker compose -f compose.week05.yaml`，详见[本周记录](docs/homework/week-06/index.md)。
+> 当前运行 Week 07：先完成 Nacos 首次初始化，再按上方入口启动三个微服务。复现下文 Week 05 单体时，使用 `docker compose -f compose.week05.yaml`，详见[本周记录](docs/homework/week-06/index.md)。
 
 ---
 

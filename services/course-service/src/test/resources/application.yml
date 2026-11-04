@@ -1,4 +1,13 @@
 spring:
+  cloud:
+    discovery:
+      enabled: false
+    service-registry:
+      auto-registration:
+        enabled: false
+    nacos:
+      discovery:
+        enabled: false
   datasource:
     url: jdbc:h2:mem:course;MODE=MySQL;DB_CLOSE_DELAY=-1
     username: sa
@@ -10,6 +19,6 @@ spring:
     init:
       mode: always
 dependency:
-  base-url: http://127.0.0.1:1
+  service-name: user-service
   connect-timeout-ms: 200
   read-timeout-ms: 200
