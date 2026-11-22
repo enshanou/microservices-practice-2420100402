@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-06",
+  "user": {
+    "displayName": "区同学",
+    "id": "55f2d1f8-452c-4a8f-a01d-fe63369bbe8b"
+  },
+  "courses": [
+    {
+      "id": "5bd5678f-e2ca-4f48-ad41-a71e58b87a46",
+      "ownerId": "55f2d1f8-452c-4a8f-a01d-fe63369bbe8b",
+      "sourceReference": "imports/服务注册与发现.srt",
+      "title": "微服务架构：服务注册与发现"
+    },
+    {
+      "id": "564f7d48-e994-417c-ba86-0c864de5a494",
+      "ownerId": "55f2d1f8-452c-4a8f-a01d-fe63369bbe8b",
+      "sourceReference": "imports/spring-boot.srt",
+      "title": "Spring Boot：接口与数据持久化"
+    },
+    {
+      "id": "5d583587-58b9-43fc-b80c-e3918c6c2920",
+      "ownerId": "55f2d1f8-452c-4a8f-a01d-fe63369bbe8b",
+      "sourceReference": "imports/docker-compose.srt",
+      "title": "Docker：容器与本地编排"
+    }
+  ],
+  "task": {
+    "activeCourseId": "5bd5678f-e2ca-4f48-ad41-a71e58b87a46",
+    "courseId": "5bd5678f-e2ca-4f48-ad41-a71e58b87a46",
+    "failureReason": null,
+    "id": "e7d70b89-af8d-416d-a327-0e3668948193",
+    "status": "PENDING"
+  },
+  "checks": [
+    "PASS new user, empty course state, real userId=55f2d1f8-452c-4a8f-a01d-fe63369bbe8b",
+    "PASS three real courses created and scoped to selected user",
+    "PASS search and no-match empty state",
+    "PASS real task created, PENDING displayed, taskId=e7d70b89-af8d-416d-a327-0e3668948193",
+    "PASS stale-tab duplicate task HTTP 409 visibly explained",
+    "PASS course activity filters, task status filters and task detail",
+    "PASS selected user persists across reload; actual course/task data reloads from backend",
+    "PASS course-service offline: visible 503, form input preserved, stale-data warning and write actions disabled",
+    "PASS backend restored, failed creation produced no new course",
+    "PASS mobile 390px viewport without document-level horizontal overflow",
+    "PASS no browser JavaScript exceptions",
+    "PASS real FAILED record, status filter and failure reason in task details (explicit manually-set UI verification record)"
+  ],
+  "failedTask": {
+    "activeCourseId": "564f7d48-e994-417c-ba86-0c864de5a494",
+    "courseId": "564f7d48-e994-417c-ba86-0c864de5a494",
+    "failureReason": "界面验证记录：手动设置失败，用于检查失败原因展示",
+    "id": "be16cbe7-fb3b-4620-abf9-1d160f1ae2a9",
+    "status": "FAILED"
+  }
+}

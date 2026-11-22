@@ -40,11 +40,14 @@ services:
   user-service:
     image: courselens-user:week06
     build: ./services/user-service
-    ports:
-      - "127.0.0.1:18081:8080"
+    restart: on-failure
     environment:
       <<: *nacos-client
       SERVER_PORT: 8080
+      AUTH_ENABLED: ${WEEK09_AUTH_ENABLED:-false}
+      AUTH_JWT_SECRET: ${WEEK09_JWT_SECRET:-}
+      AUTH_USER_PASSWORD_HASH: ${WEEK09_USER_PASSWORD_HASH:-}
+      AUTH_ADMIN_PASSWORD_HASH: ${WEEK09_ADMIN_PASSWORD_HASH:-}
       DB_URL: jdbc:mysql://user-db:3306/courselens_user?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
       DB_USER: user_app
       DB_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
@@ -67,19 +70,25 @@ services:
       retries: 30
       start_period: 30s
   course-service:
-    image: courselens-course:week06
-    build: ./services/course-service
-    ports:
-      - "127.0.0.1:18082:8080"
+    <<: &course-service
+      image: courselens-course:week06
+      build: ./services/course-service
+      depends_on:
+        course-db:
+          condition: service_healthy
     environment:
-      <<: *nacos-client
-      SERVER_PORT: 8080
-      DB_URL: jdbc:mysql://course-db:3306/courselens_course?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
-      DB_USER: course_app
-      DB_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
-    depends_on:
-      course-db:
-        condition: service_healthy
+      <<: &course-environment
+        <<: *nacos-client
+        SERVER_PORT: 8080
+        DB_URL: jdbc:mysql://course-db:3306/courselens_course?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+        DB_USER: course_app
+        DB_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
+      COURSE_INSTANCE_ID: course-1
+  course-service-replica:
+    <<: *course-service
+    environment:
+      <<: *course-environment
+      COURSE_INSTANCE_ID: course-2
   task-db:
     image: mysql:8.4.11
     environment:
@@ -98,20 +107,57 @@ services:
   task-service:
     image: courselens-task:week06
     build: ./services/task-service
-    ports:
-      - "127.0.0.1:18083:8080"
     environment:
       <<: *nacos-client
       SERVER_PORT: 8080
       DB_URL: jdbc:mysql://task-db:3306/courselens_task?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
       DB_USER: task_app
+      NOTES_API_BASE_URL: ${NOTES_API_BASE_URL:-}
+      NOTES_API_KEY: ${NOTES_API_KEY:-}
+      NOTES_MODEL: ${NOTES_MODEL:-}
+      NOTES_DEEPSEEK_API_BASE_URL: ${NOTES_DEEPSEEK_API_BASE_URL:-}
+      NOTES_DEEPSEEK_API_KEY: ${NOTES_DEEPSEEK_API_KEY:-}
+      NOTES_DEEPSEEK_MODEL: ${NOTES_DEEPSEEK_MODEL:-}
+      NOTES_GPT_API_BASE_URL: ${NOTES_GPT_API_BASE_URL:-}
+      NOTES_GPT_API_KEY: ${NOTES_GPT_API_KEY:-}
+      NOTES_GPT_MODEL: ${NOTES_GPT_MODEL:-}
+      NOTES_CLAUDE_API_BASE_URL: ${NOTES_CLAUDE_API_BASE_URL:-}
+      NOTES_CLAUDE_API_KEY: ${NOTES_CLAUDE_API_KEY:-}
+      NOTES_CLAUDE_MODEL: ${NOTES_CLAUDE_MODEL:-}
+      NOTES_KIMI_API_BASE_URL: ${NOTES_KIMI_API_BASE_URL:-}
+      NOTES_KIMI_API_KEY: ${NOTES_KIMI_API_KEY:-}
+      NOTES_KIMI_MODEL: ${NOTES_KIMI_MODEL:-}
+      VIDEO_WORKER_TOKEN: ${VIDEO_WORKER_TOKEN:-}
+      VIDEO_STORAGE_DIR: /app/media
       DB_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
+    volumes:
+      - video_data:/app/media
     depends_on:
       task-db:
         condition: service_healthy
+  gateway-service:
+    image: courselens-gateway:week09
+    build: ./services/gateway-service
+    ports:
+      - "127.0.0.1:${GATEWAY_PORT:-8080}:8080"
+    environment:
+      JWT_SECRET: ${WEEK09_JWT_SECRET:-}
+      USER_SERVICE_URL: http://user-service:8080
+      COURSE_SERVICE_URL: http://course-service:8080
+      TASK_SERVICE_URL: http://task-service:8080
+    depends_on:
+      - user-service
+      - course-service
+      - task-service
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:8080/api/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
 volumes:
   user_data:
   course_data:
   task_data:
   nacos_data:
   nacos_logs:
+  video_data:

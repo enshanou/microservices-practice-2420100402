@@ -1,12 +1,48 @@
 # 课览 CourseLens
 
-## Week 07：Nacos 注册与服务发现（当前运行入口）
+## Week 09 API Gateway 与 JWT
+
+根目录的 `compose.yaml` 通过 `http://127.0.0.1:8080` 提供业务 API。沿用已配置的 MySQL 和 Nacos，启动 Docker Desktop 后在仓库根目录的 PowerShell 执行：
+
+```powershell
+node scripts/init-week09-auth.mjs
+docker compose up -d nacos
+# 首次部署先按下方 Week 07 说明初始化 Nacos，并等待控制台可访问。
+docker compose up -d --build
+docker compose ps
+```
+
+保管初始化时显示的两组本地密码。每个环境随机生成密码，`.env` 仅保存加盐密码哈希和 JWT 签名密钥。
+
+| 测试账号 | 角色 | 权限 |
+| --- | --- | --- |
+| `week09-user` | `USER` | 查看登录身份，访问课程和任务业务接口 |
+| `week09-admin` | `ADMIN` | 普通权限加上用户管理和课程归档 |
+
+在根目录 Git Bash 执行 `bash scripts/auth-test.sh`，按提示输入两组密码。成功时显示 `PASS Week 09 auth tests` 并退出 0。端口冲突时，在本机 `.env` 设置 `GATEWAY_PORT`，测试时用 `GATEWAY_URL` 指定对应地址。运行命令、截图位置及作业系统填报文字见 [Week 09 作业记录](docs/homework/week-09/index.md)。认证和路由规则见 [安全说明](docs/security.md)。
+
+## 课览业务工作台（本机页面入口）
+
+已新增连接真实后端的课程与任务页面：用户选择/创建、课程登记与搜索、提交任务、状态筛选、失败原因与任务详情。操作和代码路径说明见 [frontend/README.md](frontend/README.md)。可上传课程视频或字幕，自动生成课程笔记，并查看转写原文和思维导图。[视频演示与验收](docs/workbench/video-mind-map.md)。
+
+根目录 PowerShell 执行（已初始化 Nacos 密码的环境）：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\Start-Workbench.ps1
+```
+
+然后打开 http://127.0.0.1:18090/ 。脚本按顺序恢复 Docker、Nacos 和三个业务服务，并启动本机网页服务；若后端已经运行，可追加 `-SkipBackend`。工作台使用 Node.js 18+ 和标准库，无需 npm install；当前机器也支持查找已有本机 Node 运行时。
+
+本地工作台启动脚本使用 `deploy/compose.legacy-local.yaml` 启用旧版直连端口 18081/18082/18083。页面的用户选择用于筛选归属。切回 Week 09 时关闭工作台和本地视频 worker，使用根目录 Compose 重建业务容器以撤销直连端口。
+
+
+## Week 07：Nacos 注册与服务发现
 
 三个服务继续使用第六周各自的数据库与数据卷。首次运行前，在本地 `.env` 配置 Nacos Token 密钥、server identity 与管理员密码（`.env.example` 只有占位值）。保留已有 MySQL 密码。
 
 1. 根目录 PowerShell 执行 `powershell -ExecutionPolicy Bypass -File .\scripts\Initialize-NacosEnv.ps1`。脚本仅补齐缺失/占位 Nacos 值，保留已有 MySQL 及已配置 Nacos 凭据，不打印密码。然后执行 `docker compose up -d nacos`。
 2. 本地打开 `.env` 查看 `NACOS_PASSWORD`，再打开 <http://localhost:18080/>，首次初始化管理员 nacos 的密码，使两者一致。不要截图或提交 `.env`。若已有管理员，使用原密码。
-3. 初始化后执行 `docker compose up -d --build`。整套环境冷启动时仍应先等待 Nacos 就绪，再执行该命令。
+3. 复现 Week 07 时执行 `docker compose -f compose.yaml -f deploy/compose.legacy-local.yaml up -d --build`。整套环境冷启动时仍应先等待 Nacos 就绪，再执行该命令。
 4. 控制台 public 命名空间、`COURSELENS_2420100402` 分组查看三个服务的实例 IP/端口。
 5. 根目录 Git Bash 执行 `bash scripts/smoke-test.sh`，随后 `echo $?` 查看退出码。成功为 0，任一检查失败为非零。
 
@@ -28,7 +64,7 @@ Set-Location ../..
 
 Git Bash/Linux 可在各服务目录运行 `bash mvnw clean test`。无本机 JDK 时，各服务的 Dockerfile 构建也会执行测试：`docker compose build user-service course-service task-service`（需要先设置 `.env`）。测试使用 H2，关闭 Nacos Discovery 与自动注册；两个调用方使用手写 DiscoveryClient 替身和本地 HTTP 模拟，覆盖空实例、下一次操作重新发现、404、远端错误、超时及失败不写入。
 
-烟测只证明控制台与应用健康检查通过；业务成功、服务下线后的 503/数据不变、恢复后的新任务 201 需另行验证，详见 [Week 07 记录](docs/homework/week-07/index.md)。本段为当前入口，后面的 Week 05/06 内容为历史记录；`scripts/smoke-test.py` 仅保留第六周历史用途。
+烟测验证控制台与应用健康。业务成功、服务下线后的 503 和数据一致性、服务恢复后的新任务 201，详见 [Week 07 记录](docs/homework/week-07/index.md)。`scripts/smoke-test.py` 保留第六周历史用途。
 
 依赖版本采用 [Spring Cloud Alibaba 官方版本表](https://sca.aliyun.com/en/docs/2025.x/overview/version-explain/) 中对应 Boot 4.0.x 的 Cloud 2025.1.x / Alibaba 2025.1.x。未引入 Config Starter，也未单独覆盖 nacos-client 版本。
 
@@ -50,7 +86,7 @@ Git Bash/Linux 可在各服务目录运行 `bash mvnw clean test`。无本机 JD
 
 **作业记录：**[Week 06：微服务拆分与本地编排](docs/homework/week-06/index.md) · [Week 02：项目选题与功能规划](docs/homework/week-02/index.md) · [Week 03：Spring Boot 工程与运行验证](docs/homework/week-03/index.md) · [Week 04：业务建模、API、数据库与测试](docs/homework/week-04/index.md) · [Week 05：Docker 与 Compose 容器化](docs/homework/week-05/index.md) · [项目选题简案](docs/project-proposal.md)
 
-> 当前运行 Week 07：先完成 Nacos 首次初始化，再按上方入口启动三个微服务。复现下文 Week 05 单体时，使用 `docker compose -f compose.week05.yaml`，详见[本周记录](docs/homework/week-06/index.md)。
+> 当前运行入口见上方 Week 09。复现下文 Week 05 单体时，使用 `docker compose --project-directory . -f deploy/compose.week05.yaml`，详见 [Week 06 记录](docs/homework/week-06/index.md)。
 
 ---
 
@@ -284,38 +320,23 @@ flowchart TD
 
 ## 9. 目录结构
 
-```text
-.
-├── README.md
-├── docs/
-│   ├── project-proposal.md
-│   ├── database.md
-│   └── homework/
-│       ├── week-01/
-│       │   ├── index.md
-│       │   ├── submission.md
-│       │   └── screenshots/
-│       ├── week-02/
-│       │   ├── index.md
-│       │   └── screenshots/
-│       ├── week-03/
-│       │   ├── index.md
-│       │   └── screenshots/
-│       └── week-04/
-│           ├── index.md
-│           ├── evidence/
-│           └── screenshots/
-├── monolith/
-│   ├── pom.xml
-│   ├── mvnw
-│   ├── mvnw.cmd
-│   ├── .mvn/wrapper/
-│   ├── scripts/
-│   └── src/
-└── src/
-```
+| 路径 | 内容 |
+| --- | --- |
+| `compose.yaml` | 本周网关、业务服务、数据库和 Nacos 的启动入口 |
+| `.env.example` | 环境变量示例，本地实际配置保存在被忽略的 `.env` |
+| `services/` | 用户、课程、任务与网关四个独立服务 |
+| `frontend/` | 本地工作台页面、服务端代理与示例素材 |
+| `monolith/` | 第 3–5 周的单体应用、Maven Wrapper 与历史脚本 |
+| `deploy/` | 第 5 周编排、旧版直连端口和工作台的辅助 Compose 配置 |
+| `scripts/` | 初始化、启动、认证测试和端到端验证脚本 |
+| `docs/homework/week-01/` 至 `week-09/` | 各周作业说明、验证记录和截图 |
+| `docs/homework/week-06/local-logs/` | 本机历史构建日志，沿用 `*.log` 忽略规则 |
+| `docs/workbench/` | 工作台功能说明、验收记录与截图 |
+| `docs/security.md` | JWT 流程、角色权限与网关路由表 |
+| `docs/service-communication.md` | 第 8 周服务通信与负载均衡说明 |
+| `docs/*.md` | 项目方案、数据库与微服务设计 |
 
-第 02 周重点是**确定项目选题和完成功能规划**，当周不要求完成 Java 代码。选题过程和完成内容见 [Week 02 作业记录](docs/homework/week-02/index.md)。
+按周查看作业可从 [Week 08](docs/homework/week-08/index.md) 和 [Week 09](docs/homework/week-09/index.md) 进入。使用 `deploy/` 内的独立历史编排时，在仓库根目录加上 `--project-directory .`，使构建上下文、挂载路径和 `.env` 都从根目录解析。
 
 ## 10. 当前工程与本机启动
 
@@ -471,4 +492,8 @@ Invoke-RestMethod "http://localhost:18080/api/courses/$($course.id)" | ConvertTo
 
 根目录 `compose.yaml` 现用于三个微服务及三个独立数据库。启动：`docker compose up -d --build`；验证：`powershell -ExecutionPolicy Bypass -File .\docs\homework\week-06\Verify-Week06.ps1`。9 张本人截图已归档，见[截图对应关系](docs/homework/week-06/screenshots/README.md)。
 
-前文 Week 05 命令复现时，请把 `docker compose` 替换为 `docker compose -f compose.week05.yaml`，保留原来的单体、项目名和数据卷。
+前文 Week 05 命令复现时，请把 `docker compose` 替换为 `docker compose --project-directory . -f deploy/compose.week05.yaml`，保留原来的单体、项目名和数据卷。
+
+## 工作台升级与验收
+
+新版工作台的启动命令、账号配置、笔记生成与导出操作见 [工作台升级与验收](docs/workbench/workbench-upgrade.md)。

@@ -27,3 +27,8 @@ management:
     web:
       exposure:
         include: health
+auth:
+  enabled: ${AUTH_ENABLED:false}
+  jwt-secret: ${AUTH_JWT_SECRET:}
+  user-password-hash: ${AUTH_USER_PASSWORD_HASH:}
+  admin-password-hash: ${AUTH_ADMIN_PASSWORD_HASH:}

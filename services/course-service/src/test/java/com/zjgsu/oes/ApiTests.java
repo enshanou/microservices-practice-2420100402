@@ -56,8 +56,9 @@ class ApiTests {
     @AfterAll static void stop() { upstream.stop(0); }
 
     @Autowired CourseRepository repository;
+    @Autowired CourseArchiveRepository archives;
     String body="{\"ownerId\":\"11111111-1111-1111-1111-111111111111\",\"title\":\"Demo\",\"sourceReference\":\"demo.srt\"}";
-    @BeforeEach void clean() { repository.deleteAll(); upstreamStatus=200; slow=false; noInstances=false; }
+    @BeforeEach void clean() { archives.deleteAll(); repository.deleteAll(); upstreamStatus=200; slow=false; noInstances=false; }
     @Test void successUsesHttpAndPersists() throws Exception {
         assertEquals(201,request("POST","/api/courses",body).statusCode());
         var item=repository.findAll().getFirst();
@@ -83,6 +84,16 @@ class ApiTests {
         assertEquals(400,request("POST","/api/courses","{}").statusCode());
         assertEquals(0,repository.count());
     }
+    @Test void archiveRemovesCourseFromWorkspaces() throws Exception {
+        assertEquals(201, request("POST", "/api/courses", body).statusCode());
+        var course = repository.findAll().getFirst();
+        String path = "/api/courses/" + course.id;
+        assertEquals(204, request("DELETE", path, "").statusCode());
+        assertEquals(404, request("GET", path, "").statusCode());
+        assertEquals("[]", request("GET", "/api/courses", "").body());
+        assertEquals(1, repository.count());
+    }
+
     @Test void health() throws Exception { assertEquals(200,request("GET","/actuator/health","").statusCode()); }
 
 

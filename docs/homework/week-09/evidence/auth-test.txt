@@ -1,0 +1,26 @@
+Verified 2026-11-22 Asia/Shanghai; root compose.yaml with Nacos enabled.
+
+[Gateway and anonymous access]
+PASS gateway health GET /api/health                   HTTP 200
+PASS anonymous GET /api/courses                       HTTP 401
+PASS anonymous request with forged identity headers   HTTP 401
+
+[Login and JWT]
+PASS incorrect login password                         HTTP 401
+PASS USER login POST /api/auth/login                  HTTP 200
+PASS USER bearer token, role and 900-second lifetime
+PASS ADMIN login POST /api/auth/login                 HTTP 200
+PASS ADMIN bearer token, role and 900-second lifetime
+
+[Authorization and service routes]
+PASS protected endpoint with invalid JWT signature    HTTP 401
+PASS USER GET /api/auth/me with forged headers        HTTP 200
+PASS downstream received username=week09-user role=USER
+PASS USER GET /api/courses -> course-service          HTTP 200
+PASS USER GET /api/tasks -> task-service              HTTP 200
+PASS USER GET /api/users with forged ADMIN role       HTTP 403
+PASS USER DELETE /api/courses/{id}                    HTTP 403
+PASS ADMIN GET /api/users -> user-service             HTTP 200
+
+PASS Week 09 auth tests
+exit=0

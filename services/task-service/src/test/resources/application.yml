@@ -1,7 +1,16 @@
 spring:
   cloud:
-    discovery:
-      enabled: false
+    openfeign:
+      client:
+        config:
+          course-service:
+            connect-timeout: 200
+            read-timeout: 200
+    loadbalancer:
+      cache:
+        enabled: false
+      retry:
+        enabled: false
     service-registry:
       auto-registration:
         enabled: false

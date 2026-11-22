@@ -1,0 +1,13 @@
+# Local development entry points for the pre-Week-09 workbench and scripts.
+services:
+  gateway-service:
+    profiles: [gateway]
+  user-service:
+    ports:
+      - "127.0.0.1:18081:8080"
+  course-service:
+    ports:
+      - "127.0.0.1:18082:8080"
+  task-service:
+    ports:
+      - "127.0.0.1:18083:8080"

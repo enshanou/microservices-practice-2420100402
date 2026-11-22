@@ -2,3 +2,13 @@ CREATE TABLE IF NOT EXISTS courses (
  id VARCHAR(36) PRIMARY KEY, owner_id VARCHAR(36) NOT NULL,
  title VARCHAR(200) NOT NULL, source_reference VARCHAR(500) NOT NULL
 );
+CREATE TABLE IF NOT EXISTS course_transcripts (
+ course_id VARCHAR(36) PRIMARY KEY,
+ file_name VARCHAR(200) NOT NULL,
+ subtitle_text VARCHAR(7000) NOT NULL,
+ FOREIGN KEY (course_id) REFERENCES courses(id)
+);
+CREATE TABLE IF NOT EXISTS course_archives (
+ id VARCHAR(36) PRIMARY KEY,
+ FOREIGN KEY (id) REFERENCES courses(id)
+);

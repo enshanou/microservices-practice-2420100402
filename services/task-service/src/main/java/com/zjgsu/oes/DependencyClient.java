@@ -34,6 +34,10 @@ public class DependencyClient {
     }
 
     public void require(String path) {
+        read(path);
+    }
+
+    public String read(String path) {
         ServiceInstance instance;
         try {
             // 每次业务操作都读取当前已知实例，不把某个地址永久保存。
@@ -60,6 +64,7 @@ public class DependencyClient {
                 throw new ResponseStatusException(HttpStatus.BAD_GATEWAY,
                         "Invalid dependency response");
             }
+            return response.getBody();
         } catch (HttpClientErrorException.NotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Dependency resource does not exist");

@@ -13,5 +13,6 @@ public class TaskController {
     @PostMapping @ResponseStatus(HttpStatus.CREATED) public Task create(@Valid @RequestBody Create body) { return service.create(body.courseId()); }
     @GetMapping public List<Task> list() { return service.list(); }
     @GetMapping("/{id}") public Task get(@PathVariable String id) { return service.get(id); }
+    @PostMapping("/{id}/cancel") public Task cancel(@PathVariable String id) { return service.cancelManual(id); }
     @PatchMapping("/{id}/status") public Task change(@PathVariable String id,@Valid @RequestBody Change body) { return service.transition(id,body); }
 }

@@ -1,0 +1,25 @@
+services:
+  workbench:
+    image: node:22-bookworm-slim
+    working_dir: /app
+    command: [node, server.mjs]
+    user: node
+    environment:
+      PORT: "18090"
+      WORKBENCH_BIND: 0.0.0.0
+      WORKBENCH_SETTINGS_FILE: /app/.workbench-settings.json
+      WORKBENCH_USER_URL: http://user-service:8080
+      WORKBENCH_COURSE_URL: http://course-service:8080
+      WORKBENCH_TASK_URL: http://task-service:8080
+    volumes:
+      - ./frontend:/app:ro
+    ports:
+      - "127.0.0.1:18090:18090"
+    depends_on: [user-service, course-service, task-service]
+    read_only: true
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:18090/api/session').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 3s
+      retries: 5

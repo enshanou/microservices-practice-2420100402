@@ -9,3 +9,14 @@
 *.log
 # Week 07: keep nested service credentials local as well.
 **/.env
+# Local workbench background process
+frontend/.workbench.pid
+frontend/.video-worker.pid
+**/video-storage/
+scripts/__pycache__/
+
+# Local workbench account hashes and Notion integration credentials
+/frontend/.workbench-settings.json
+/frontend/.workbench-settings.json.*.tmp
+
+/scripts/.video-python/

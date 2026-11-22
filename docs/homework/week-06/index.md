@@ -54,7 +54,7 @@ docker compose ps
 
 服务在容器内使用 `user-db`、`course-db`、`task-db` 访问数据库，通过 `user-service`、`course-service` 调用依赖，不使用 localhost 指向其他容器。本机访问端口依次是 18081、18082、18083。数据库不发布宿主机端口。user_data、course_data、task_data 三个命名卷保留数据，`down` 再 `up -d` 不会丢失；不要使用 `down -v`。
 
-前一周原编排另存为 `compose.week05.yaml`，保留原项目名和 mysql_data 卷。复现 Week 05 时使用 `docker compose -f compose.week05.yaml ...`；两周采用不同项目名和端口，可以分别管理。
+前一周原编排另存为 `deploy/compose.week05.yaml`，保留原项目名和 mysql_data 卷。复现 Week 05 时使用 `docker compose --project-directory . -f deploy/compose.week05.yaml ...`；两周采用不同项目名和端口，可以分别管理。
 
 ## 4. 验证
 

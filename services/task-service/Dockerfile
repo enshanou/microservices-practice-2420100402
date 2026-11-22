@@ -7,7 +7,7 @@ RUN mvn -B -ntp clean package
 
 FROM eclipse-temurin:25.0.4.1_1-jre AS runtime
 WORKDIR /app
-RUN groupadd --system app && useradd --system --gid app app
+RUN groupadd --system app && useradd --system --gid app app && install -d -o app -g app /app/media
 COPY --from=build --chown=app:app /build/target/courselens-task-service-0.0.1-SNAPSHOT.jar /app/app.jar
 USER app
 EXPOSE 8080

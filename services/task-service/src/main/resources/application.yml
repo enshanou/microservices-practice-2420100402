@@ -1,7 +1,26 @@
 server:
   port: ${SERVER_PORT:18083}
 spring:
+  task:
+    scheduling:
+      pool:
+        size: 2
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1025MB
   cloud:
+    openfeign:
+      client:
+        config:
+          course-service:
+            connect-timeout: ${CONNECT_TIMEOUT_MS:1500}
+            read-timeout: ${READ_TIMEOUT_MS:2000}
+    loadbalancer:
+      cache:
+        enabled: false
+      retry:
+        enabled: false
     nacos:
       discovery:
         server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
